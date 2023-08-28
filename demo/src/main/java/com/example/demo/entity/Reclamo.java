@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Entity;
 
 @Entity
@@ -9,8 +11,12 @@ import jakarta.persistence.Entity;
 public class Reclamo {
     @Id
     private Integer idReclamo;
-    private Integer documento;
-    private Integer codigo;
+    @ManyToOne // Indica la relación Many-to-One con Edificio
+    @JoinColumn(name = "documento") // Nombre de la columna de clave foránea en la tabla de Persona
+    private Persona persona;
+    @ManyToOne // Indica la relación Many-to-One con Edificio
+    @JoinColumn(name = "codigo") // Nombre de la columna de clave foránea en la tabla de Edificio
+    private Edificio edificio;
     private String ubicacion;
     private String descripcion;
     private Integer identificador;
@@ -19,26 +25,24 @@ public class Reclamo {
 
     }
 
-    public Reclamo(Integer idReclamo, Integer documento, Integer codigo, String ubicacion, 
-        String descripcion, Integer identificador){
-            this.idReclamo = idReclamo;
-            this.documento = documento;
-            this.codigo = codigo;
-            this.ubicacion = ubicacion;
-            this.descripcion = descripcion;
-            this.identificador = identificador;
+    public Reclamo(Integer idReclamo, String ubicacion,
+            String descripcion, Integer identificador) {
+        this.idReclamo = idReclamo;
+        this.ubicacion = ubicacion;
+        this.descripcion = descripcion;
+        this.identificador = identificador;
     }
 
     public void setidReclamo(Integer idReclamo) {
         this.idReclamo = idReclamo;
     }
 
-    public void setDocumento(Integer documento) {
-        this.documento = documento;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setEdifcio(Edificio edificio) {
+        this.edificio = edificio;
     }
 
     public void setUbicacion(String ubicacion) {
@@ -57,12 +61,12 @@ public class Reclamo {
         return this.idReclamo;
     }
 
-    public Integer getDocumento() {
-        return this.documento;
+    public Persona getPersona() {
+        return this.persona;
     }
 
-    public Integer getCodigo() {
-        return this.codigo;
+    public Edificio getEdificio() {
+        return this.edificio;
     }
 
     public String getUbicacion() {
