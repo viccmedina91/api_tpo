@@ -16,14 +16,14 @@ public class Unidad {
     private Edificio edificio;
     private Integer piso;
     private Integer numero;
-    private Boolean habitado;
+    private String habitado;
 
     public Unidad() {
 
     }
 
     public Unidad(Integer identificador, Integer piso,
-            Integer numero, Boolean habitado) {
+            Integer numero, String habitado) {
         this.identificador = identificador;
         this.piso = piso;
         this.numero = numero;
@@ -46,7 +46,7 @@ public class Unidad {
         this.numero = numero;
     }
 
-    public void setHabitado(Boolean habitado) {
+    public void setHabitado(String habitado) {
         this.habitado = habitado;
     }
 
@@ -62,7 +62,7 @@ public class Unidad {
         return this.numero;
     }
 
-    public Boolean getHabitado() {
+    public String getHabitado() {
         return this.habitado;
     }
 

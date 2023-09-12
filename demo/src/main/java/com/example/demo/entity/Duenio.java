@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 
@@ -9,15 +11,16 @@ import jakarta.persistence.Id;
 public class Duenio {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer identificador;
-    private Integer documento;
+    private String documento;
 
     public Duenio() {
 
     }
 
-    public Duenio(Integer id, Integer identificador, Integer documento) {
+    public Duenio(Integer id, Integer identificador, String documento) {
         this.id = id;
         this.identificador = identificador;
         this.documento = documento;
@@ -32,7 +35,7 @@ public class Duenio {
         this.identificador = identificador;
     }
 
-    public void setDocumento(Integer documento) {
+    public void setDocumento(String documento) {
         this.documento = documento;
     }
 
@@ -40,11 +43,11 @@ public class Duenio {
         return this.id;
     }
 
-    public Integer getIdentificador(){
+    public Integer getIdentificador() {
         return this.identificador;
     }
 
-    public Integer getDocumento() {
+    public String getDocumento() {
         return this.documento;
     }
 }

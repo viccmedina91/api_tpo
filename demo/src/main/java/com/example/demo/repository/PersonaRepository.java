@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PersonaRepository extends JpaRepository<Persona, Integer> {
-    Optional<Persona> findByDocumento(Integer documento);
+public interface PersonaRepository extends JpaRepository<Persona, String> {
+    Optional<Persona> findByDocumento(String documento);
 
 }

@@ -20,7 +20,7 @@ public class PersonaController {
         this.personaRepository = personaRepository;
     }
 
-    @PostMapping("/createPersona")
+    @PostMapping("/createUpdatePersona")
     public String createPersona(@RequestBody Persona persona) {
         /*
          * Endpoint para la creación de personas.
@@ -36,7 +36,7 @@ public class PersonaController {
     }
 
     @GetMapping("/personasByDocumento/{documento}")
-    public ResponseEntity<Persona> getPersonaByDocumento(@PathVariable Integer documento) {
+    public ResponseEntity<Persona> getPersonaByDocumento(@PathVariable String documento) {
         /*
          * Endpoint para obtener una persona por medio del documento.
          * localhost:8080/personasByDocumento/1234

@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 @Table(name = "personas")
 public class Persona {
     @Id
-    private Integer documento;
+    private String documento;
     private String nombre;
     private String mail;
     private String contrasenia;
@@ -17,21 +17,42 @@ public class Persona {
 
     }
 
-    public Persona(Integer documento, String nombre, String contrasenia) {
+    public Persona(String documento, String nombre, String contrasenia, String mail) {
         this.documento = documento;
         this.nombre = nombre;
         this.contrasenia = contrasenia;
+        this.mail = mail;
     }
 
-    public void setDocumento(Integer documento) {
+    public void setDocumento(String documento) {
         this.documento = documento;
     }
 
-    public Integer getDocumento() {
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public String getDocumento() {
         return this.documento;
     }
 
     public String getNombre() {
         return this.nombre;
+    }
+
+    public String getMail() {
+        return this.mail;
+    }
+
+    public String getContrasenia() {
+        return this.contrasenia;
     }
 }

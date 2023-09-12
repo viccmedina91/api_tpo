@@ -11,13 +11,13 @@ public class Inquilino {
     @Id
     private Integer id;
     private Integer identificador;
-    private Integer documento;
+    private String documento;
 
     public Inquilino() {
 
     }
 
-    public Inquilino(Integer id, Integer identificador, Integer documento) {
+    public Inquilino(Integer id, Integer identificador, String documento) {
         this.id = id;
         this.identificador = identificador;
         this.documento = documento;
@@ -31,7 +31,7 @@ public class Inquilino {
         this.identificador = identificador;
     }
 
-    public void setDocumento(Integer documento) {
+    public void setDocumento(String documento) {
         this.documento = documento;
     }
 
@@ -43,7 +43,7 @@ public class Inquilino {
         return this.identificador;
     }
 
-    public Integer getDocumento() {
+    public String getDocumento() {
         return this.documento;
     }
 }

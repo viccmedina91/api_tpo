@@ -41,7 +41,7 @@ public class Reclamo {
         this.persona = persona;
     }
 
-    public void setEdifcio(Edificio edificio) {
+    public void setEdificio(Edificio edificio) {
         this.edificio = edificio;
     }
 

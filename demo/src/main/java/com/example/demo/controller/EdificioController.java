@@ -22,13 +22,12 @@ public class EdificioController {
         this.edificioRepository = edificioRepository;
     }
 
-    @PostMapping("/createEdificio")
+    @PostMapping("/createUpdateEdificio")
     public String createEdificio(@RequestBody Edificio edificio) {
         /*
          * Endpoint para la creación de edificio.
          * Por el momento se espera recibir un JSON como el siguiente:
          * {
-         * "codigo": 1234,
          * "nombre": "Los Arrayanes",
          * "direccion": "Calle Falsa 1234"
          * }
