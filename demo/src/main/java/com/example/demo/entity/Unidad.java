@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -10,9 +12,10 @@ import jakarta.persistence.Table;
 @Table(name = "unidades")
 public class Unidad {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer identificador;
     @ManyToOne // Indica la relación Many-to-One con Edificio
-    @JoinColumn(name = "codigo") // Nombre de la columna de clave foránea en la tabla de Unidad
+    @JoinColumn(name = "codigoEdificio") // Nombre de la columna de clave foránea en la tabla de Unidad
     private Edificio edificio;
     private Integer piso;
     private Integer numero;
@@ -22,9 +25,7 @@ public class Unidad {
 
     }
 
-    public Unidad(Integer identificador, Integer piso,
-            Integer numero, String habitado) {
-        this.identificador = identificador;
+    public Unidad(Integer piso, Integer numero, String habitado) {
         this.piso = piso;
         this.numero = numero;
         this.habitado = habitado;
@@ -70,4 +71,7 @@ public class Unidad {
         return this.edificio;
     }
 
+    public String toString() {
+        return this.identificador + " " + this.numero + " " + this.piso + " " + this.edificio.getCodigo();
+    }
 }

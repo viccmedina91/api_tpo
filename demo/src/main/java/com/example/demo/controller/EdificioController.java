@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Duenio;
 import com.example.demo.entity.Edificio;
 import com.example.demo.repository.EdificioRepository;
 
@@ -50,6 +52,14 @@ public class EdificioController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/getAllEdificios")
+    public ResponseEntity<List<Edificio>> getAllEdificios() {
+        /*
+         * Nos devuelve todos los datos que contiene la tabla duenios.
+         */
+        return ResponseEntity.ok(edificioRepository.findAll());
     }
 
 }

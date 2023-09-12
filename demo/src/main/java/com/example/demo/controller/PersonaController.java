@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.repository.PersonaRepository;
+import com.example.demo.entity.Duenio;
 import com.example.demo.entity.Persona;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -49,6 +52,14 @@ public class PersonaController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/getAllPersonas")
+    public ResponseEntity<List<Persona>> getAllPersonas() {
+        /*
+         * Nos devuelve todos los datos que contiene la tabla personas.
+         */
+        return ResponseEntity.ok(personaRepository.findAll());
     }
 
 }

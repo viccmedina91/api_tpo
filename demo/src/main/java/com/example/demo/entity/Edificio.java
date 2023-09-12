@@ -18,15 +18,14 @@ public class Edificio {
     private Integer codigo;
     private String nombre;
     private String direccion;
-    @OneToMany(mappedBy = "edificio") // Indica una relación One-to-Many
-    private List<Unidad> unidades = new ArrayList<>();
+    // @OneToMany(mappedBy = "edificio") // Indica una relación One-to-Many
+    // private List<Unidad> unidades = new ArrayList<>();
 
     public Edificio() {
 
     }
 
-    public Edificio(Integer codigo, String nombre, String direccion) {
-        this.codigo = codigo;
+    public Edificio(String nombre, String direccion) {
         this.nombre = nombre;
         this.direccion = direccion;
 
@@ -44,10 +43,6 @@ public class Edificio {
         this.direccion = direccion;
     }
 
-    public void addUnidad(Unidad unidad) {
-        this.unidades.add(unidad);
-    }
-
     public Integer getCodigo() {
         return this.codigo;
     }
@@ -60,7 +55,8 @@ public class Edificio {
         return this.direccion;
     }
 
-    public List<Unidad> getUnidadeList() {
-        return unidades;
+    public String toString() {
+        return this.nombre + " " + this.direccion + " " + this.codigo;
     }
+
 }

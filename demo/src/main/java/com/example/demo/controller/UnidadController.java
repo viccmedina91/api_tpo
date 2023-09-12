@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,16 @@ public class UnidadController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/allUnitByEdificios/{identificador}")
+    public ResponseEntity<List<Unidad>> getUnidadesByEdificio(@PathVariable Integer identificador) {
+        /*
+         * Endpoint para obtener una unidad por medio del identificador.
+         * localhost:8080/allUnitByEdificios/1234
+         */
+
+        List<Unidad> unidades = unidadRepository.findByEdificioCodigo(identificador);
+        return ResponseEntity.ok(unidades);
     }
 }

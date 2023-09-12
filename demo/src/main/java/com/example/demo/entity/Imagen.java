@@ -20,11 +20,6 @@ public class Imagen {
 
     }
 
-    public Imagen(Integer numero, String path) {
-        this.numero = numero;
-        this.path = path;
-    }
-
     public void setReclamo(Reclamo reclamo) {
         this.reclamo = reclamo;
     }

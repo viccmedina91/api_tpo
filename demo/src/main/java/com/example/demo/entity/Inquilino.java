@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
@@ -9,6 +11,7 @@ import jakarta.persistence.Id;
 public class Inquilino {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer identificador;
     private String documento;
@@ -17,8 +20,7 @@ public class Inquilino {
 
     }
 
-    public Inquilino(Integer id, Integer identificador, String documento) {
-        this.id = id;
+    public Inquilino(Integer identificador, String documento) {
         this.identificador = identificador;
         this.documento = documento;
     }
@@ -45,5 +47,9 @@ public class Inquilino {
 
     public String getDocumento() {
         return this.documento;
+    }
+
+    public String toString() {
+        return this.id + " " + this.identificador + " " + this.documento;
     }
 }

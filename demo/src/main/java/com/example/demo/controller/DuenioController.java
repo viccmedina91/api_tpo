@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,13 @@ public class DuenioController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/getAllDuenios")
+    public ResponseEntity<List<Duenio>> getAllDuenios() {
+        /*
+         * Nos devuelve todos los datos que contiene la tabla duenios.
+         */
+        return ResponseEntity.ok(duenioRepository.findAll());
     }
 }
