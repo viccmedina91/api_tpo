@@ -10,12 +10,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Unidad;
+import com.example.demo.repository.EdificioRepository;
 import com.example.demo.repository.UnidadRepository;
 
 @RestController
 public class UnidadController {
     private final UnidadRepository unidadRepository;
+
+    @Autowired
+    private EdificioRepository edificioRepository;
 
     @Autowired
     public UnidadController(UnidadRepository unidadRepository) {
@@ -27,14 +32,25 @@ public class UnidadController {
         /*
          * Enpoint para crear una unidad. Se debe enviar lo siguiente
          * {
-         * "identificador": 9999,
          * "piso": 1,
          * "numero": 999,
-         * "habitado": "N"
+         * "habitado": "N",
+         * "codigoEdificio": 1
          * }
          */
-        Unidad unidadGuardada = unidadRepository.save(unidad);
-        return "Unidad Guardada: " + unidadGuardada.getIdentificador();
+        System.out.println("....................................... " + unidad);
+        Optional<Edificio> edificioOptional = edificioRepository.findById(unidad.getEdificio().getCodigo());
+
+        System.out.println(edificioOptional);
+        if (edificioOptional.isPresent()) {
+            Edificio edificio = edificioOptional.get();
+            Unidad nuevaUnidad = new Unidad(unidad.getPiso(), unidad.getNumero(), unidad.getHabitado());
+            nuevaUnidad.setEdificio(edificio);
+            unidadRepository.save(unidad);
+            return "Unidad Guardada: " + nuevaUnidad.getIdentificador() + "Edificio: " + nuevaUnidad.getEdificio();
+        }
+        return "Error, el edificio no existe";
+
     }
 
     @GetMapping("/getUnidadByIdentificador/{identificador}")

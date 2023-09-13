@@ -5,11 +5,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "reclamos")
 public class Reclamo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReclamo;
     @ManyToOne // Indica la relación Many-to-One con Edificio
     @JoinColumn(name = "documento") // Nombre de la columna de clave foránea en la tabla de Persona
@@ -25,9 +28,8 @@ public class Reclamo {
 
     }
 
-    public Reclamo(Integer idReclamo, String ubicacion,
+    public Reclamo(String ubicacion,
             String descripcion, Integer identificador) {
-        this.idReclamo = idReclamo;
         this.ubicacion = ubicacion;
         this.descripcion = descripcion;
         this.identificador = identificador;

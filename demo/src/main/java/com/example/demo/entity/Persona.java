@@ -1,7 +1,11 @@
 package com.example.demo.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,6 +16,8 @@ public class Persona {
     private String nombre;
     private String mail;
     private String contrasenia;
+    @OneToMany(mappedBy = "persona") // Indica una relación One-to-Many
+    private List<Reclamo> reclamos = new ArrayList<>();
 
     public Persona() {
 
@@ -40,6 +46,10 @@ public class Persona {
         this.contrasenia = contrasenia;
     }
 
+    public void addReclamo(Reclamo reclamo) {
+        this.reclamos.add(reclamo);
+    }
+
     public String getDocumento() {
         return this.documento;
     }
@@ -54,5 +64,9 @@ public class Persona {
 
     public String getContrasenia() {
         return this.contrasenia;
+    }
+
+    public List<Reclamo> getReclamos() {
+        return this.reclamos;
     }
 }

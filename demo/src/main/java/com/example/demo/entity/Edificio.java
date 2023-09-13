@@ -18,8 +18,10 @@ public class Edificio {
     private Integer codigo;
     private String nombre;
     private String direccion;
-    // @OneToMany(mappedBy = "edificio") // Indica una relación One-to-Many
-    // private List<Unidad> unidades = new ArrayList<>();
+    @OneToMany(mappedBy = "edificio") // Indica una relación One-to-Many
+    private List<Unidad> unidades = new ArrayList<>();
+    @OneToMany(mappedBy = "edificio") // Indica una relación One-to-Many
+    private List<Reclamo> reclamos = new ArrayList<>();
 
     public Edificio() {
 
@@ -43,8 +45,24 @@ public class Edificio {
         this.direccion = direccion;
     }
 
+    public void addReclamo(Reclamo reclamo) {
+        this.reclamos.add(reclamo);
+    }
+
+    public void addUnidades(Unidad unidad) {
+        this.unidades.add(unidad);
+    }
+
     public Integer getCodigo() {
         return this.codigo;
+    }
+
+    public List<Reclamo> getReclamos() {
+        return this.reclamos;
+    }
+
+    public List<Unidad> getUnidades() {
+        return this.unidades;
     }
 
     public String getNombre() {
