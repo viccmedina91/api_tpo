@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,70 +11,62 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Unidad;
-import com.example.demo.repository.EdificioRepository;
-import com.example.demo.repository.UnidadRepository;
 
 @RestController
 public class UnidadController {
     private final UnidadRepository unidadRepository;
+    private final EdificioRepository edificioRepository;
 
     @Autowired
-    private EdificioRepository edificioRepository;
-
-    @Autowired
-    public UnidadController(UnidadRepository unidadRepository) {
+    public UnidadController(UnidadRepository unidadRepository,
+            EdificioRepository edificioRepository) {
         this.unidadRepository = unidadRepository;
+        this.edificioRepository = edificioRepository;
     }
 
-    @PostMapping("/createUnidad")
-    public String createUnidad(@RequestBody Unidad unidad) {
+    @PostMapping("/unidad/create")
+    public ResponseEntity<String> createUnidad(@RequestBody AltaUnidadRequest urquest) {
         /*
-         * Enpoint para crear una unidad. Se debe enviar lo siguiente
-         * {
-         * "piso": 1,
-         * "numero": 999,
-         * "habitado": "N",
-         * "codigoEdificio": 1
-         * }
+         * identificador: id de la unidad
+         * piso: integer donde se encuentra la unidad dentro del edificio
+         * numero: identifica a la unidad dentro del piso
+         * codigoedificio: FK contra edificio, donde pertenece la unidad
+         * habitado: indica si la unidad se encuentra alquilada o no
          */
-        System.out.println("....................................... " + unidad);
-        Optional<Edificio> edificioOptional = edificioRepository.findById(unidad.getEdificio().getCodigo());
 
-        System.out.println(edificioOptional);
-        if (edificioOptional.isPresent()) {
-            Edificio edificio = edificioOptional.get();
-            Unidad nuevaUnidad = new Unidad(unidad.getPiso(), unidad.getNumero(), unidad.getHabitado());
-            nuevaUnidad.setEdificio(edificio);
-            unidadRepository.save(unidad);
-            return "Unidad Guardada: " + nuevaUnidad.getIdentificador() + "Edificio: " + nuevaUnidad.getEdificio();
+        // Verificar que el edificio exista
+        Edificio edificioRecovery = edificioRepository.findByCodigo(urquest.getCodigoEdificio());
+        if (edificioRecovery == null) {
+            System.out.println("El codigo de edificio no existe");
+            return ResponseEntity.accepted().body("404 Error - El codigo de edificio no existe");
         }
-        return "Error, el edificio no existe";
+        // Si el edificio existe, se deberá crear la unidad
+        System.out.println("El edificio existe");
+        Unidad unidad = new Unidad();
+        unidad.setEdificio(edificioRecovery);
+        unidad.setHabitado(urquest.getHabitado());
+        unidad.setNumero(urquest.getNumero());
+        unidad.setPiso(urquest.getPiso());
+        unidadRepository.save(unidad);
+        return ResponseEntity.accepted().body("200 OK - Nueva unidad agregada");
 
     }
 
-    @GetMapping("/getUnidadByIdentificador/{identificador}")
-    public ResponseEntity<Unidad> getUnidadByIdentificador(@PathVariable Integer identificador) {
-        /*
-         * Endpoint para obtener una unidad por medio del identificador.
-         * localhost:8080/getUnidadByIdentificador/1234
-         */
-        Optional<Unidad> unidadOptional = unidadRepository.findByIdentificador(identificador);
-        if (unidadOptional.isPresent()) {
-            Unidad unidad = unidadOptional.get();
-            return ResponseEntity.ok(unidad);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @GetMapping("/allUnitByEdificios/{identificador}")
-    public ResponseEntity<List<Unidad>> getUnidadesByEdificio(@PathVariable Integer identificador) {
+    @GetMapping("/unidad/getbyid/{identificador}")
+    public ResponseEntity<Unidad> getUnidadById(@PathVariable Integer identificador) {
         /*
          * Endpoint para obtener una unidad por medio del identificador.
          * localhost:8080/allUnitByEdificios/1234
          */
 
-        List<Unidad> unidades = unidadRepository.findByEdificioCodigo(identificador);
+        Unidad unidadRecovery = unidadRepository.findUnidadByIdentificador(identificador);
+        return ResponseEntity.ok(unidadRecovery);
+    }
+
+    @GetMapping("/unidad/getAllUnidades")
+    public ResponseEntity<List<Unidad>> getAllUnidades(@PathVariable Integer identificador) {
+        // Obtenermos todas las unidades cargadas en el sistema
+        List<Unidad> unidades = unidadRepository.findAll();
         return ResponseEntity.ok(unidades);
     }
 }

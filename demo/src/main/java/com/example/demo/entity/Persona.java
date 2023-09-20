@@ -1,33 +1,27 @@
 package com.example.demo.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "personas")
 public class Persona {
     @Id
+    @Column(name = "documento")
     private String documento;
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "mail")
     private String mail;
+    @Column(name = "contrasenia")
     private String contrasenia;
-    @OneToMany(mappedBy = "persona") // Indica una relación One-to-Many
-    private List<Reclamo> reclamos = new ArrayList<>();
 
     public Persona() {
 
-    }
-
-    public Persona(String documento, String nombre, String contrasenia, String mail) {
-        this.documento = documento;
-        this.nombre = nombre;
-        this.contrasenia = contrasenia;
-        this.mail = mail;
     }
 
     public void setDocumento(String documento) {
@@ -46,10 +40,6 @@ public class Persona {
         this.contrasenia = contrasenia;
     }
 
-    public void addReclamo(Reclamo reclamo) {
-        this.reclamos.add(reclamo);
-    }
-
     public String getDocumento() {
         return this.documento;
     }
@@ -66,7 +56,8 @@ public class Persona {
         return this.contrasenia;
     }
 
-    public List<Reclamo> getReclamos() {
-        return this.reclamos;
+    @Autowired
+    public String toString() {
+        return "Nombre: " + this.nombre + " Documento: " + this.documento;
     }
 }

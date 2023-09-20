@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.Duenio;
 import com.example.demo.entity.Edificio;
-import com.example.demo.repository.EdificioRepository;
+import com.example.demo.entity.Unidad;
 
 @RestController
 public class EdificioController {
@@ -24,8 +22,8 @@ public class EdificioController {
         this.edificioRepository = edificioRepository;
     }
 
-    @PostMapping("/createUpdateEdificio")
-    public String createEdificio(@RequestBody Edificio edificio) {
+    @PostMapping("/edificio/crear")
+    public ResponseEntity<String> createEdificio(@RequestBody Edificio edificio) {
         /*
          * Endpoint para la creación de edificio.
          * Por el momento se espera recibir un JSON como el siguiente:
@@ -34,32 +32,47 @@ public class EdificioController {
          * "direccion": "Calle Falsa 1234"
          * }
          */
-        Edificio edificioGuardada = edificioRepository.save(edificio);
-        return "Edificio Guardado: " + edificioGuardada.getNombre();
+        Edificio edificioSaved = edificioRepository.save(edificio);
+        return ResponseEntity.accepted().body("200 OK - Edificio almacenado: " +
+                edificioSaved.toString());
     }
 
-    @GetMapping("/getEdificioByCodigo/{codigo}")
-    public ResponseEntity<Edificio> getEdificioByCodigo(@PathVariable Integer codigo) {
+    @GetMapping("/edificio/getByCodigo/{codigoedificio}")
+    public ResponseEntity<Edificio> getEdificioByCodigo(@PathVariable Integer codigoedificio) {
         /*
          * Endpoint para obtener un edificio por medio del codigo.
          * localhost:8080/edificioByCodigo/1234
          */
-        Optional<Edificio> edificioOptional = edificioRepository.findByCodigo(codigo);
+        Edificio edificioRecovery = edificioRepository.findByCodigo(codigoedificio);
 
-        if (edificioOptional.isPresent()) {
-            Edificio edificio = edificioOptional.get();
-            return ResponseEntity.ok(edificio);
+        if (edificioRecovery != null) {
+            return ResponseEntity.ok(edificioRecovery);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/getAllEdificios")
-    public ResponseEntity<List<Edificio>> getAllEdificios() {
-        /*
-         * Nos devuelve todos los datos que contiene la tabla duenios.
-         */
-        return ResponseEntity.ok(edificioRepository.findAll());
+    public ResponseEntity<String> getAllEdificios() throws Exception {
+        List<Edificio> edificios = edificioRepository.findAll();
+        if (edificios.isEmpty()) {
+            throw new Exception("No se encontraron edificios en la base de datos.");
+        }
+        return ResponseEntity.ok(edificios.toString());
+    }
+
+    @GetMapping("/edificio/getUnidades/{codigoedificio}")
+    public ResponseEntity<String> getUnidades(@PathVariable Integer codigoedificio) {
+        // Comprobamos que el edificio exista
+        Edificio edificioRecovery = edificioRepository.findByCodigo(codigoedificio);
+        if (edificioRecovery == null) {
+            return null;
+        }
+        // System.out.println("unidades: " + edificioRecovery.getUnidades());
+        List<Unidad> unidades = edificioRecovery.getUnidades();
+        return ResponseEntity.ok(unidades.toString());
+
+        // Si el edificio existe, recuperamos todas las unidades
     }
 
 }

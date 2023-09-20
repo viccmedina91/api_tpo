@@ -43,8 +43,6 @@
         	<version>8.0.23</version> <!-- La versión puede variar -->
     	</dependency>
 
-
-
 	</dependencies>
 
 	<build>
