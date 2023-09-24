@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.entity.Edificio;
+import com.example.demo.entity.Inquilino;
 import com.example.demo.entity.Unidad;
 
 @RestController
@@ -68,5 +69,14 @@ public class UnidadController {
         // Obtenermos todas las unidades cargadas en el sistema
         List<Unidad> unidades = unidadRepository.findAll();
         return ResponseEntity.ok(unidades);
+    }
+
+    @GetMapping("unidad/getInquilinos/{identificador}")
+    public String getInquilinos(@PathVariable Integer identificador) {
+        // Dado el identificador de una unidad, obtenermos la lista de inquilinos
+        Unidad unidadRecovery = unidadRepository.findUnidadByIdentificador(identificador);
+        List<Inquilino> inquilino = unidadRecovery.getInquilinos();
+        return inquilino.toString();
+
     }
 }
