@@ -52,7 +52,7 @@ public class EdificioController {
         }
     }
 
-    @GetMapping("/getAllEdificios")
+    @GetMapping("/edificio/getAllEdificios")
     public ResponseEntity<String> getAllEdificios() throws Exception {
         List<Edificio> edificios = edificioRepository.findAll();
         if (edificios.isEmpty()) {

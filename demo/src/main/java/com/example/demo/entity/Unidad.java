@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Column;
@@ -39,6 +41,9 @@ public class Unidad {
     @JoinColumn(name = "codigoedificio")
     private Edificio edificio;
 
+    @OneToMany(mappedBy = "unidad")
+    List<Inquilino> inquilinos;
+
     public Unidad() {
 
     }
@@ -64,6 +69,10 @@ public class Unidad {
         this.habitado = habitado;
     }
 
+    public void setInquilino(Inquilino inquilino) {
+        this.inquilinos.add(inquilino);
+    }
+
     public Edificio getEdificio() {
         return this.edificio;
     }
@@ -82,6 +91,10 @@ public class Unidad {
 
     public String getHabitado() {
         return this.habitado;
+    }
+
+    public List<Inquilino> getInquilinos() {
+        return this.inquilinos;
     }
 
     @Autowired
