@@ -83,11 +83,7 @@ public class UnidadController {
     @GetMapping("unidad/getDuenio/{identificador}")
     public String getDuenio(@PathVariable Integer identificador) {
         // Dado un identificador de unidad, obtenemos el duenio
-        System.out.println("#########################");
-        System.out.println(identificador.toString());
         Unidad unidadRecovery = unidadRepository.findUnidadByIdentificador(identificador);
-        System.out.println("#########################");
-        System.out.println(unidadRecovery.getDuenio());
         return null;
 
     }
