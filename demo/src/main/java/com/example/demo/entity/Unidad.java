@@ -42,10 +42,18 @@ public class Unidad {
     private Edificio edificio;
 
     @OneToMany(mappedBy = "unidad")
-    List<Inquilino> inquilinos;
+    private List<Inquilino> inquilinos;
+
+    @ManyToOne
+    @JoinColumn(name = "identificador", insertable = false, updatable = false)
+    private Duenio duenio;
 
     public Unidad() {
 
+    }
+
+    public void setDuenio(Duenio duenio) {
+        this.duenio = duenio;
     }
 
     public void setEdificio(Edificio edificio) {
@@ -75,6 +83,10 @@ public class Unidad {
 
     public Edificio getEdificio() {
         return this.edificio;
+    }
+
+    public Duenio getDuenio() {
+        return this.duenio;
     }
 
     public Integer getIdentificador() {

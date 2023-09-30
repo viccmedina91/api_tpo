@@ -59,7 +59,6 @@ public class DuenioController {
         }
         Duenio duenioSaved = new Duenio();
         duenioSaved.setPersona(persona);
-        duenioSaved.setIdentificador(drequest.getIdentificador());
         duenioRepository.save(duenioSaved);
         return ResponseEntity.accepted().body("200 OK - Nuevo Duenio alamcenado");
     }

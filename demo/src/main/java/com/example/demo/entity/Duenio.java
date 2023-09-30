@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -28,8 +31,8 @@ public class Duenio {
     @JoinColumn(name = "documento")
     Persona persona;
 
-    @Column(name = "identificador")
-    private Integer identificador;
+    @OneToMany(mappedBy = "duenio")
+    List<Unidad> unidades;
 
     public Duenio() {
 
@@ -39,8 +42,8 @@ public class Duenio {
         this.id = id;
     }
 
-    public void setIdentificador(Integer identificador) {
-        this.identificador = identificador;
+    public void addUnidad(Unidad unidad) {
+        this.unidades.add(unidad);
     }
 
     public void setPersona(Persona persona) {
@@ -55,11 +58,11 @@ public class Duenio {
         return this.persona;
     }
 
-    public Integer getIdentificador() {
-        return this.identificador;
+    public List<Unidad> getUnidades() {
+        return this.unidades;
     }
 
     public String toString() {
-        return "Documento: " + this.persona.getDocumento() + " - ID Unidad: " + this.identificador;
+        return "Documento: " + this.persona.getDocumento() + " - Unidades: " + this.unidades;
     }
 }
