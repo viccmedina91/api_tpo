@@ -74,7 +74,7 @@ public class EdificioController {
 
     @GetMapping("/edificio/getDuenios/{codigoedificio}")
     public ResponseEntity<String> getDuenios(@PathVariable Integer codigoedificio) {
-        // Comprobamos que el edificio exista
+        // Dado un código de edificio, obtener todos los dueños
         String duenios = edificioRepository.dueniosByEdificio(codigoedificio);
         if (duenios == null) {
             return ResponseEntity.ok("No hay duenios para este edificio");
@@ -82,6 +82,13 @@ public class EdificioController {
             return ResponseEntity.ok(duenios);
         }
 
+    }
+
+    @GetMapping("/edificio/unidadesHabitadas/{codigoedificio}")
+    public ResponseEntity<String> getUnidadesHabitadas(@PathVariable Integer codigoedificio) {
+        // Dado un codigo de edificio, obtener aquellas unidades que estan habitadas.
+        String unidadHabitadas = edificioRepository.unidadesHabitadas(codigoedificio);
+        return ResponseEntity.ok(unidadHabitadas);
     }
 
 }

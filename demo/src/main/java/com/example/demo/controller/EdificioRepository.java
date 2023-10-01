@@ -22,4 +22,16 @@ public interface EdificioRepository extends JpaRepository<Edificio, String> {
 
         return duenios.toString();
     }
+
+    public default String unidadesHabitadas(Integer codigo) {
+        Edificio edificioRecovery = findByCodigo(codigo);
+        List<Unidad> unidades = edificioRecovery.getUnidades();
+        List<Unidad> habitadas = new ArrayList<>();
+        for (Unidad unidad : unidades) {
+            if (unidad.getHabitado() == "S") {
+                habitadas.add(unidad);
+            }
+        }
+        return habitadas.toString();
+    }
 }
