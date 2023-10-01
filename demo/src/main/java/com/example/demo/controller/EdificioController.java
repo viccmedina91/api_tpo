@@ -68,11 +68,20 @@ public class EdificioController {
         if (edificioRecovery == null) {
             return null;
         }
-        // System.out.println("unidades: " + edificioRecovery.getUnidades());
         List<Unidad> unidades = edificioRecovery.getUnidades();
         return ResponseEntity.ok(unidades.toString());
+    }
 
-        // Si el edificio existe, recuperamos todas las unidades
+    @GetMapping("/edificio/getDuenios/{codigoedificio}")
+    public ResponseEntity<String> getDuenios(@PathVariable Integer codigoedificio) {
+        // Comprobamos que el edificio exista
+        String duenios = edificioRepository.dueniosByEdificio(codigoedificio);
+        if (duenios == null) {
+            return ResponseEntity.ok("No hay duenios para este edificio");
+        } else {
+            return ResponseEntity.ok(duenios);
+        }
+
     }
 
 }

@@ -84,7 +84,7 @@ public class UnidadController {
     public String getDuenio(@PathVariable Integer identificador) {
         // Dado un identificador de unidad, obtenemos el duenio
         Unidad unidadRecovery = unidadRepository.findUnidadByIdentificador(identificador);
-        return null;
+        return unidadRecovery.getDuenio().toString();
 
     }
 }
