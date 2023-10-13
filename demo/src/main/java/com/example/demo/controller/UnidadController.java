@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,7 +43,6 @@ public class UnidadController {
             return ResponseEntity.accepted().body("404 Error - El codigo de edificio no existe");
         }
         // Si el edificio existe, se deberá crear la unidad
-        System.out.println("El edificio existe");
         Unidad unidad = new Unidad();
         unidad.setEdificio(edificioRecovery);
         unidad.setHabitado(urquest.getHabitado());
@@ -71,7 +71,7 @@ public class UnidadController {
         return ResponseEntity.ok(unidades);
     }
 
-    @GetMapping("unidad/getInquilinos/{identificador}")
+    @GetMapping("/unidad/getInquilinos/{identificador}")
     public String getInquilinos(@PathVariable Integer identificador) {
         // Dado el identificador de una unidad, obtenermos la lista de inquilinos
         Unidad unidadRecovery = unidadRepository.findUnidadByIdentificador(identificador);
@@ -80,11 +80,36 @@ public class UnidadController {
 
     }
 
-    @GetMapping("unidad/getDuenio/{identificador}")
+    @GetMapping("/unidad/getDuenio/{identificador}")
     public String getDuenio(@PathVariable Integer identificador) {
         // Dado un identificador de unidad, obtenemos el duenio
         Unidad unidadRecovery = unidadRepository.findUnidadByIdentificador(identificador);
         return unidadRecovery.getDuenio().toString();
 
+    }
+
+    @PatchMapping("/unidad/alquilarUnidad")
+    public ResponseEntity<String> altaAlquiler(@RequestBody AltaAlquilerRequest urquest) {
+        System.out.println("#######################################################");
+        System.out.println("Identificador" + urquest.getIdentificadorUnidad().toString());
+        System.out.println("documento: " + urquest.getDocumento());
+        Unidad unidadRecovery = unidadRepository.findUnidadByIdentificador(urquest.getIdentificadorUnidad());
+        if (unidadRecovery == null) {
+            return ResponseEntity.ok("Unidad inexistente");
+        }
+        if (unidadRecovery.getHabitado() == "S") {
+            return ResponseEntity.ok("La unidad ya se encuentra alquilada");
+        }
+        List<Inquilino> inquilinos = unidadRecovery.getInquilinos();
+        System.out.println(inquilinos.toString());
+        for (Inquilino inquilino : inquilinos) {
+            if (inquilino.getPersona().getDocumento().equals(urquest.getDocumento())) {
+                System.out.println("Inquilino encontrado");
+                unidadRecovery.setHabitado("S");
+                unidadRepository.save(unidadRecovery);
+                return ResponseEntity.ok("Unidad alquilada: " + unidadRecovery.toString());
+            }
+        }
+        return ResponseEntity.ok("Ha ocurrido un error");
     }
 }

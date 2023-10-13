@@ -20,5 +20,4 @@ public interface UnidadRepository extends JpaRepository<Unidad, Integer> {
     }
 
     List<Unidad> findByEdificioCodigo(Integer codigoEdificio);
-
 }
