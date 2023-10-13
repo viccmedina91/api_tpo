@@ -34,9 +34,6 @@ public class Edificio {
     @OneToMany(mappedBy = "edificio")
     List<Unidad> unidades;
 
-    @OneToMany(mappedBy = "reclamo")
-    List<Reclamo> reclamos;
-
     public Edificio() {
 
     }
@@ -72,10 +69,6 @@ public class Edificio {
 
     public List<Unidad> getUnidades() {
         return this.unidades;
-    }
-
-    public List<Reclamo> getReclamos() {
-        return this.reclamos;
     }
 
 }

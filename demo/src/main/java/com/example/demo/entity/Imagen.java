@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -62,6 +64,11 @@ public class Imagen {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    @Autowired
+    public String toString() {
+        return "Nro: " + this.numero;
     }
 
 }

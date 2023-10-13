@@ -26,7 +26,7 @@ public class Reclamo {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @OneToMany(mappedBy = "imagen")
+    @OneToMany(mappedBy = "reclamo")
     List<Imagen> imagenes;
 
     @ManyToOne
