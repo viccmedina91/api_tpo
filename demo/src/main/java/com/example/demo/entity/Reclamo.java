@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -90,5 +92,9 @@ public class Reclamo {
     public void addImagen(Imagen imagen) {
         this.imagenes.add(imagen);
     }
+
+    @Autowired
+    public String toString() {
+        return "ID: " + this.idreclamo;
 
 }
