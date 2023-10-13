@@ -30,8 +30,12 @@ public class Edificio {
     private String nombre;
     @Column(name = "direccion")
     private String direccion;
+
     @OneToMany(mappedBy = "edificio")
     List<Unidad> unidades;
+
+    @OneToMany(mappedBy = "reclamo")
+    List<Reclamo> reclamos;
 
     public Edificio() {
 
@@ -68,6 +72,10 @@ public class Edificio {
 
     public List<Unidad> getUnidades() {
         return this.unidades;
+    }
+
+    public List<Reclamo> getReclamos() {
+        return this.reclamos;
     }
 
 }

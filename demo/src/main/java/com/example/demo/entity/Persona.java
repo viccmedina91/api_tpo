@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,6 +22,9 @@ public class Persona {
     private String mail;
     @Column(name = "contrasenia")
     private String contrasenia;
+
+    @OneToMany(mappedBy = "reclamo")
+    List<Reclamo> reclamos;
 
     public Persona() {
 
@@ -56,6 +60,10 @@ public class Persona {
 
     public String getContrasenia() {
         return this.contrasenia;
+    }
+
+    public List<Reclamo> getReclamos() {
+        return this.reclamos;
     }
 
     @Autowired

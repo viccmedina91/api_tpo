@@ -25,14 +25,18 @@ public class Reclamo {
     private String ubicacion;
     @Column(name = "descripcion")
     private String descripcion;
+
     @OneToMany(mappedBy = "imagen")
     List<Imagen> imagenes;
+
     @ManyToOne
     @JoinColumn(name = "documento")
     private Persona persona;
+
     @ManyToOne
     @JoinColumn(name = "codigo")
     private Edificio edificio;
+
     @ManyToOne
     @JoinColumn(name = "identificador")
     private Unidad unidad;
@@ -97,4 +101,5 @@ public class Reclamo {
     public String toString() {
         return "ID: " + this.idreclamo;
 
+    }
 }
