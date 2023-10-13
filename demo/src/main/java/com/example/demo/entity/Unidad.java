@@ -48,8 +48,15 @@ public class Unidad {
     @JoinColumn(name = "identificador", insertable = false, updatable = false)
     private Duenio duenio;
 
+    @OneToMany(mappedBy = "reclamo")
+    List<Reclamo> reclamos;
+
     public Unidad() {
 
+    }
+
+    public void addReclamo(Reclamo reclamo) {
+        this.reclamos.add(reclamo);
     }
 
     public void setDuenio(Duenio duenio) {
@@ -107,6 +114,10 @@ public class Unidad {
 
     public List<Inquilino> getInquilinos() {
         return this.inquilinos;
+    }
+
+    public List<Reclamo> getReclamos() {
+        return this.reclamos;
     }
 
     @Autowired
