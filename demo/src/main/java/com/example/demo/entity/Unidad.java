@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,6 +41,7 @@ public class Unidad {
     private String habitado;
     @ManyToOne
     @JoinColumn(name = "codigoedificio")
+    @JsonBackReference
     private Edificio edificio;
 
     @OneToMany(mappedBy = "unidad")
@@ -109,9 +112,4 @@ public class Unidad {
         return this.inquilinos;
     }
 
-    @Autowired
-    public String toString() {
-        return "Identificador: " + this.identificador + " Nro: " +
-                this.numero + " Piso:" + this.piso + " ";
-    }
 }

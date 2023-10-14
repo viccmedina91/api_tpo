@@ -11,27 +11,4 @@ import com.example.demo.entity.Unidad;
 
 public interface EdificioRepository extends JpaRepository<Edificio, String> {
     Edificio findByCodigo(Integer codigo);
-
-    public default String dueniosByEdificio(Integer codigo) {
-        Edificio edificioRecovery = findByCodigo(codigo);
-        List<Duenio> duenios = new ArrayList<>();
-        List<Unidad> unidades = edificioRecovery.getUnidades();
-        for (Unidad unidad : unidades) {
-            duenios.add(unidad.getDuenio());
-        }
-
-        return duenios.toString();
-    }
-
-    public default String unidadesHabitadas(Integer codigo) {
-        Edificio edificioRecovery = findByCodigo(codigo);
-        List<Unidad> unidades = edificioRecovery.getUnidades();
-        List<Unidad> habitadas = new ArrayList<>();
-        for (Unidad unidad : unidades) {
-            if (unidad.getHabitado() == "S") {
-                habitadas.add(unidad);
-            }
-        }
-        return habitadas.toString();
-    }
 }

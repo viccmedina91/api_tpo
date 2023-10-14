@@ -1,7 +1,5 @@
 package com.example.demo.entity;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Column;

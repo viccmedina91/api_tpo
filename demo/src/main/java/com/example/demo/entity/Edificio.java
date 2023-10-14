@@ -31,9 +31,6 @@ public class Edificio {
     @Column(name = "direccion")
     private String direccion;
 
-    @OneToMany(mappedBy = "edificio")
-    List<Unidad> unidades;
-
     public Edificio() {
 
     }
@@ -60,15 +57,6 @@ public class Edificio {
 
     public String getDireccion() {
         return this.direccion;
-    }
-
-    @Autowired
-    public String toString() {
-        return this.nombre + " " + this.direccion + " " + this.codigo;
-    }
-
-    public List<Unidad> getUnidades() {
-        return this.unidades;
     }
 
 }
