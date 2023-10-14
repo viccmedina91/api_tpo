@@ -12,6 +12,7 @@ import ListadoReclamo from "./ListadoReclamo";
 import SearchInquilinoEdificio from "./SearchInquilinoEdificio";
 import SearchDuenioEdificio from "./SearchDuenioEdificio";
 import SearchReclamoEdificio from "./SearchReclamoEdificio";
+import SearchReclamoUnidad from "./SearchReclamoUnidad";
 
 export default function App() {
   return (
@@ -33,6 +34,8 @@ export default function App() {
 
         <Route path="/reclamo/listar" element={<ListadoReclamo />}></Route>
         <Route path="/reclamos/listar/edificio" element={<SearchReclamoEdificio />}></Route>
+        <Route path="/reclamos/listar/unidad" element={<SearchReclamoUnidad />}></Route>
+
       </Routes>
     </BrowserRouter>
   );
