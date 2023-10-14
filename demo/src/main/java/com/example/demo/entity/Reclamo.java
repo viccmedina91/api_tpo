@@ -21,13 +21,12 @@ public class Reclamo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idreclamo")
     private Integer idreclamo;
+
     @Column(name = "ubicacion")
     private String ubicacion;
+
     @Column(name = "descripcion")
     private String descripcion;
-
-    @OneToMany(mappedBy = "reclamo")
-    List<Imagen> imagenes;
 
     @ManyToOne
     @JoinColumn(name = "documento")
@@ -55,10 +54,6 @@ public class Reclamo {
 
     public String getDescripcion() {
         return this.descripcion;
-    }
-
-    public List<Imagen> getImagenes() {
-        return this.imagenes;
     }
 
     public Persona getPersona() {
@@ -93,13 +88,4 @@ public class Reclamo {
         this.unidad = unidad;
     }
 
-    public void addImagen(Imagen imagen) {
-        this.imagenes.add(imagen);
-    }
-
-    @Autowired
-    public String toString() {
-        return "ID: " + this.idreclamo;
-
-    }
 }

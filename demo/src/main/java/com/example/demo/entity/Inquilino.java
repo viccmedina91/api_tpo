@@ -53,9 +53,4 @@ public class Inquilino {
         return this.unidad;
     }
 
-    @Override
-    public String toString() {
-        return this.id + " Doc:" + this.persona.getDocumento() + " ID Unidad:" + this.unidad.getIdentificador();
-    }
-
 }

@@ -31,19 +31,12 @@ public class Duenio {
     @JoinColumn(name = "documento")
     Persona persona;
 
-    @OneToMany(mappedBy = "duenio")
-    List<Unidad> unidades;
-
     public Duenio() {
 
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public void addUnidad(Unidad unidad) {
-        this.unidades.add(unidad);
     }
 
     public void setPersona(Persona persona) {
@@ -58,11 +51,4 @@ public class Duenio {
         return this.persona;
     }
 
-    public List<Unidad> getUnidades() {
-        return this.unidades;
-    }
-
-    public String toString() {
-        return "Documento: " + this.persona.getDocumento() + " - Unidades: " + this.unidades;
-    }
 }

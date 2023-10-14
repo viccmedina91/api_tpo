@@ -33,19 +33,19 @@ public class Unidad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "identificador")
     private Integer identificador;
+
     @Column(name = "piso")
     private Integer piso;
+
     @Column(name = "numero")
     private Integer numero;
+
     @Column(name = "habitado")
     private String habitado;
+
     @ManyToOne
     @JoinColumn(name = "codigoedificio")
-    @JsonBackReference
     private Edificio edificio;
-
-    @OneToMany(mappedBy = "unidad")
-    private List<Inquilino> inquilinos;
 
     @ManyToOne
     @JoinColumn(name = "identificador", insertable = false, updatable = false)
@@ -80,10 +80,6 @@ public class Unidad {
         this.habitado = habitado;
     }
 
-    public void setInquilino(Inquilino inquilino) {
-        this.inquilinos.add(inquilino);
-    }
-
     public Edificio getEdificio() {
         return this.edificio;
     }
@@ -107,9 +103,4 @@ public class Unidad {
     public String getHabitado() {
         return this.habitado;
     }
-
-    public List<Inquilino> getInquilinos() {
-        return this.inquilinos;
-    }
-
 }

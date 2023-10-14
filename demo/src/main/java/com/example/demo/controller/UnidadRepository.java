@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.example.demo.entity.Duenio;
 import com.example.demo.entity.Unidad;
 
 public interface UnidadRepository extends JpaRepository<Unidad, Integer> {
@@ -20,4 +22,15 @@ public interface UnidadRepository extends JpaRepository<Unidad, Integer> {
     }
 
     List<Unidad> findByEdificioCodigo(Integer codigoEdificio);
+
+    public default List<Duenio> findDueniosPorEdificio(Integer codigoEdificio) {
+        List<Unidad> unidades = findByEdificioCodigo(codigoEdificio);
+        List<Duenio> duenios = new ArrayList<Duenio>();
+
+        for (Unidad unidad : unidades) {
+            duenios.add(unidad.getDuenio());
+        }
+
+        return duenios;
+    }
 }

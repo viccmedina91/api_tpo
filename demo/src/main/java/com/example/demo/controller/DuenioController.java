@@ -4,16 +4,20 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.Duenio;
 import com.example.demo.entity.Persona;
 import com.example.demo.entity.Unidad;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000/")
+@RequestMapping(path = "/duenio", produces = "application/json")
 public class DuenioController {
     private final DuenioRepository duenioRepository;
     private final PersonaRepository personaRepository;
@@ -28,7 +32,7 @@ public class DuenioController {
         this.unidadRepository = unidadRepository;
     }
 
-    @PostMapping("/duenio/crear")
+    @PostMapping("/crear")
     public ResponseEntity<String> createDuenio(@RequestBody AltaDuenioRequest drequest) {
         /*
          * Enpoint para crear un duenio. Se debe enviar lo siguiente
@@ -63,7 +67,7 @@ public class DuenioController {
         return ResponseEntity.accepted().body("200 OK - Nuevo Duenio alamcenado");
     }
 
-    @GetMapping("/duenio/getByDocumento/{documento}")
+    @GetMapping("/getByDocumento/{documento}")
     public ResponseEntity<Duenio> getduenioById(@PathVariable String documento) {
         /*
          * Endpoint para obtener un duenio por medio del id.
@@ -78,7 +82,7 @@ public class DuenioController {
         }
     }
 
-    @GetMapping("/duenio/getAllDuenios")
+    @GetMapping("/getAllDuenios")
     public ResponseEntity<List<Duenio>> getAllDuenios() {
         /*
          * Nos devuelve todos los datos que contiene la tabla duenios.

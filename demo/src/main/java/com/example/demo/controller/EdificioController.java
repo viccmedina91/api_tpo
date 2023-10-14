@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Edificio;
-import com.example.demo.entity.Unidad;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -41,7 +40,7 @@ public class EdificioController {
                 edificioSaved.toString());
     }
 
-    @GetMapping("/edificio/getByCodigo/{codigoedificio}")
+    @GetMapping("/getByCodigo/{codigoedificio}")
     public ResponseEntity<Edificio> getEdificioByCodigo(@PathVariable Integer codigoedificio) {
         /*
          * Endpoint para obtener un edificio por medio del codigo.
