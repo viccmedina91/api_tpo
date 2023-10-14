@@ -57,6 +57,9 @@ const Layout = () => {
                             <li>
                                 <Link to="/reclamos/listar">Listar todos los Reclamos</Link>
                             </li>
+                            <li>
+                                <Link to="/reclamos/listar/edificio">Listar todos los Reclamos por Edificio</Link>
+                            </li>
                         </ul>
                     </li>
                 </ul>
