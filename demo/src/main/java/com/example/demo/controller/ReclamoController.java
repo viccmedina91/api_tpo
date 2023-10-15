@@ -20,8 +20,6 @@ import com.example.demo.entity.Persona;
 import com.example.demo.entity.Reclamo;
 import com.example.demo.entity.Unidad;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping(path = "/reclamo", produces = "application/json")
@@ -73,12 +71,7 @@ public class ReclamoController {
     @PostMapping("/crear")
     public ResponseEntity<String> addReclamo(@RequestBody AltaReclamoRequest rReclamo) {
         // Endpoint para crear un reclamo.
-        System.out.println(".........................!");
-        System.out.println(rReclamo.getUbicacion());
-        System.out.println(rReclamo.getDescripcion());
-        System.out.println(rReclamo.getCodigo().toString());
-        System.out.println(rReclamo.getIdentificador().toString());
-        System.out.println(rReclamo.getDocumento().toString());
+
         Edificio edificio = edificioRepository.findByCodigo(rReclamo.getCodigo());
         if (edificio == null) {
             return new ResponseEntity<>("El codigo de edificio no existe", HttpStatus.BAD_REQUEST);
