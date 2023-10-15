@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.Duenio;
 import com.example.demo.entity.Edificio;
-import com.example.demo.entity.Inquilino;
 import com.example.demo.entity.Unidad;
 
 @RestController

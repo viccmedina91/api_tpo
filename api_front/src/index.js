@@ -13,6 +13,9 @@ import SearchInquilinoEdificio from "./SearchInquilinoEdificio";
 import SearchDuenioEdificio from "./SearchDuenioEdificio";
 import SearchReclamoEdificio from "./SearchReclamoEdificio";
 import SearchReclamoUnidad from "./SearchReclamoUnidad";
+import SearchReclamoPersona from "./SearchReclamoPersona";
+import AddReclamo from "./AddReclamo";
+import AddDuenio from "./AddDuenio";
 
 export default function App() {
   return (
@@ -27,6 +30,7 @@ export default function App() {
         <Route path="/personas/listar" element={<ListadoPersona />}></Route>
         <Route path="/personas/listar_duenios" element={<ListadoDuenio />}></Route>
         <Route path="/duenio/listar/edifcio" element={<SearchDuenioEdificio />}></Route>
+        <Route path="/duenio/agregar" element={<AddDuenio />}></Route>
 
         <Route path="/personas/listar_inquilinos" element={<ListadoInquilino />}></Route>
 
@@ -35,6 +39,8 @@ export default function App() {
         <Route path="/reclamo/listar" element={<ListadoReclamo />}></Route>
         <Route path="/reclamos/listar/edificio" element={<SearchReclamoEdificio />}></Route>
         <Route path="/reclamos/listar/unidad" element={<SearchReclamoUnidad />}></Route>
+        <Route path="/reclamos/listar/persona" element={<SearchReclamoPersona />}></Route>
+        <Route path="/reclamos/agregar" element={<AddReclamo />}></Route>
 
       </Routes>
     </BrowserRouter>

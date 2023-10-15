@@ -41,6 +41,9 @@ const Layout = () => {
                                 <Link to="/personas/buscar_duenios">Buscar Dueños por DNI</Link>
                             </li>
                             <li>
+                                <Link to="/duenio/agregar">Agregar Duenio</Link>
+                            </li>
+                            <li>
                                 <Link to="/personas/listar_inquilinos">Listar todas los Inquilinos</Link>
                             </li>
                             <li>
@@ -62,6 +65,12 @@ const Layout = () => {
                             </li>
                             <li>
                                 <Link to="/reclamos/listar/unidad">Listar todos los Reclamos por Unidad</Link>
+                            </li>
+                            <li>
+                                <Link to="/reclamos/listar/persona">Listar todos los Reclamos por Persona</Link>
+                            </li>
+                            <li>
+                                <Link to="/reclamos/agregar">Agregar Reclamo</Link>
                             </li>
                         </ul>
                     </li>
