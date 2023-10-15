@@ -33,37 +33,34 @@ public class DuenioController {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<String> createDuenio(@RequestBody AltaDuenioRequest drequest) {
-        /*
-         * Enpoint para crear un duenio. Se debe enviar lo siguiente
-         * {
-         * "identificador": 9999,
-         * "documento": "DNI12344"
-         * }
-         * 
-         * Tengo que controlar si el identificador existe, ya que ese valor es la
-         * relación con unidadad.
-         * Tengo que controlar si el dni existe. Por el momento, si no existe error.
-         * Tiene que existir porque es la relación con Persona.
-         */
+    public ResponseEntity<String> createDuenio(@RequestBody AltaDuenioRequest rDuenio) {
+        // Endpoint para dar de alta un nuevo duenio.
 
-        // Verificamos que la persona exista en la BD
-        Persona persona = personaRepository.findByDocumento(drequest.getDocumento());
-        if (persona == null) {
-            System.out.println("El documento ingresado no se encuentra registrado");
-            return ResponseEntity.accepted().body("El documento ingresado " +
-                    "no se encuentra registrado");
-        }
-        // verificamos que la unidad ingresada exista
-        Unidad unidad = unidadRepository.findUnidadByIdentificador(drequest.getIdentificador());
+        Unidad unidad = unidadRepository.findUnidadByIdentificador(rDuenio.getIdentificador());
+        // Si la unidad no existe, no se podrá crear un nuevo dienio
         if (unidad == null) {
             System.out.println("La unidad ingresada no existe");
             return ResponseEntity.accepted().body("La unidad ingresada no existe");
-
         }
-        Duenio duenioSaved = new Duenio();
-        duenioSaved.setPersona(persona);
-        duenioRepository.save(duenioSaved);
+
+        Persona persona = personaRepository.findByDocumento(rDuenio.getDocumento());
+        // Si la persona no se encuentra registrada, la registramos
+        if (persona == null) {
+            Persona nuevaPersona = new Persona();
+            nuevaPersona.setContrasenia(rDuenio.getContrasenia());
+            nuevaPersona.setDocumento(rDuenio.getDocumento());
+            nuevaPersona.setMail(rDuenio.getMail());
+            nuevaPersona.setNombre(rDuenio.getNombre());
+            personaRepository.save(nuevaPersona);
+            System.out.println("La persona no existia, pero la hemos agregado");
+        }
+
+        // verificamos que la unidad ingresada exista
+
+        Duenio duenio = new Duenio();
+        duenio.setPersona(persona);
+        duenio.setUnidad(unidad);
+        duenioRepository.save(duenio);
         return ResponseEntity.accepted().body("200 OK - Nuevo Duenio alamcenado");
     }
 
