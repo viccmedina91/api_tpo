@@ -37,10 +37,10 @@ public class ReclamoController {
         this.unidadRepository = unidadRepository;
     }
 
-    @GetMapping("/getAllReclamos")
-    public ResponseEntity<List<Reclamo>> getAllReclamos() {
+    @GetMapping("/listar")
+    public ResponseEntity<List<String>> listarTodos() {
         // Retorna todos los reclamos cargados
-        List<Reclamo> reclamos = reclamoRepository.findAll();
+        List<String> reclamos = reclamoRepository.listarTodos();
         return ResponseEntity.ok(reclamos);
     }
 

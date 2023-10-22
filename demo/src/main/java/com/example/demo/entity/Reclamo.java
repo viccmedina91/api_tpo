@@ -87,4 +87,11 @@ public class Reclamo {
         this.unidad = unidad;
     }
 
+    public String toString() {
+        return "ID: " + this.idreclamo +
+                " Edificio: " + this.edificio.getCodigo() +
+                " Unidad: " + this.unidad.getIdentificador() +
+                " Descripción: " + this.descripcion +
+                " Ubicación: " + this.ubicacion;
+    }
 }

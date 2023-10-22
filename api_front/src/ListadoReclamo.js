@@ -6,7 +6,7 @@ function App() {
 
     const handleSubmit = () => {
         // Devuelve todos los reclamos cargados en el sistema
-        fetch(`http://localhost:8080/reclamo/getAllReclamos`)
+        fetch(`http://localhost:8080/reclamo/listar`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
