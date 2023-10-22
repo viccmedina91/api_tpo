@@ -34,12 +34,13 @@ public class InquilinoController {
         this.unidadRepository = unidadRepository;
     }
 
-    @GetMapping("/getAllInquilinos")
-    public ResponseEntity<List<Inquilino>> getAllInquilinos() {
+    @GetMapping("/listar")
+    public ResponseEntity<List<String>> listarTodos() {
         /*
          * Nos devuelve todos los datos que contiene la tabla personas.
          */
-        return ResponseEntity.ok(inquiniloRepository.findAll());
+        List<String> inquilinos = inquiniloRepository.listarTodos();
+        return ResponseEntity.ok(inquilinos);
     }
 
     @GetMapping("/getInquilinos/edificio/{codigoedificio}")

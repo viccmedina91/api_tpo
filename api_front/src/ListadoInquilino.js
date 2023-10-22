@@ -6,7 +6,7 @@ function App() {
 
     const handleSubmit = () => {
         // Devuelve todos los inquilinos almacenados en la BD
-        fetch(`http://localhost:8080/inquilino/getAllInquilinos`)
+        fetch(`http://localhost:8080/inquilino/listar`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

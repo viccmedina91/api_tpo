@@ -56,9 +56,7 @@ public class Inquilino {
     }
 
     public String toString() {
-        return "DNI: " + this.persona.getDocumento() +
-                " Nombre: " + this.persona.getNombre() +
-                " Unidad: " + this.unidad.toString();
+        return "Persona: " + this.persona.toString() + " | Unidad: " + this.unidad.toString();
 
     }
 

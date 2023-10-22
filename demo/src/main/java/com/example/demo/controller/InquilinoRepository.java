@@ -12,7 +12,6 @@ public interface InquilinoRepository extends JpaRepository<Inquilino, String> {
     public default List<Inquilino> findInquilinosPorEdificio(Integer codigoEdificio) {
         List<Inquilino> inquilinos = findAll();
         List<Inquilino> porEdificio = new ArrayList<Inquilino>();
-        ;
         for (Inquilino inquilino : inquilinos) {
             if (inquilino.getUnidad().getEdificio().getCodigo() == codigoEdificio) {
                 porEdificio.add(inquilino);
@@ -20,5 +19,15 @@ public interface InquilinoRepository extends JpaRepository<Inquilino, String> {
         }
         return porEdificio;
 
+    }
+
+    public default List<String> listarTodos() {
+        List<String> resultado = new ArrayList<String>();
+        List<Inquilino> inquilinos = findAll();
+        for (Inquilino inquilino : inquilinos) {
+            resultado.add(inquilino.toString());
+        }
+
+        return resultado;
     }
 }
