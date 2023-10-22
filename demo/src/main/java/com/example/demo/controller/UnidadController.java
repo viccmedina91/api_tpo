@@ -74,13 +74,6 @@ public class UnidadController {
         return ResponseEntity.ok(unidades);
     }
 
-    @GetMapping("/duenio/{codigoedificio}")
-    public ResponseEntity<List<Duenio>> getDueniosPorEdificio(@PathVariable Integer codigoedificio) {
-        // Unidades por Edificio
-        List<Duenio> duenios = unidadRepository.findDueniosPorEdificio(codigoedificio);
-        return ResponseEntity.ok(duenios);
-    }
-
     @GetMapping("/getDuenio/{identificador}")
     public String getDuenio(@PathVariable Integer identificador) {
         // Dado un identificador de unidad, obtenemos el duenio

@@ -8,6 +8,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.entity.Duenio;
 
 public interface DuenioRepository extends JpaRepository<Duenio, Integer> {
+
+    public default List<String> listarSegunEdifico(Integer codigoedificio) {
+        List<Duenio> duenios = findAll();
+        List<String> resultado = new ArrayList<String>();
+        for (Duenio duenio : duenios) {
+            if (duenio.getUnidad().getEdificio().getCodigo() == codigoedificio) {
+                resultado.add(duenio.toString());
+            }
+        }
+        return resultado;
+    }
+
     public default List<String> listarTodos(List<Duenio> duenios) {
         List<String> resultado = new ArrayList<String>();
         for (Duenio duenio : duenios) {

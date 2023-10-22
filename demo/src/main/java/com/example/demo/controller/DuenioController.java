@@ -88,4 +88,12 @@ public class DuenioController {
         return ResponseEntity.ok(duenioRepository.listarTodos(duenioRepository.findAll()));
     }
 
+    @GetMapping("/edificio/{codigoedificio}")
+    public ResponseEntity<List<String>> listarSegunEdificio(@PathVariable Integer codigoedificio) {
+        /*
+         * Nos devuelve todos los datos que contiene la tabla duenios.
+         */
+        List<String> duenios = duenioRepository.listarSegunEdifico(codigoedificio);
+        return ResponseEntity.ok(duenios);
+    }
 }
