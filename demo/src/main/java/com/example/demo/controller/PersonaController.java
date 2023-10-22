@@ -11,6 +11,7 @@ import com.example.demo.entity.Persona;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -42,5 +43,15 @@ public class PersonaController {
          * Nos devuelve todos los datos que contiene la tabla personas.
          */
         return ResponseEntity.ok(personaRepository.findAll());
+    }
+
+    @GetMapping("/buscar/{documento}")
+    public ResponseEntity<Persona> buscarPersona(@PathVariable String documento) {
+        /*
+         * Nos devuelve todos los datos que contiene la tabla personas.
+         */
+
+        Persona persona = personaRepository.findByDocumento(documento);
+        return ResponseEntity.ok(persona);
     }
 }
