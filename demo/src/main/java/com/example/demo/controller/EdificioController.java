@@ -13,16 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Edificio;
+import com.example.demo.entity.Unidad;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
 @RequestMapping(path = "/edificio", produces = "application/json")
 public class EdificioController {
     private final EdificioRepository edificioRepository;
+    private final UnidadRepository unidadRepository;
 
     @Autowired
-    public EdificioController(EdificioRepository edificioRepository) {
+    public EdificioController(EdificioRepository edificioRepository,
+            UnidadRepository unidadRepository) {
         this.edificioRepository = edificioRepository;
+        this.unidadRepository = unidadRepository;
     }
 
     @PostMapping("/crear")
@@ -59,6 +63,13 @@ public class EdificioController {
     public ResponseEntity<List<Edificio>> getAllEdificios() {
         List<Edificio> edificios = edificioRepository.findAll();
         return ResponseEntity.ok(edificios);
+    }
+
+    @GetMapping("/listar/unidades/{codigoedificio}")
+    public ResponseEntity<List<String>> listarUnidades(@PathVariable Integer codigoedificio) {
+        List<Unidad> unidades = unidadRepository.findAll();
+        List<String> resultado = edificioRepository.listarUnidades(codigoedificio, unidades);
+        return ResponseEntity.ok(resultado);
     }
 
 }

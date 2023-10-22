@@ -53,6 +53,7 @@ public class DuenioController {
             nuevaPersona.setNombre(rDuenio.getNombre());
             personaRepository.save(nuevaPersona);
             System.out.println("La persona no existia, pero la hemos agregado");
+            personaRepository.save(persona);
         }
 
         // verificamos que la unidad ingresada exista
@@ -80,11 +81,11 @@ public class DuenioController {
     }
 
     @GetMapping("/getAllDuenios")
-    public ResponseEntity<List<Duenio>> getAllDuenios() {
+    public ResponseEntity<List<String>> getAllDuenios() {
         /*
          * Nos devuelve todos los datos que contiene la tabla duenios.
          */
-        return ResponseEntity.ok(duenioRepository.findAll());
+        return ResponseEntity.ok(duenioRepository.listarTodos(duenioRepository.findAll()));
     }
 
 }

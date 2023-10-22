@@ -1,13 +1,11 @@
 package com.example.demo.entity;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,16 +17,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "unidades")
 public class Unidad {
-    /*
-     * Departamentos que pertenecen a un edificio.
-     * Una unidad puede tener varios dueños
-     * Donde las personas pueden ser dueños y/o inquilinos.
-     * identificador: de la unidad.
-     * piso: al que pertenece la undiad dentro del edificio.
-     * numero: dentro del piso, su identificador.
-     * habitado: para indicar si tiene inquilinos o no.
-     * lista dueños: una unidad puede tener uno o más dueños.
-     */
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "identificador")
@@ -43,13 +32,16 @@ public class Unidad {
     @Column(name = "habitado")
     private String habitado;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codigoedificio")
     private Edificio edificio;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "identificador", insertable = false, updatable = false)
     private Duenio duenio;
+
+    @OneToMany(mappedBy = "unidad", fetch = FetchType.LAZY)
+    private List<Inquilino> inquilinos = new ArrayList<Inquilino>();
 
     public Unidad() {
 
@@ -80,6 +72,10 @@ public class Unidad {
         this.habitado = habitado;
     }
 
+    public void addInquilinos(Inquilino inquilino) {
+        this.inquilinos.add(inquilino);
+    }
+
     public Edificio getEdificio() {
         return this.edificio;
     }
@@ -103,4 +99,18 @@ public class Unidad {
     public String getHabitado() {
         return this.habitado;
     }
+
+    public List<Inquilino> getInquilinos() {
+        return this.inquilinos;
+    }
+
+    public String toString() {
+        return "ID: " + this.identificador +
+                " Edificio: " + this.edificio.getCodigo().toString() +
+                " Nro: " + this.numero +
+                " Piso: " + this.piso +
+                " Habitado: " + this.habitado +
+                " Cant Inquilinos: " + this.inquilinos.size();
+    }
+
 }

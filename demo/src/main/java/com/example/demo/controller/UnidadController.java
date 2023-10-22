@@ -68,16 +68,9 @@ public class UnidadController {
     }
 
     @GetMapping("/getAllUnidades")
-    public ResponseEntity<List<Unidad>> getAllUnidades() {
+    public ResponseEntity<List<String>> getAllUnidades() {
         // Obtenermos todas las unidades cargadas en el sistema
-        List<Unidad> unidades = unidadRepository.findAll();
-        return ResponseEntity.ok(unidades);
-    }
-
-    @GetMapping("/edificio/{codigoedificio}")
-    public ResponseEntity<List<Unidad>> getUnidadesPorEdificio(@PathVariable Integer codigoedificio) {
-        // Unidades por Edificio
-        List<Unidad> unidades = unidadRepository.findByEdificioCodigo(codigoedificio);
+        List<String> unidades = unidadRepository.listarUnidades(unidadRepository.findAll());
         return ResponseEntity.ok(unidades);
     }
 

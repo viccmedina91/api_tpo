@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.Column;
@@ -58,6 +60,8 @@ public class Persona {
 
     @Autowired
     public String toString() {
-        return "Nombre: " + this.nombre + " Documento: " + this.documento;
+        return "DNI: " + this.documento +
+                " Nombre: " + this.nombre +
+                " Mail: " + this.mail;
     }
 }

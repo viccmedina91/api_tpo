@@ -52,6 +52,9 @@ const Layout = () => {
                             <li>
                                 <Link to="/personas/buscar_inquilinos">Buscar Inquilinos por DNI</Link>
                             </li>
+                            <li>
+                                <Link to="/inquilino/agregar">Agregar Inquilino</Link>
+                            </li>
                         </ul>
                     </li>
                     <li>

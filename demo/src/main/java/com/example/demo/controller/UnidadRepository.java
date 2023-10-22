@@ -21,7 +21,7 @@ public interface UnidadRepository extends JpaRepository<Unidad, Integer> {
         return unidadRecovery;
     }
 
-    List<Unidad> findByEdificioCodigo(Integer codigoEdificio);
+    public List<Unidad> findByEdificioCodigo(Integer codigoEdificio);
 
     public default List<Duenio> findDueniosPorEdificio(Integer codigoEdificio) {
         List<Unidad> unidades = findByEdificioCodigo(codigoEdificio);
@@ -33,4 +33,13 @@ public interface UnidadRepository extends JpaRepository<Unidad, Integer> {
 
         return duenios;
     }
+
+    public default List<String> listarUnidades(List<Unidad> unidades) {
+        List<String> resultado = new ArrayList<String>();
+        for (Unidad unidad : unidades) {
+            resultado.add(unidad.toString());
+        }
+        return resultado;
+    }
+
 }

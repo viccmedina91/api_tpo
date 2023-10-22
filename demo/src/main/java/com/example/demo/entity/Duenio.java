@@ -60,4 +60,9 @@ public class Duenio {
         return this.unidad;
     }
 
+    public String toString() {
+        return "Persona: " + persona.toString() +
+                "| Unidad: " + unidad.toString();
+    }
+
 }
