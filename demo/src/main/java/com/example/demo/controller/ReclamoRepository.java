@@ -17,15 +17,15 @@ public interface ReclamoRepository extends JpaRepository<Reclamo, String> {
         return resultado;
     }
 
-    public default List<Reclamo> findReclamoPorEdificio(Integer identificador) {
+    public default List<String> listarPorEdificio(Integer codigo) {
         List<Reclamo> reclamos = findAll();
-        List<Reclamo> porEdificio = new ArrayList<Reclamo>();
+        List<String> resultado = new ArrayList<String>();
         for (Reclamo reclamo : reclamos) {
-            if (reclamo.getEdificio().getCodigo() == identificador) {
-                porEdificio.add(reclamo);
+            if (reclamo.getEdificio().getCodigo() == codigo) {
+                resultado.add(reclamo.toString());
             }
         }
-        return porEdificio;
+        return resultado;
     }
 
     public default List<Reclamo> findReclamoPorUnidad(Integer identificador) {

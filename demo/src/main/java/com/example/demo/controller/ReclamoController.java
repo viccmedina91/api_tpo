@@ -44,10 +44,10 @@ public class ReclamoController {
         return ResponseEntity.ok(reclamos);
     }
 
-    @GetMapping("/getReclamosPorEdificio/{codigoedificio}")
-    public ResponseEntity<List<Reclamo>> getReclamosPorEdificio(@PathVariable Integer codigoedificio) {
+    @GetMapping("/edificio/listar/{codigoedificio}")
+    public ResponseEntity<List<String>> listarPorEdificio(@PathVariable Integer codigoedificio) {
         // Dado un código de Edificio, devolvemos el listado de reclamos asociados
-        List<Reclamo> reclamos = reclamoRepository.findReclamoPorEdificio(codigoedificio);
+        List<String> reclamos = reclamoRepository.listarPorEdificio(codigoedificio);
         return ResponseEntity.ok(reclamos);
     }
 
