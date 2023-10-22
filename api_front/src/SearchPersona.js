@@ -10,7 +10,7 @@ function App() {
     };
 
     const handleSubmit = () => {
-        // Busca un edificio según el código ingresado
+        // Según el DNI ingresado, devuelve la persona
         fetch(`http://localhost:8080/persona/buscar/${inputValue}`)
             .then((response) => {
                 if (!response.ok) {

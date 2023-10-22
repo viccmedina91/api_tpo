@@ -10,7 +10,7 @@ function App() {
     };
 
     const handleSubmit = () => {
-        // Busca un edificio según el código ingresado
+        // Según el código de Edificio ingresado, devuelve todos los dueños
         fetch(`http://localhost:8080/duenio/edificio/${inputValue}`)
             .then((response) => {
                 if (!response.ok) {

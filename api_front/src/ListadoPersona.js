@@ -5,7 +5,7 @@ function App() {
     const [responseData, setResponseData] = useState(null);
 
     const handleSubmit = () => {
-        // Busca un edificio según el código ingresado
+        // Devuelve todas las personas cargadas en la BD.
         fetch(`http://localhost:8080/persona/getAllPersonas`)
             .then((response) => {
                 if (!response.ok) {

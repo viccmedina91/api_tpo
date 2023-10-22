@@ -10,7 +10,7 @@ function App() {
     };
 
     const handleSubmit = () => {
-        // Busca un edificio según el código ingresado
+        // Devuelve la unidad según el identificador ingresado
         fetch(`http://localhost:8080/edificio/listar/unidades/${inputValue}`)
             .then((response) => {
                 if (!response.ok) {

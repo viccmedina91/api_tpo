@@ -5,7 +5,7 @@ function App() {
     const [responseData, setResponseData] = useState(null);
 
     const handleSubmit = () => {
-        // Busca un edificio según el código ingresado
+        // Devuelve todos los edificios cargados en la BD.
         fetch(`http://localhost:8080/edificio/getAllEdificios`)
             .then((response) => {
                 if (!response.ok) {

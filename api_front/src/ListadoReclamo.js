@@ -5,7 +5,7 @@ function App() {
     const [responseData, setResponseData] = useState(null);
 
     const handleSubmit = () => {
-        // Busca un edificio según el código ingresado
+        // Devuelve todos los reclamos cargados en el sistema
         fetch(`http://localhost:8080/reclamo/getAllReclamos`)
             .then((response) => {
                 if (!response.ok) {
