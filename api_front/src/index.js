@@ -7,6 +7,7 @@ import ListadoUnidad from "./ListadoUnidad";
 import ListadoPersona from "./ListadoPersona";
 import SearchPersona from "./SearchPersona";
 import ListadoDuenio from "./ListadoDuenio";
+import SearchDuenio from "./SearchDuenio";
 import ListadoInquilino from "./ListadoInquilino";
 import SearchUnidad from "./SearchUnidad";
 import ListadoReclamo from "./ListadoReclamo";
@@ -31,6 +32,7 @@ export default function App() {
 
         <Route path="/personas/listar" element={<ListadoPersona />}></Route>
         <Route path="/personas/buscar" element={<SearchPersona />}></Route>
+        <Route path="/duenio/buscar" element={<SearchDuenio />}></Route>
         <Route path="/personas/listar_duenios" element={<ListadoDuenio />}></Route>
         <Route path="/duenio/listar/edifcio" element={<SearchDuenioEdificio />}></Route>
         <Route path="/duenio/agregar" element={<AddDuenio />}></Route>

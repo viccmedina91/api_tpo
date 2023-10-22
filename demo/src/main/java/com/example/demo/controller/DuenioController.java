@@ -96,4 +96,5 @@ public class DuenioController {
         List<String> duenios = duenioRepository.listarSegunEdifico(codigoedificio);
         return ResponseEntity.ok(duenios);
     }
+
 }

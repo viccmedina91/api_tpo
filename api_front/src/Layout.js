@@ -38,7 +38,7 @@ const Layout = () => {
                                 <Link to="/duenio/listar/edifcio">Listar todas los Dueños por Edificio</Link>
                             </li>
                             <li>
-                                <Link to="/personas/buscar_duenios">Buscar Dueños por DNI</Link>
+                                <Link to="/duenio/buscar">Buscar Dueños por DNI</Link>
                             </li>
                             <li>
                                 <Link to="/duenio/agregar">Agregar Duenio</Link>
