@@ -50,7 +50,7 @@ const Layout = () => {
                                 <Link to="/inquilino/listar/edificio">Listar todas los Inquilinos por Edificio</Link>
                             </li>
                             <li>
-                                <Link to="/personas/buscar_inquilinos">Buscar Inquilinos por DNI</Link>
+                                <Link to="/inquilino/buscar">Buscar Inquilinos por DNI</Link>
                             </li>
                             <li>
                                 <Link to="/inquilino/agregar">Agregar Inquilino</Link>

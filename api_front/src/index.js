@@ -9,6 +9,7 @@ import SearchPersona from "./SearchPersona";
 import ListadoDuenio from "./ListadoDuenio";
 import SearchDuenio from "./SearchDuenio";
 import ListadoInquilino from "./ListadoInquilino";
+import SearchInquilino from "./SearchInquilino";
 import SearchUnidad from "./SearchUnidad";
 import ListadoReclamo from "./ListadoReclamo";
 import SearchInquilinoEdificio from "./SearchInquilinoEdificio";
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/personas/listar_inquilinos" element={<ListadoInquilino />}></Route>
         <Route path="/inquilino/listar/edificio" element={<SearchInquilinoEdificio />}></Route>
         <Route path="/inquilino/agregar" element={<AddInquilino />}></Route>
+        <Route path="/inquilino/buscar" element={<SearchInquilino />}></Route>
 
         <Route path="/reclamos/listar" element={<ListadoReclamo />}></Route>
         <Route path="/reclamos/listar/edificio" element={<SearchReclamoEdificio />}></Route>
