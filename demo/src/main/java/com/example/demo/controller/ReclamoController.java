@@ -97,4 +97,14 @@ public class ReclamoController {
 
     }
 
+    @GetMapping("/listar/nro/{identificador}")
+    public ResponseEntity<Map<String, String>> listarPorNro(@PathVariable Integer identificador) {
+        // Dado un código de Reclamo, lo devolvemos siempre y cuando exista.
+        String reclamo = this.reclamoRepository.findById(identificador).toString();
+        if (reclamo.contains("empty")) {
+            return ResponseEntity.ok(Collections.singletonMap("error", "El nro de reclamo no existe"));
+        }
+        return ResponseEntity.ok(Collections.singletonMap("ok", reclamo));
+    }
+
 }

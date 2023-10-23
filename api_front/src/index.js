@@ -12,6 +12,7 @@ import ListadoInquilino from "./ListadoInquilino";
 import SearchInquilino from "./SearchInquilino";
 import SearchUnidad from "./SearchUnidad";
 import ListadoReclamo from "./ListadoReclamo";
+import SearchReclamo from "./SearchReclamo";
 import SearchInquilinoEdificio from "./SearchInquilinoEdificio";
 import SearchDuenioEdificio from "./SearchDuenioEdificio";
 import SearchReclamoEdificio from "./SearchReclamoEdificio";
@@ -48,6 +49,7 @@ export default function App() {
         <Route path="/reclamos/listar/unidad" element={<SearchReclamoUnidad />}></Route>
         <Route path="/reclamos/listar/persona" element={<SearchReclamoPersona />}></Route>
         <Route path="/reclamos/agregar" element={<AddReclamo />}></Route>
+        <Route path="/reclamos/listar/nro" element={<SearchReclamo />}></Route>
 
       </Routes>
     </BrowserRouter>

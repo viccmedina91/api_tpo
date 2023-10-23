@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.Reclamo;
 
-public interface ReclamoRepository extends JpaRepository<Reclamo, String> {
+public interface ReclamoRepository extends JpaRepository<Reclamo, Integer> {
     public default List<String> listarTodos() {
         List<Reclamo> reclamos = findAll();
         List<String> resultado = new ArrayList<String>();
