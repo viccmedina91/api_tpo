@@ -11,7 +11,7 @@ function App() {
 
     const handleSubmit = () => {
         // Busca un edificio según el código ingresado
-        fetch(`http://localhost:8080/reclamo/getReclamosPorPersona/${inputValue}`)
+        fetch(`http://localhost:8080/reclamo/persona/listar/${inputValue}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

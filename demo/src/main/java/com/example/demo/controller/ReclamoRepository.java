@@ -39,15 +39,14 @@ public interface ReclamoRepository extends JpaRepository<Reclamo, String> {
         return resultado;
     }
 
-    public default List<Reclamo> findReclamoPorPersona(String documento) {
+    public default List<String> listarPorPersona(String codigo) {
         List<Reclamo> reclamos = findAll();
-        List<Reclamo> porPersona = new ArrayList<Reclamo>();
+        List<String> resultado = new ArrayList<String>();
         for (Reclamo reclamo : reclamos) {
-            if (reclamo.getPersona().getDocumento() == documento) {
-                porPersona.add(reclamo);
+            if (reclamo.getPersona().getDocumento().equals(codigo)) {
+                resultado.add(reclamo.toString());
             }
         }
-        return porPersona;
-
+        return resultado;
     }
 }

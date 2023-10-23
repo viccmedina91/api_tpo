@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,14 +53,18 @@ public class InquilinoController {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<String> createInquilino(@RequestBody AltaDuenioRequest rDuenio) {
+    public ResponseEntity<Map<String, String>> createInquilino(@RequestBody AltaDuenioRequest rDuenio) {
         // Endpoint para dar de alta un nuevo duenio.
-
-        Unidad unidad = unidadRepository.findUnidadByIdentificador(rDuenio.getIdentificador());
+        Inquilino inquilino = new Inquilino();
+        Unidad unidad = this.unidadRepository.findUnidadByIdentificador(rDuenio.getIdentificador());
         // Si la unidad no existe, no se podrá crear un nuevo dienio
         if (unidad == null) {
             System.out.println("La unidad ingresada no existe");
-            return ResponseEntity.accepted().body("La unidad ingresada no existe");
+            return ResponseEntity.ok(Collections.singletonMap("error", "La unidad no existe"));
+        }
+        if (this.inquiniloRepository.existeInquilino(rDuenio.getDocumento())) {
+            return ResponseEntity.ok(Collections.singletonMap("error", "La persona ya es inquilino"));
+
         }
 
         Persona persona = personaRepository.findByDocumento(rDuenio.getDocumento());
@@ -69,15 +75,16 @@ public class InquilinoController {
             nuevaPersona.setDocumento(rDuenio.getDocumento());
             nuevaPersona.setMail(rDuenio.getMail());
             nuevaPersona.setNombre(rDuenio.getNombre());
-            personaRepository.save(nuevaPersona);
-            System.out.println("La persona no existia, pero la hemos agregado");
-            personaRepository.save(persona);
+            this.personaRepository.save(nuevaPersona);
+            inquilino.setPersona(nuevaPersona);
+        } else {
+            inquilino.setPersona(persona);
         }
 
-        Inquilino inquilino = new Inquilino();
-        inquilino.setPersona(persona);
         inquilino.setUnidad(unidad);
-        inquiniloRepository.save(inquilino);
-        return ResponseEntity.accepted().body("200 OK - Nuevo Inquilino alamcenado");
+        this.inquiniloRepository.save(inquilino);
+        unidad.setHabitado("S");
+        this.unidadRepository.save(unidad);
+        return ResponseEntity.ok(Collections.singletonMap("ok", "Inquilino guardado"));
     }
 }

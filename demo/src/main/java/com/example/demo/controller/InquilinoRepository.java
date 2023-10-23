@@ -30,4 +30,15 @@ public interface InquilinoRepository extends JpaRepository<Inquilino, String> {
 
         return resultado;
     }
+
+    public default Boolean existeInquilino(String documento) {
+        Boolean result = true;
+        List<Inquilino> inquilinos = findAll();
+        for (Inquilino inquilino : inquilinos) {
+            if (inquilino.getPersona().getDocumento().equals(documento)) {
+                return result;
+            }
+        }
+        return false;
+    }
 }

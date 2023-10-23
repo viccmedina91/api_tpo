@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,29 +61,30 @@ public class ReclamoController {
         return ResponseEntity.ok(reclamos);
     }
 
-    @GetMapping("/getReclamosPorPersona/{documento}")
-    public ResponseEntity<List<Reclamo>> getReclamosPorPersona(@PathVariable String documento) {
+    @GetMapping("/persona/listar/{documento}")
+    public ResponseEntity<List<String>> getReclamosPorPersona(@PathVariable String documento) {
         // Dado un código de Unidad, devolvemos el listado de reclamos asociados
-        List<Reclamo> reclamos = reclamoRepository.findReclamoPorPersona(documento);
+        List<String> reclamos = reclamoRepository.listarPorPersona(documento);
         return ResponseEntity.ok(reclamos);
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<String> addReclamo(@RequestBody AltaReclamoRequest rReclamo) {
+    public ResponseEntity<Map<String, String>> addReclamo(@RequestBody AltaReclamoRequest rReclamo) {
         // Endpoint para crear un reclamo.
 
         Edificio edificio = edificioRepository.findByCodigo(rReclamo.getCodigo());
         if (edificio == null) {
-            return new ResponseEntity<>("El codigo de edificio no existe", HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok(Collections.singletonMap("error", "El codigo de edificio no existe"));
+
         }
         Persona persona = personaRepository.findByDocumento(rReclamo.getDocumento());
         if (persona == null) {
-            return new ResponseEntity<>("El documento no se encuentra registrado", HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok(Collections.singletonMap("error", "El documento no se encuentra registrado"));
+
         }
         Unidad unidad = unidadRepository.findUnidadByIdentificador(rReclamo.getIdentificador());
         if (unidad == null) {
-            return new ResponseEntity<>("El codigo de unidad no existe", HttpStatus.BAD_REQUEST);
-
+            return ResponseEntity.ok(Collections.singletonMap("error", "El codigo de unidad no existe"));
         }
         Reclamo reclamo = new Reclamo();
         reclamo.setPersona(persona);
@@ -89,7 +93,7 @@ public class ReclamoController {
         reclamo.setDescripcion(rReclamo.getDescripcion());
         reclamo.setUbicacion(rReclamo.getUbicacion());
         reclamoRepository.save(reclamo);
-        return new ResponseEntity<>("Reclamo creado exitosamente", HttpStatus.CREATED);
+        return ResponseEntity.ok(Collections.singletonMap("ok", "Reclamo guardado"));
 
     }
 
