@@ -6,7 +6,7 @@ function App() {
 
     const handleSubmit = () => {
         // Devuelve todos los dueños cargados en la BD.
-        fetch(`http://localhost:8080/duenio/getAllDuenios`)
+        fetch(`http://localhost:8080/duenio/listar`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

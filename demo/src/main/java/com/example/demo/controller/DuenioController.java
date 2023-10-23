@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,16 +36,17 @@ public class DuenioController {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<String> createDuenio(@RequestBody AltaDuenioRequest rDuenio) {
+    public ResponseEntity<Map<String, String>> createDuenio(@RequestBody AltaDuenioRequest rDuenio) {
         // Endpoint para dar de alta un nuevo duenio.
 
         Unidad unidad = unidadRepository.findUnidadByIdentificador(rDuenio.getIdentificador());
         // Si la unidad no existe, no se podrá crear un nuevo dienio
         if (unidad == null) {
             System.out.println("La unidad ingresada no existe");
-            return ResponseEntity.accepted().body("La unidad ingresada no existe");
-        }
+            return ResponseEntity.ok(Collections.singletonMap("error", "La unidad ingresada no existe"));
 
+        }
+        Duenio duenio = new Duenio();
         Persona persona = personaRepository.findByDocumento(rDuenio.getDocumento());
         // Si la persona no se encuentra registrada, la registramos
         if (persona == null) {
@@ -51,18 +55,15 @@ public class DuenioController {
             nuevaPersona.setDocumento(rDuenio.getDocumento());
             nuevaPersona.setMail(rDuenio.getMail());
             nuevaPersona.setNombre(rDuenio.getNombre());
-            personaRepository.save(nuevaPersona);
-            System.out.println("La persona no existia, pero la hemos agregado");
-            personaRepository.save(persona);
+            this.personaRepository.save(nuevaPersona);
+            duenio.setPersona(nuevaPersona);
+        } else {
+            duenio.setPersona(persona);
         }
 
-        // verificamos que la unidad ingresada exista
-
-        Duenio duenio = new Duenio();
-        duenio.setPersona(persona);
         duenio.setUnidad(unidad);
-        duenioRepository.save(duenio);
-        return ResponseEntity.accepted().body("200 OK - Nuevo Duenio alamcenado");
+        this.duenioRepository.save(duenio);
+        return ResponseEntity.ok(Collections.singletonMap("ok", "Nuevo Dueño alamcenado"));
     }
 
     @GetMapping("/getByDocumento/{documento}")
@@ -71,8 +72,8 @@ public class DuenioController {
          * Endpoint para obtener un duenio por medio del id.
          * localhost:8080/duenio/getByDocumento/1234
          */
-        Duenio duenio = duenioRepository.findDuenioByDocumento(documento);
-        if (duenio != duenioRepository) {
+        Duenio duenio = this.duenioRepository.findDuenioByDocumento(documento);
+        if (duenio != null) {
 
             return ResponseEntity.ok(duenio);
         } else {
@@ -80,12 +81,12 @@ public class DuenioController {
         }
     }
 
-    @GetMapping("/getAllDuenios")
-    public ResponseEntity<List<String>> getAllDuenios() {
+    @GetMapping("/listar")
+    public ResponseEntity<List<String>> listarTodos() {
         /*
          * Nos devuelve todos los datos que contiene la tabla duenios.
          */
-        return ResponseEntity.ok(duenioRepository.listarTodos(duenioRepository.findAll()));
+        return ResponseEntity.ok(this.duenioRepository.listarTodos());
     }
 
     @GetMapping("/edificio/{codigoedificio}")
@@ -93,7 +94,7 @@ public class DuenioController {
         /*
          * Nos devuelve todos los datos que contiene la tabla duenios.
          */
-        List<String> duenios = duenioRepository.listarSegunEdifico(codigoedificio);
+        List<String> duenios = this.duenioRepository.listarSegunEdifico(codigoedificio);
         return ResponseEntity.ok(duenios);
     }
 

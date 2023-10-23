@@ -20,7 +20,8 @@ public interface DuenioRepository extends JpaRepository<Duenio, Integer> {
         return resultado;
     }
 
-    public default List<String> listarTodos(List<Duenio> duenios) {
+    public default List<String> listarTodos() {
+        List<Duenio> duenios = findAll();
         List<String> resultado = new ArrayList<String>();
         for (Duenio duenio : duenios) {
             resultado.add(duenio.toString());
