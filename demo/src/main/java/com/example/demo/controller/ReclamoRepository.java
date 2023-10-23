@@ -28,15 +28,15 @@ public interface ReclamoRepository extends JpaRepository<Reclamo, String> {
         return resultado;
     }
 
-    public default List<Reclamo> findReclamoPorUnidad(Integer identificador) {
+    public default List<String> listarPorUnidad(Integer codigo) {
         List<Reclamo> reclamos = findAll();
-        List<Reclamo> porUnidad = new ArrayList<Reclamo>();
+        List<String> resultado = new ArrayList<String>();
         for (Reclamo reclamo : reclamos) {
-            if (reclamo.getUnidad().getNumero() == identificador) {
-                porUnidad.add(reclamo);
+            if (reclamo.getUnidad().getIdentificador() == codigo) {
+                resultado.add(reclamo.toString());
             }
         }
-        return porUnidad;
+        return resultado;
     }
 
     public default List<Reclamo> findReclamoPorPersona(String documento) {

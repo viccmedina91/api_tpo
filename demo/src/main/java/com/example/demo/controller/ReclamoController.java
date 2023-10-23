@@ -51,10 +51,10 @@ public class ReclamoController {
         return ResponseEntity.ok(reclamos);
     }
 
-    @GetMapping("/getReclamosPorUnidad/{codigoedificio}")
-    public ResponseEntity<List<Reclamo>> getReclamosPorUnidad(@PathVariable Integer codigoedificio) {
+    @GetMapping("/unidad/listar/{identificador}")
+    public ResponseEntity<List<String>> listarPorUnidad(@PathVariable Integer identificador) {
         // Dado un código de Unidad, devolvemos el listado de reclamos asociados
-        List<Reclamo> reclamos = reclamoRepository.findReclamoPorUnidad(codigoedificio);
+        List<String> reclamos = reclamoRepository.listarPorUnidad(identificador);
         return ResponseEntity.ok(reclamos);
     }
 
