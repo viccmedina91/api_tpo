@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Imagen;
 import com.example.demo.entity.Reclamo;
+import com.example.demo.requests.AltaImagenRequest;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")

@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import com.example.demo.entity.Inquilino;
 import com.example.demo.entity.Persona;
 import com.example.demo.entity.Unidad;
+import com.example.demo.requests.AltaDuenioRequest;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")

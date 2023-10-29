@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.requests;
 
 public class AltaAlquilerRequest {
     private String documento;

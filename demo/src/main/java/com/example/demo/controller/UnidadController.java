@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.entity.Duenio;
 import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Unidad;
+import com.example.demo.requests.AltaUnidadRequest;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
