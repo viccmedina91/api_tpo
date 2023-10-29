@@ -31,14 +31,19 @@ public class ImagenController {
     @PostMapping("/crear")
     public ResponseEntity<Map<String, String>> agregarImagen(@RequestBody AltaImagenRequest rImagen) {
         // Para agregar una imagen a un reclamo existente
-        Reclamo reclamo = this.reclamoRepository.buscarPorID(rImagen.getNroRelcamo());
+        System.out.println("ID RECLAMO " + rImagen.getReclamoid());
+        System.out.println("PATH " + rImagen.getPath());
+        System.out.println("TIPO " + rImagen.getTipo());
+        Reclamo reclamo = this.reclamoRepository.buscarPorID(rImagen.getReclamoid());
+
         if (reclamo == null) {
             return ResponseEntity.ok(Collections.singletonMap("error", "El Reclamo no existe"));
         }
         Imagen imagen = new Imagen();
         imagen.setReclamo(reclamo);
-        imagen.setPath(rImagen.getPathImagen());
+        imagen.setPath(rImagen.getPath());
         imagen.setTipo(rImagen.getTipo());
+        this.imagenRepository.save(imagen);
         return ResponseEntity.ok(Collections.singletonMap("ok", "La imagen ha sido agregada"));
 
     }

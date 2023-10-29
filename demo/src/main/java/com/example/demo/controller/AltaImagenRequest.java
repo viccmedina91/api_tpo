@@ -1,16 +1,16 @@
 package com.example.demo.controller;
 
 public class AltaImagenRequest {
-    private String pathImagen;
-    private Integer nroReclamo;
+    private String path;
+    private Integer reclamoid;
     private String tipo;
 
-    public String getPathImagen() {
-        return this.pathImagen;
+    public String getPath() {
+        return this.path;
     }
 
-    public Integer getNroRelcamo() {
-        return this.nroReclamo;
+    public Integer getReclamoid() {
+        return this.reclamoid;
     }
 
     public String getTipo() {

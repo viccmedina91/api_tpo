@@ -79,6 +79,9 @@ const Layout = () => {
                                 <Link to="/reclamos/agregar">Agregar Reclamo</Link>
                             </li>
                             <li>
+                                <Link to="/imagenes/agregar">Agregar Imagen a Reclamo</Link>
+                            </li>
+                            <li>
                                 <Link to="/estados/listar">Listar Estados</Link>
                             </li>
                         </ul>
