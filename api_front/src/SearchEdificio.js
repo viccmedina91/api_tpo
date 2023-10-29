@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
 
-function App() {
+function SearchEdificio() {
     const [inputValue, setInputValue] = useState('');
     const [responseData, setResponseData] = useState(null);
 
@@ -46,4 +46,4 @@ function App() {
     );
 }
 
-export default App;
+export default SearchEdificio;

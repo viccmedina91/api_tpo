@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
 
-function App() {
+function ListadoDuenio() {
     const [responseData, setResponseData] = useState(null);
 
     const handleSubmit = () => {
@@ -33,4 +33,4 @@ function App() {
     );
 }
 
-export default App;
+export default ListadoDuenio;
