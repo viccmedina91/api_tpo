@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import FormSearch from './Forms/FormSearch';
 
 function SearchEdificio() {
-    const [inputValue, setInputValue] = useState('');
     const [responseData, setResponseData] = useState(null);
 
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
-
-    const handleSubmit = () => {
+    const handleSubmit = (campo) => {
         // Busca un edificio según el código ingresado
-        fetch(`http://localhost:8080/edificio/getByCodigo/${inputValue}`)
+        fetch(`http://localhost:8080/edificio/getByCodigo/${campo}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -30,17 +26,9 @@ function SearchEdificio() {
 
     return (
         <div>
-            <h1>Formulario de Búsqueda</h1>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={handleInputChange}
-                placeholder="Ingresa un valor"
-            />
-            <button onClick={handleSubmit}>Buscar</button>
-
+            <h2>Buscar Edificio según Código</h2>
+            <FormSearch onSubmit={handleSubmit} />
             {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-
             )}
         </div>
     );
