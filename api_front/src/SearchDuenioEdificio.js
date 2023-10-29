@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import FormSearch from './Forms/FormSearch';
 
 function SearchDuenioEdificio() {
-    const [inputValue, setInputValue] = useState('');
     const [responseData, setResponseData] = useState(null);
 
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
-
-    const handleSubmit = () => {
+    const handleSubmit = (campo) => {
         // Según el código de Edificio ingresado, devuelve todos los dueños
-        fetch(`http://localhost:8080/duenio/edificio/${inputValue}`)
+        fetch(`http://localhost:8080/duenio/edificio/${campo}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -30,17 +26,9 @@ function SearchDuenioEdificio() {
 
     return (
         <div>
-            <h1>Formulario de Búsqueda</h1>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={handleInputChange}
-                placeholder="Ingresa un valor"
-            />
-            <button onClick={handleSubmit}>Buscar</button>
-
+            <h2>Buscar Dueño según Edificio</h2>
+            <FormSearch onSubmit={handleSubmit} />
             {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-
             )}
         </div>
     );
