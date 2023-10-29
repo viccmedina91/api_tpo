@@ -23,6 +23,7 @@ import AddDuenio from "./AddDuenio";
 import AddInquilino from "./AddInquilino";
 import ListadoEstado from "./ListadoEstado";
 import AddImagen from "./AddImagen";
+import SearchImagenReclamo from "./SearchImagenReclamo";
 
 export default function App() {
   return (
@@ -53,6 +54,8 @@ export default function App() {
         <Route path="/reclamos/agregar" element={<AddReclamo />}></Route>
         <Route path="/imagenes/agregar" element={<AddImagen />}></Route>
         <Route path="/reclamos/listar/nro" element={<SearchReclamo />}></Route>
+        <Route path="/imagenes/segun/reclamo" element={<SearchImagenReclamo />}></Route>
+
 
         <Route path="/estados/listar/" element={<ListadoEstado />}></Route>
 

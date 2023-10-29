@@ -68,7 +68,9 @@ public class Imagen {
 
     @Autowired
     public String toString() {
-        return "Nro: " + this.numero;
+        return "Nro: " + this.numero +
+                " Path: " + this.path +
+                " Tipo: " + this.tipo;
     }
 
 }
