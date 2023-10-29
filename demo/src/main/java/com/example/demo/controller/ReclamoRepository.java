@@ -8,6 +8,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.entity.Reclamo;
 
 public interface ReclamoRepository extends JpaRepository<Reclamo, Integer> {
+    public default Reclamo buscarPorID(Integer nro) {
+        List<Reclamo> reclamos = findAll();
+        for (Reclamo reclamo : reclamos) {
+            if (reclamo.getIdReclamo() == nro) {
+                return reclamo;
+            }
+        }
+        return null;
+    }
+
     public default List<String> listarTodos() {
         List<Reclamo> reclamos = findAll();
         List<String> resultado = new ArrayList<String>();

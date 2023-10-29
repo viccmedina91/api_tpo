@@ -50,13 +50,7 @@ public class DuenioController {
         Persona persona = personaRepository.findByDocumento(rDuenio.getDocumento());
         // Si la persona no se encuentra registrada, la registramos
         if (persona == null) {
-            Persona nuevaPersona = new Persona();
-            nuevaPersona.setContrasenia(rDuenio.getContrasenia());
-            nuevaPersona.setDocumento(rDuenio.getDocumento());
-            nuevaPersona.setMail(rDuenio.getMail());
-            nuevaPersona.setNombre(rDuenio.getNombre());
-            this.personaRepository.save(nuevaPersona);
-            duenio.setPersona(nuevaPersona);
+
         } else {
             duenio.setPersona(persona);
         }
