@@ -17,4 +17,14 @@ public interface EstadoRepository extends JpaRepository<Estado, String> {
         return resultados;
     }
 
+    public default Estado encontrarPorDescripcion(String descripcion) {
+        List<Estado> estados = findAll();
+        for (Estado estado : estados) {
+            if (descripcion.equals(estado.getDescripcion())) {
+                return estado;
+            }
+        }
+        return null;
+    }
+
 }

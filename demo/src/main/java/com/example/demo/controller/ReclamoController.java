@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.entity.Edificio;
+import com.example.demo.entity.Estado;
 import com.example.demo.entity.Persona;
 import com.example.demo.entity.Reclamo;
 import com.example.demo.entity.Unidad;
@@ -27,16 +28,19 @@ public class ReclamoController {
     private final EdificioRepository edificioRepository;
     private final PersonaRepository personaRepository;
     private final UnidadRepository unidadRepository;
+    private final EstadoRepository estadoRepository;
 
     @Autowired
     public ReclamoController(ReclamoRepository reclamoRepository,
             EdificioRepository edificioRepository,
             PersonaRepository personaRepository,
-            UnidadRepository unidadRepository) {
+            UnidadRepository unidadRepository,
+            EstadoRepository estadoRepository) {
         this.reclamoRepository = reclamoRepository;
         this.edificioRepository = edificioRepository;
         this.personaRepository = personaRepository;
         this.unidadRepository = unidadRepository;
+        this.estadoRepository = estadoRepository;
     }
 
     @GetMapping("/listar")
@@ -86,6 +90,8 @@ public class ReclamoController {
             return ResponseEntity.ok(Collections.singletonMap("error", "El codigo de unidad no existe"));
         }
         Reclamo reclamo = new Reclamo();
+        Estado estado = this.estadoRepository.encontrarPorDescripcion("Pendiente");
+        reclamo.setEstado(estado);
         reclamo.setPersona(persona);
         reclamo.setEdificio(edificio);
         reclamo.setUnidad(unidad);
