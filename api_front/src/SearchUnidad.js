@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import FormSearch from './Forms/FormSearch';
+
 
 function SearchUnidad() {
-    const [inputValue, setInputValue] = useState('');
     const [responseData, setResponseData] = useState(null);
 
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
-
-    const handleSubmit = () => {
+    const handleSubmit = (campo) => {
         // Devuelve la unidad según el identificador ingresado
-        fetch(`http://localhost:8080/edificio/listar/unidades/${inputValue}`)
+        fetch(`http://localhost:8080/edificio/listar/unidades/${campo}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -30,15 +27,8 @@ function SearchUnidad() {
 
     return (
         <div>
-            <h1>Formulario de Búsqueda</h1>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={handleInputChange}
-                placeholder="Código de Edificio"
-            />
-            <button onClick={handleSubmit}>Buscar</button>
-
+            <h2>Listar Unidades según Edificio</h2>
+            <FormSearch onSubmit={handleSubmit} />
             {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
             )}
         </div>
