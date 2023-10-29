@@ -78,6 +78,9 @@ const Layout = () => {
                             <li>
                                 <Link to="/reclamos/agregar">Agregar Reclamo</Link>
                             </li>
+                            <li>
+                                <Link to="/estados/listar">Listar Estados</Link>
+                            </li>
                         </ul>
                     </li>
                 </ul>
