@@ -35,6 +35,10 @@ public class Reclamo {
     @JoinColumn(name = "identificador")
     private Unidad unidad;
 
+    @ManyToOne
+    @JoinColumn(name = "estadoid")
+    private Estado estado;
+
     public Reclamo() {
 
     }
@@ -63,6 +67,10 @@ public class Reclamo {
         return this.unidad;
     }
 
+    public Estado getEstado() {
+        return this.estado;
+    }
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -83,11 +91,16 @@ public class Reclamo {
         this.unidad = unidad;
     }
 
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
     public String toString() {
         return "ID: " + this.idreclamo +
                 " Edificio: " + this.edificio.getCodigo() +
                 " Unidad: " + this.unidad.getIdentificador() +
                 " Descripción: " + this.descripcion +
-                " Ubicación: " + this.ubicacion;
+                " Ubicación: " + this.ubicacion +
+                " Estado: " + this.estado.getDescripcion();
     }
 }
