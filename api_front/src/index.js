@@ -18,6 +18,7 @@ import SearchDuenioEdificio from "./SearchDuenioEdificio";
 import SearchReclamoEdificio from "./SearchReclamoEdificio";
 import SearchReclamoUnidad from "./SearchReclamoUnidad";
 import SearchReclamoPersona from "./SearchReclamoPersona";
+import ActualizarEstadoReclamo from "./ActualizarEstadoReclamo";
 import AddReclamo from "./AddReclamo";
 import AddDuenio from "./AddDuenio";
 import AddInquilino from "./AddInquilino";
@@ -55,7 +56,7 @@ export default function App() {
         <Route path="/imagenes/agregar" element={<AddImagen />}></Route>
         <Route path="/reclamos/listar/nro" element={<SearchReclamo />}></Route>
         <Route path="/imagenes/segun/reclamo" element={<SearchImagenReclamo />}></Route>
-
+        <Route path="/reclamos/actualizar/estado" element={<ActualizarEstadoReclamo />}></Route>
 
         <Route path="/estados/listar/" element={<ListadoEstado />}></Route>
 

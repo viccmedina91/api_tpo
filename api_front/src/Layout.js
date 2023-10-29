@@ -82,7 +82,10 @@ const Layout = () => {
                                 <Link to="/imagenes/agregar">Agregar Imagen a Reclamo</Link>
                             </li>
                             <li>
-                                <Link to="/imagenes/segun/reclamo"> Imagen según Reclamo</Link>
+                                <Link to="/imagenes/segun/reclamo">Imagen según Reclamo</Link>
+                            </li>
+                            <li>
+                                <Link to="/reclamos/actualizar/estado">Actualizar estado de Reclamo</Link>
                             </li>
 
                             <li>

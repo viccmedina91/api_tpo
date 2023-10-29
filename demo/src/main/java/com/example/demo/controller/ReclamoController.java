@@ -9,9 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.demo.entity.Edificio;
@@ -19,9 +21,10 @@ import com.example.demo.entity.Estado;
 import com.example.demo.entity.Persona;
 import com.example.demo.entity.Reclamo;
 import com.example.demo.entity.Unidad;
+import com.example.demo.requests.ModificarEstadoRequest;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(path = "/reclamo", produces = "application/json")
 public class ReclamoController {
     private final ReclamoRepository reclamoRepository;
@@ -110,6 +113,23 @@ public class ReclamoController {
             return ResponseEntity.ok(Collections.singletonMap("error", "El nro de reclamo no existe"));
         }
         return ResponseEntity.ok(Collections.singletonMap("ok", reclamo));
+    }
+
+    @PostMapping("/actualizar/estado")
+    // Actualizamos el estado de un reclamo, validamos que la actualización sea
+    // válida
+    public ResponseEntity<Map<String, String>> actualizarEstado(@RequestBody ModificarEstadoRequest rReclamo) {
+        String resultado = this.reclamoRepository.actualizarEstado(rReclamo);
+        if (resultado.equals("ok")) {
+            Reclamo reclamo = this.reclamoRepository.buscarPorID(rReclamo.getReclamoid());
+            Estado estado = this.estadoRepository.encontrarPorDescripcion(rReclamo.getEstado());
+            reclamo.setEstado(estado);
+            this.reclamoRepository.save(reclamo);
+            return ResponseEntity.ok(Collections.singletonMap("ok", "Estado del reclamo actualizado"));
+        } else {
+            return ResponseEntity.ok(Collections.singletonMap("error", resultado));
+        }
+
     }
 
 }

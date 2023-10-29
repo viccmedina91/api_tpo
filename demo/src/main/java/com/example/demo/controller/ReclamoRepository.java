@@ -6,8 +6,25 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.Reclamo;
+import com.example.demo.requests.ModificarEstadoRequest;
 
 public interface ReclamoRepository extends JpaRepository<Reclamo, Integer> {
+
+    public default String actualizarEstado(ModificarEstadoRequest rReclamo) {
+        Reclamo reclamo = buscarPorID(rReclamo.getReclamoid());
+        String estadoActual = reclamo.getEstado().getDescripcion();
+        String estadoNuevo = rReclamo.getEstado();
+        if ((estadoActual.equals("Pendiente")) && (estadoNuevo.equals("En Proceso"))) {
+            return "ok";
+
+        } else {
+            if ((estadoActual.equals("En Proceso")) && (estadoNuevo.equals("Cumplido"))) {
+                return "ok";
+            }
+        }
+        return "Estado inválido";
+    }
+
     public default Reclamo buscarPorID(Integer nro) {
         List<Reclamo> reclamos = findAll();
         for (Reclamo reclamo : reclamos) {
