@@ -28,31 +28,5 @@ public class PersonaController {
          */
         return this.controlador.getPersonas();
     }
-    /*
-     * 
-     * 
-     * @GetMapping("/buscar/{documento}")
-     * public ResponseEntity<Persona> buscarPersona(@PathVariable String documento)
-     * {
-     * /*
-     * Nos devuelve todos los datos que contiene la tabla personas.
-     * 
-     * 
-     * Persona persona = personaRepository.findByDocumento(documento);
-     * return ResponseEntity.ok(persona);
-     * }
-     * 
-     * @PostMapping("/crear")
-     * public ResponseEntity<String> crearPersona(@RequestBody Persona persona) {
-     * try {
-     * // Guarda la persona en la base de datos
-     * personaRepository.save(persona);
-     * return new ResponseEntity<>("Persona creada exitosamente",
-     * HttpStatus.CREATED);
-     * } catch (Exception e) {
-     * return new ResponseEntity<>("Error al crear la persona",
-     * HttpStatus.INTERNAL_SERVER_ERROR);
-     * }
-     * }
-     */
+
 }

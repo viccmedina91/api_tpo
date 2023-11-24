@@ -90,4 +90,22 @@ public class UnidadController {
         return ResponseEntity.status(HttpStatus.CREATED).body(operacion);
     }
 
+    @PostMapping("/agregar/duenio")
+    public ResponseEntity<?> agregarDuenio(@RequestBody UnidadPersona unidadPersona) {
+        // Dado un documento y un codigo de unidad, le asignamos la propiedad
+        PersonaView persona = this.controlador.agregarDuenioUnidad(unidadPersona);
+        if (persona == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unidad o Persona inexistente");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(persona);
+    }
+
+    @PostMapping("/agregar/inquilino")
+    public ResponseEntity<?> agregarInquilino(@RequestBody UnidadPersona unidadPersona) {
+        if (this.controlador.agregarInquilinoUnidad(unidadPersona)) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(unidadPersona);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha ocurrido un error");
+    }
+
 }

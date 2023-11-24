@@ -133,7 +133,12 @@ public class Controlador {
             return null;
         }
         unidadExistente.setPiso(unidad.getPiso());
-        unidadExistente.setHabitado(unidad.getHabitado());
+        if (unidad.getHabitado()) {
+            unidadExistente.setHabitado("S");
+        } else {
+            unidadExistente.setHabitado("N");
+        }
+
         unidadExistente.setNumero(unidad.getNumero());
         this.unidadRepository.save(unidadExistente);
         return unidadExistente.toView();
@@ -192,6 +197,37 @@ public class Controlador {
             return null;
         }
         return edificio.habitantes().stream().map(Persona::toView).toList();
+    }
+
+    public PersonaView agregarDuenioUnidad(UnidadPersona unidadPersona) {
+        Unidad unidad = buscarUnidad(Integer.parseInt(unidadPersona.getCodigoUnidad()));
+        Persona persona = buscarPersona(unidadPersona.getDocumento());
+        if (unidad == null) {
+            return null;
+        }
+        if (persona == null) {
+            return null;
+        }
+        unidad.agregarDuenio(persona);
+        this.unidadRepository.save(unidad);
+        return persona.toView();
+    }
+
+    public Boolean agregarInquilinoUnidad(UnidadPersona unidadPersona) {
+        Unidad unidad = this.buscarUnidad(Integer.parseInt(unidadPersona.getCodigoUnidad()));
+        Persona persona = buscarPersona(unidadPersona.getDocumento());
+        if (unidad.getInquilinos().isEmpty()) {
+            unidad.alquilar(persona);
+        } else {
+            if (!unidad.getInquilinos().contains(persona)) {
+                unidad.agregarInquilino(persona);
+
+            } else {
+                return false;
+            }
+        }
+        this.actualizarUnidad(unidad, unidad.getIdentificador());
+        return true;
     }
 
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {

@@ -112,8 +112,11 @@ public class Unidad {
         return this.numero;
     }
 
-    public String getHabitado() {
-        return this.habitado;
+    public Boolean getHabitado() {
+        if (this.habitado.equals("S")) {
+            return true;
+        }
+        return false;
     }
 
     public List<Persona> getInquilinos() {
@@ -146,6 +149,30 @@ public class Unidad {
     public UnidadSinEdificioView toViewSinEdificios() {
         return new UnidadSinEdificioView(this.identificador, this.piso,
                 this.numero, this.habitado);
+    }
+
+    public boolean esInquilino(Persona persona) {
+        AtomicBoolean esInquilino = new AtomicBoolean(false);
+        inquilinos.forEach(inquilino -> {
+            if (inquilino.getDocumento().equals(persona.getDocumento())) {
+                esInquilino.set(true);
+            }
+        });
+        return esInquilino.get();
+    }
+
+    public Boolean alquilar(Persona inquilino) {
+        if (!getHabitado()) {
+            this.habitado = "S";
+            inquilinos = new ArrayList<Persona>();
+            inquilinos.add(inquilino);
+            return true;
+        }
+        return false;
+    }
+
+    public void agregarInquilino(Persona inquilino) {
+        inquilinos.add(inquilino);
     }
 
     public String toString() {
