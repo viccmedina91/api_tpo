@@ -120,6 +120,13 @@ public class Unidad {
         return this.inquilinos;
     }
 
+    public boolean estaHabitado() {
+        if (this.habitado.equals("S")) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean esDuenio(Persona persona) {
         AtomicBoolean esDuenio = new AtomicBoolean(false);
         duenios.forEach(duenio -> {

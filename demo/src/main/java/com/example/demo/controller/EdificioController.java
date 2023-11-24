@@ -91,6 +91,15 @@ public class EdificioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(edificioActualizado);
     }
 
+    @GetMapping("/habitantes/{id}")
+    public ResponseEntity<?> obtenerHabitantesPorEdificio(@PathVariable("id") int codigo) throws EdificioException {
+        List<PersonaView> habitantes = this.controlador.habitantesPorEdificio(codigo);
+        if (habitantes == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + codigo);
+        }
+        return ResponseEntity.ok(habitantes);
+    }
+
     /*
      * @PostMapping("/crear")
      * public ResponseEntity<String> createEdificio(@RequestBody Edificio edificio)
