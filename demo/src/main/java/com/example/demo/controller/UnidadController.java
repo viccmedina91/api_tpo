@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -79,6 +82,18 @@ public class UnidadController {
         // Dado un identificador de unidad, obtenemos el duenio
         Unidad unidadRecovery = unidadRepository.findUnidadByIdentificador(identificador);
         return unidadRecovery.getDuenio().toString();
+
+    }
+
+    @GetMapping("/habitado/{identificador}")
+    public ResponseEntity<Map<String, String>> getHabitados(@PathVariable Integer identificador) {
+        //
+        List<Unidad> resultado = this.unidadRepository.getHabitados(identificador);
+        if (resultado != null) {
+            return ResponseEntity.ok(Collections.singletonMap("ok", resultado.toString()));
+        } else {
+            return ResponseEntity.ok(Collections.singletonMap("error", "No hay unidades habitadas"));
+        }
 
     }
 

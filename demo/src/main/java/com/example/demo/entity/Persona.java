@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.demo.views.EdificioView;
+import com.example.demo.views.PersonaView;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -56,6 +59,10 @@ public class Persona {
 
     public String getContrasenia() {
         return this.contrasenia;
+    }
+
+    public PersonaView toView() {
+        return new PersonaView(this.documento, this.nombre, this.mail, this.contrasenia);
     }
 
     @Autowired

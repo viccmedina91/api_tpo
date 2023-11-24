@@ -42,4 +42,15 @@ public interface UnidadRepository extends JpaRepository<Unidad, Integer> {
         return resultado;
     }
 
+    public default List<Unidad> getHabitados(Integer identificador) {
+        List<Unidad> resultado = new ArrayList<Unidad>();
+        List<Unidad> unidades = findAll();
+        for (Unidad unidad : unidades) {
+            if (unidad.getHabitado().equals("S") && (unidad.getEdificio().getCodigo() == identificador)) {
+                resultado.add(unidad);
+            }
+        }
+        return resultado;
+    }
+
 }

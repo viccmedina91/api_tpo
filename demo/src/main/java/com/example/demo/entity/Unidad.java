@@ -3,6 +3,10 @@ package com.example.demo.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.demo.views.EdificioView;
+import com.example.demo.views.UnidadSinEdificioView;
+import com.example.demo.views.UnidadView;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,10 +28,10 @@ public class Unidad {
     private Integer identificador;
 
     @Column(name = "piso")
-    private Integer piso;
+    private String piso;
 
     @Column(name = "numero")
-    private Integer numero;
+    private String numero;
 
     @Column(name = "habitado")
     private String habitado;
@@ -60,11 +64,11 @@ public class Unidad {
         this.identificador = identificador;
     }
 
-    public void setPiso(Integer piso) {
+    public void setPiso(String piso) {
         this.piso = piso;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -88,11 +92,11 @@ public class Unidad {
         return this.identificador;
     }
 
-    public Integer getPiso() {
+    public String getPiso() {
         return this.piso;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return this.numero;
     }
 
@@ -102,6 +106,17 @@ public class Unidad {
 
     public List<Inquilino> getInquilinos() {
         return this.inquilinos;
+    }
+
+    public UnidadView toView() {
+        EdificioView auxEdificio = edificio.toView();
+        return new UnidadView(this.identificador, this.piso, this.numero,
+                this.habitado, auxEdificio);
+    }
+
+    public UnidadSinEdificioView toViewSinEdificios() {
+        return new UnidadSinEdificioView(this.identificador, this.piso,
+                this.numero, this.habitado);
     }
 
     public String toString() {

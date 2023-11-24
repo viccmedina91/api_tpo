@@ -1,12 +1,10 @@
 package com.example.demo.entity;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.Serializable;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.serializer.Serializer;
+import com.example.demo.views.EdificioConUnidadesView;
+import com.example.demo.views.EdificioView;
+import com.example.demo.views.UnidadSinEdificioView;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,12 +12,13 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "edificios")
-public class Edificio implements Serializable {
+public class Edificio {
     /*
      * Contiene unidades y reclamos.
      * codigo: identificador del edificio.
@@ -35,6 +34,10 @@ public class Edificio implements Serializable {
     private String nombre;
     @Column(name = "direccion")
     private String direccion;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "codigoedificio")
+    private List<Unidad> unidades;
 
     public Edificio() {
 
@@ -64,4 +67,17 @@ public class Edificio implements Serializable {
         return this.direccion;
     }
 
+    public List<Unidad> getUnidades() {
+        return unidades;
+    }
+
+    public EdificioView toView() {
+        return new EdificioView(this.codigo, this.nombre, this.direccion);
+    }
+
+    public EdificioConUnidadesView toViewConUnidades() {
+        List<UnidadSinEdificioView> unidadesSinEdificio = this.unidades.stream().map(Unidad::toViewSinEdificios)
+                .toList();
+        return new EdificioConUnidadesView(this.codigo, this.nombre, this.direccion, unidadesSinEdificio);
+    }
 }

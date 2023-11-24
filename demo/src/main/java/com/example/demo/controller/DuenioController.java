@@ -51,6 +51,7 @@ public class DuenioController {
         Persona persona = personaRepository.findByDocumento(rDuenio.getDocumento());
         // Si la persona no se encuentra registrada, la registramos
         if (persona == null) {
+            return ResponseEntity.ok(Collections.singletonMap("error", "La persona no existe"));
 
         } else {
             duenio.setPersona(persona);
