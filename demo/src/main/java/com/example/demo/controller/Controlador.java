@@ -54,6 +54,14 @@ public class Controlador {
         return personasView;
     }
 
+    public EdificioView buscarEdificioPorCodigo(Integer codigo) {
+        Edificio edificio = this.buscarEdificio(codigo);
+        if (edificio == null) {
+            return null;
+        }
+        return edificio.toView();
+    }
+
     public List<EdificioConUnidadesView> getEdificiosConUnidades() {
         return this.edificioRepository.findAll().stream().map(Edificio::toViewConUnidades).toList();
     }
@@ -68,6 +76,14 @@ public class Controlador {
         for (Unidad unidad : unidades)
             resultado.add(unidad.toView());
         return resultado;
+    }
+
+    public UnidadView buscarUnidadPorCodigo(Integer codigo) {
+        Unidad unidad = this.buscarUnidad(codigo);
+        if (unidad == null) {
+            return null;
+        }
+        return unidad.toView();
     }
 
     public List<PersonaView> dueniosPorUnidad(int codigo) throws EdificioException {

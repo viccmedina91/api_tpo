@@ -28,6 +28,15 @@ public class EdificioController {
         this.controlador = controlador;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> obtenerEdificioPorId(@PathVariable Integer id) throws EdificioException {
+        EdificioView edificio = this.controlador.buscarEdificioPorCodigo(id);
+        if (edificio == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + id);
+        }
+        return ResponseEntity.ok(edificio);
+    }
+
     @GetMapping("/listar")
     public List<EdificioView> edificioListar() {
         // Devuelve el listado de edificios

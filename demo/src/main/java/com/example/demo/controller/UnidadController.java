@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.entity.Unidad;
 import com.example.demo.exceptions.EdificioException;
 import com.example.demo.views.PersonaView;
+import com.example.demo.views.UnidadView;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -22,6 +24,15 @@ public class UnidadController {
     @Autowired
     public UnidadController(Controlador controlador) {
         this.controlador = controlador;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> obtenerUnidadPorId(@PathVariable Integer id) throws EdificioException {
+        UnidadView unidad = this.controlador.buscarUnidadPorCodigo(id);
+        if (unidad == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + id);
+        }
+        return ResponseEntity.ok(unidad);
     }
 
     @GetMapping("/duenios/{id}")
