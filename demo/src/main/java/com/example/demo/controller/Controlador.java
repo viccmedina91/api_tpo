@@ -78,6 +78,21 @@ public class Controlador {
         return edificioExistente.toView();
     }
 
+    public EdificioView eliminarEdificio(Integer codigo) {
+        Edificio edificio = this.buscarEdificio(codigo);
+        if (edificio == null) {
+            System.out.println("edificio null");
+            return null;
+        }
+        if (edificio.getUnidades().size() > 0) {
+            System.out.println("no hay unidades pero estro aca");
+            return null;
+        }
+
+        this.edificioRepository.deleteById(codigo);
+        return edificio.toView();
+    }
+
     public List<EdificioConUnidadesView> getEdificiosConUnidades() {
         return this.edificioRepository.findAll().stream().map(Edificio::toViewConUnidades).toList();
     }
