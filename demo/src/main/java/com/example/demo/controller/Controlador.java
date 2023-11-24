@@ -140,6 +140,14 @@ public class Controlador {
         return edificio.duenios().stream().map(Persona::toView).toList();
     }
 
+    public List<PersonaView> habilitadosPorEdificio(int codigo) throws EdificioException {
+        Edificio edificio = buscarEdificio(codigo);
+        if (edificio == null) {
+            return null;
+        }
+        return edificio.habilitados().stream().map(Persona::toView).toList();
+    }
+
     public List<PersonaView> inquilinosPorUnidad(int codigo) throws EdificioException {
         Unidad unidad = this.buscarUnidad(codigo);
         if (unidad == null) {

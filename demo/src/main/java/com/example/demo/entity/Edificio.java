@@ -69,6 +69,19 @@ public class Edificio {
         return this.direccion;
     }
 
+    public Set<Persona> habilitados() {
+        Set<Persona> habilitados = new HashSet<Persona>();
+        for (Unidad unidad : unidades) {
+            List<Persona> duenios = unidad.getDuenios();
+            for (Persona p : duenios)
+                habilitados.add(p);
+            List<Persona> inquilinos = unidad.getInquilinos();
+            for (Persona p : inquilinos)
+                habilitados.add(p);
+        }
+        return habilitados;
+    }
+
     public Set<Persona> habitantes() {
         Set<Persona> resultado = new HashSet<Persona>();
         for (Unidad unidad : unidades) {

@@ -101,39 +101,14 @@ public class EdificioController {
         return ResponseEntity.ok(habitantes);
     }
 
-    /*
-     * @PostMapping("/crear")
-     * public ResponseEntity<String> createEdificio(@RequestBody Edificio edificio)
-     * {
-     * 
-     * Endpoint para la creación de edificio.
-     * Por el momento se espera recibir un JSON como el siguiente:
-     * {
-     * "nombre": "Los Arrayanes",
-     * "direccion": "Calle Falsa 1234"
-     * }
-     * 
-     * Edificio edificioSaved = edificioRepository.save(edificio);
-     * return ResponseEntity.accepted().body("200 OK - Edificio almacenado: " +
-     * edificioSaved.toString());
-     * }
-     * 
-     * @GetMapping("/getByCodigo/{codigoedificio}")
-     * public ResponseEntity<Edificio> getEdificioByCodigo(@PathVariable Integer
-     * codigoedificio) {
-     * 
-     * Edificio edificioRecovery = edificioRepository.findByCodigo(codigoedificio);
-     * 
-     * if (edificioRecovery != null) {
-     * return ResponseEntity.ok(edificioRecovery);
-     * } else {
-     * return ResponseEntity.notFound().build();
-     * }
-     * }
-     * 
-     * 
-     * 
-     * 
-     */
+    @GetMapping("/habilitados/{id}")
+    public ResponseEntity<?> obtenerHabilitadosPorEdificio(@PathVariable("id") int codigo) throws EdificioException {
+        // Dado un codigo de edificio, nos devuelve los habilitados
+        List<PersonaView> habilitados = this.controlador.habilitadosPorEdificio(codigo);
+        if (habilitados == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + codigo);
+        }
+        return ResponseEntity.ok(habilitados);
+    }
 
 }
