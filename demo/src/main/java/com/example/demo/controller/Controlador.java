@@ -102,6 +102,28 @@ public class Controlador {
         return unidad.toView();
     }
 
+    public UnidadView guardarUnidad(Unidad unidad, Integer codigo) {
+        Edificio edificio = this.buscarEdificio(codigo);
+        if (edificio == null) {
+            return null;
+        }
+        unidad.setEdificio(edificio);
+
+        return this.unidadRepository.save(unidad).toView();
+    }
+
+    public UnidadView actualizarUnidad(Unidad unidad, int codigo) {
+        Unidad unidadExistente = this.buscarUnidad(codigo);
+        if (unidadExistente == null) {
+            return null;
+        }
+        unidadExistente.setPiso(unidad.getPiso());
+        unidadExistente.setHabitado(unidad.getHabitado());
+        unidadExistente.setNumero(unidad.getNumero());
+        this.unidadRepository.save(unidadExistente);
+        return unidadExistente.toView();
+    }
+
     public List<PersonaView> dueniosPorUnidad(int codigo) throws EdificioException {
         Unidad unidad = buscarUnidad(codigo);
         if (unidad == null) {

@@ -8,10 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Unidad;
 import com.example.demo.exceptions.EdificioException;
+import com.example.demo.views.EdificioView;
 import com.example.demo.views.PersonaView;
 import com.example.demo.views.UnidadView;
 
@@ -53,6 +58,27 @@ public class UnidadController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + id);
         }
         return ResponseEntity.ok(inquilinos);
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<?> guardarUnidad(@PathVariable int id, @RequestBody Unidad unidad) {
+        // Guardar una Unidad
+        // Campos: Piso (String), Numero (String), Habitado, Codigo Edificio
+        UnidadView unidadNueva = this.controlador.guardarUnidad(unidad, id);
+        if (unidadNueva == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + id);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(unidadNueva);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUnidad(@PathVariable int id, @RequestBody Unidad unidad) {
+        // Actualizar una unidad
+        UnidadView unidadActualizado = this.controlador.actualizarUnidad(unidad, id);
+        if (unidadActualizado == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unidad no encontrado con el código: " + id);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(unidadActualizado);
     }
 
 }

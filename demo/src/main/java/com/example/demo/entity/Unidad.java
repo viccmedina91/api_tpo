@@ -138,7 +138,7 @@ public class Unidad {
     }
 
     public UnidadView toView() {
-        EdificioView auxEdificio = edificio.toView();
+        EdificioView auxEdificio = this.edificio.toView();
         return new UnidadView(this.identificador, this.piso, this.numero,
                 this.habitado, auxEdificio);
     }
