@@ -20,6 +20,9 @@ const Layout = () => {
                             <li>
                                 <Link to="/edificio/unidades">Unidades por Edificio</Link>
                             </li>
+                            <li>
+                                <Link to="/unidad/habitada">Unidades por Habitadas</Link>
+                            </li>
                         </ul>
                     </li>
                     <li>
