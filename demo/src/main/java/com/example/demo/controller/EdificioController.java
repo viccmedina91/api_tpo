@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -78,6 +79,16 @@ public class EdificioController {
         // Guardar un Edificio
         // Campos: Nombre (String), Direccion (String)
         return ResponseEntity.status(HttpStatus.CREATED).body(this.controlador.guardarEdificio(edificio));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateEdificio(@PathVariable int id, @RequestBody Edificio edificio) {
+        // Actualizar un edificio
+        EdificioView edificioActualizado = this.controlador.actualizarEdificio(edificio, id);
+        if (edificioActualizado == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + id);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(edificioActualizado);
     }
 
     /*

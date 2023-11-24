@@ -66,6 +66,18 @@ public class Controlador {
         return this.edificioRepository.save(edificio);
     }
 
+    public EdificioView actualizarEdificio(Edificio edificio, int codigo) {
+        Edificio edificioExistente = this.buscarEdificio(codigo);
+        if (edificioExistente == null) {
+            return null;
+        }
+
+        edificioExistente.setNombre(edificio.getDireccion());
+        edificioExistente.setDireccion(edificio.getNombre());
+        this.edificioRepository.save(edificioExistente);
+        return edificioExistente.toView();
+    }
+
     public List<EdificioConUnidadesView> getEdificiosConUnidades() {
         return this.edificioRepository.findAll().stream().map(Edificio::toViewConUnidades).toList();
     }
