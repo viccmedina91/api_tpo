@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.example.demo.views.EdificioView;
 import com.example.demo.views.UnidadSinEdificioView;
@@ -14,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -40,9 +42,13 @@ public class Unidad {
     @JoinColumn(name = "codigoedificio")
     private Edificio edificio;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "identificador", insertable = false, updatable = false)
-    private Duenio duenio;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "duenios", joinColumns = {
+            @JoinColumn(name = "unidadidentificador"),
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "documento")
+    })
+    private List<Persona> duenios;
 
     @OneToMany(mappedBy = "unidad", fetch = FetchType.LAZY)
     private List<Inquilino> inquilinos = new ArrayList<Inquilino>();
@@ -51,8 +57,13 @@ public class Unidad {
 
     }
 
-    public void setDuenio(Duenio duenio) {
-        this.duenio = duenio;
+    public void transferir(Persona nuevoDuenio) {
+        duenios = new ArrayList<Persona>();
+        duenios.add(nuevoDuenio);
+    }
+
+    public void agregarDuenio(Persona duenio) {
+        duenios.add(duenio);
     }
 
     public void setEdificio(Edificio edificio) {
@@ -84,8 +95,8 @@ public class Unidad {
         return this.edificio;
     }
 
-    public Duenio getDuenio() {
-        return this.duenio;
+    public List<Persona> getDuenios() {
+        return this.duenios;
     }
 
     public Integer getIdentificador() {
@@ -106,6 +117,16 @@ public class Unidad {
 
     public List<Inquilino> getInquilinos() {
         return this.inquilinos;
+    }
+
+    public boolean esDuenio(Persona persona) {
+        AtomicBoolean esDuenio = new AtomicBoolean(false);
+        duenios.forEach(duenio -> {
+            if (duenio.getDocumento().equals(persona.getDocumento())) {
+                esDuenio.set(true);
+            }
+        });
+        return esDuenio.get();
     }
 
     public UnidadView toView() {

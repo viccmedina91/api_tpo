@@ -57,7 +57,7 @@ public class Controlador {
 
     public List<UnidadView> getUnidadesPorEdificio(Integer codigo) throws EdificioException {
         List<UnidadView> resultado = new ArrayList<UnidadView>();
-        Edificio edificio = buscarEdificio(codigo);
+        Edificio edificio = this.buscarEdificio(codigo);
         if (edificio == null) {
             return null;
         }
@@ -67,6 +67,14 @@ public class Controlador {
         return resultado;
     }
 
+    public List<PersonaView> dueniosPorEdificio(int codigo) throws EdificioException {
+        Edificio edificio = this.buscarEdificio(codigo);
+        if (edificio == null) {
+            return null;
+        }
+        return edificio.duenios().stream().map(Persona::toView).toList();
+    }
+
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {
         Optional<Edificio> edificio = this.edificioRepository.findById(codigo);
         if (edificio.isPresent()) {
@@ -74,7 +82,6 @@ public class Controlador {
 
         }
         return null;
-
     }
 
 }

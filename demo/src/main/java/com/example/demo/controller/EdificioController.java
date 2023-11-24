@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.exceptions.EdificioException;
 import com.example.demo.views.EdificioConUnidadesView;
 import com.example.demo.views.EdificioView;
+import com.example.demo.views.PersonaView;
 import com.example.demo.views.UnidadView;
 
 @RestController
@@ -47,6 +48,18 @@ public class EdificioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + codigo);
         }
         return ResponseEntity.ok(unidades);
+    }
+
+    @GetMapping("/duenios/{id}")
+    public ResponseEntity<?> obtenerDueniosPorEdificio(@PathVariable("id") int codigo) throws EdificioException {
+        // Dado un codigo de edificio, devolvemos todos los dueños
+        List<PersonaView> duenios = this.controlador.dueniosPorEdificio(codigo);
+        System.out.println("................");
+        if (duenios == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + codigo);
+        }
+        return ResponseEntity.ok(duenios);
+
     }
 
     /*

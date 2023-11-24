@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.example.demo.views.EdificioConUnidadesView;
 import com.example.demo.views.EdificioView;
@@ -65,6 +67,16 @@ public class Edificio {
 
     public String getDireccion() {
         return this.direccion;
+    }
+
+    public Set<Persona> duenios() {
+        Set<Persona> resultado = new HashSet<Persona>();
+        for (Unidad unidad : unidades) {
+            List<Persona> duenios = unidad.getDuenios();
+            for (Persona p : duenios)
+                resultado.add(p);
+        }
+        return resultado;
     }
 
     public List<Unidad> getUnidades() {
