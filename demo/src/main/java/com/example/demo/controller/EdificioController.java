@@ -8,9 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Edificio;
 import com.example.demo.exceptions.EdificioException;
 import com.example.demo.views.EdificioConUnidadesView;
 import com.example.demo.views.EdificioView;
@@ -68,6 +71,13 @@ public class EdificioController {
         }
         return ResponseEntity.ok(duenios);
 
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> guardarEdificio(@RequestBody Edificio edificio) {
+        // Guardar un Edificio
+        // Campos: Nombre (String), Direccion (String)
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.controlador.guardarEdificio(edificio));
     }
 
     /*

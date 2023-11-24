@@ -62,6 +62,10 @@ public class Controlador {
         return edificio.toView();
     }
 
+    public Edificio guardarEdificio(Edificio edificio) {
+        return this.edificioRepository.save(edificio);
+    }
+
     public List<EdificioConUnidadesView> getEdificiosConUnidades() {
         return this.edificioRepository.findAll().stream().map(Edificio::toViewConUnidades).toList();
     }
