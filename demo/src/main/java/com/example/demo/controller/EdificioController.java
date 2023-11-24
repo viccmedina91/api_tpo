@@ -54,7 +54,6 @@ public class EdificioController {
     public ResponseEntity<?> obtenerDueniosPorEdificio(@PathVariable("id") int codigo) throws EdificioException {
         // Dado un codigo de edificio, devolvemos todos los dueños
         List<PersonaView> duenios = this.controlador.dueniosPorEdificio(codigo);
-        System.out.println("................");
         if (duenios == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + codigo);
         }

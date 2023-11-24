@@ -25,10 +25,13 @@ public class Controlador {
     private static Controlador instancia;
     private final EdificioRepository edificioRepository;
     private final PersonaRepository personaRepository;
+    private final UnidadRepository unidadRepository;
 
-    private Controlador(EdificioRepository edificioRepository, PersonaRepository personaRepository) {
+    private Controlador(EdificioRepository edificioRepository, PersonaRepository personaRepository,
+            UnidadRepository unidadRepository) {
         this.edificioRepository = edificioRepository;
         this.personaRepository = personaRepository;
+        this.unidadRepository = unidadRepository;
     }
 
     public List<EdificioView> getEdificios() {
@@ -67,6 +70,14 @@ public class Controlador {
         return resultado;
     }
 
+    public List<PersonaView> dueniosPorUnidad(int codigo) throws EdificioException {
+        Unidad unidad = buscarUnidad(codigo);
+        if (unidad == null) {
+            return null;
+        }
+        return unidad.getDuenios().stream().map(Persona::toView).toList();
+    }
+
     public List<PersonaView> dueniosPorEdificio(int codigo) throws EdificioException {
         Edificio edificio = this.buscarEdificio(codigo);
         if (edificio == null) {
@@ -79,6 +90,15 @@ public class Controlador {
         Optional<Edificio> edificio = this.edificioRepository.findById(codigo);
         if (edificio.isPresent()) {
             return edificio.get();
+
+        }
+        return null;
+    }
+
+    private Unidad buscarUnidad(Integer codigo) throws EdificioException {
+        Optional<Unidad> unidad = this.unidadRepository.findById(codigo);
+        if (unidad.isPresent()) {
+            return unidad.get();
 
         }
         return null;
