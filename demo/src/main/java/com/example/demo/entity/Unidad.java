@@ -180,6 +180,17 @@ public class Unidad {
         this.habitado = "N";
     }
 
+    public Boolean habitar() {
+        if (this.getHabitado()) {
+            return true;
+
+        } else {
+            this.habitado = "S";
+        }
+        return false;
+
+    }
+
     public String toString() {
         return "ID: " + this.identificador +
                 " Edificio: " + this.edificio.getCodigo().toString() +
