@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Persona;
 import com.example.demo.entity.Unidad;
-
+import com.example.demo.entity.UnidadPersona;
 // Views
 import com.example.demo.views.EdificioConUnidadesView;
 import com.example.demo.views.EdificioView;
@@ -139,6 +139,21 @@ public class Controlador {
         return unidadExistente.toView();
     }
 
+    public String transferirUnidad(UnidadPersona unidadPersona) {
+        Unidad unidad = this.buscarUnidad(Integer.parseInt(unidadPersona.getCodigoUnidad()));
+        if (unidad == null) {
+            return "La unidad no existe";
+        }
+
+        Persona persona = this.buscarPersona(unidadPersona.getDocumento());
+        if (persona == null) {
+            return "La persona no existe";
+        }
+        unidad.transferir(persona);
+        this.unidadRepository.save(unidad);
+        return "200 OK";
+    }
+
     public List<PersonaView> dueniosPorUnidad(int codigo) throws EdificioException {
         Unidad unidad = buscarUnidad(codigo);
         if (unidad == null) {
@@ -195,6 +210,14 @@ public class Controlador {
 
         }
         return null;
+    }
+
+    private Persona buscarPersona(String documento) {
+        Optional<Persona> persona = this.personaRepository.findById(documento);
+        if (persona == null) {
+            return null;
+        }
+        return persona.get();
     }
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Unidad;
+import com.example.demo.entity.UnidadPersona;
 import com.example.demo.exceptions.EdificioException;
 import com.example.demo.views.EdificioView;
 import com.example.demo.views.PersonaView;
@@ -79,6 +80,14 @@ public class UnidadController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unidad no encontrado con el código: " + id);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(unidadActualizado);
+    }
+
+    @PutMapping("/transferir/unidad")
+    public ResponseEntity<?> transferirUnidad(@RequestBody UnidadPersona unidadPersona) {
+        // Dado un documento de un dueño y el codigo de una unidad, se transfiere
+
+        String operacion = this.controlador.transferirUnidad(unidadPersona);
+        return ResponseEntity.status(HttpStatus.CREATED).body(operacion);
     }
 
 }
