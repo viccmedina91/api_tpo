@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -102,10 +103,23 @@ public class UnidadController {
 
     @PostMapping("/agregar/inquilino")
     public ResponseEntity<?> agregarInquilino(@RequestBody UnidadPersona unidadPersona) {
+        // Dado un documento y un codigo de unidad, agregamos a la persona como
+        // inquilino de la misma
         if (this.controlador.agregarInquilinoUnidad(unidadPersona)) {
             return ResponseEntity.status(HttpStatus.CREATED).body(unidadPersona);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha ocurrido un error");
+    }
+
+    @DeleteMapping("/liberar/{id}")
+    public ResponseEntity<?> liberarUnidad(@PathVariable int id) {
+        // Dado un codigo de unidad, la liberamos
+        if (this.controlador.liberarUnidad(id) == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha ocurrido un error");
+
+        }
+        return ResponseEntity.ok().build();
+
     }
 
 }

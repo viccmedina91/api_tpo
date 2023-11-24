@@ -175,6 +175,11 @@ public class Unidad {
         inquilinos.add(inquilino);
     }
 
+    public void liberar() {
+        this.inquilinos = new ArrayList<Persona>();
+        this.habitado = "N";
+    }
+
     public String toString() {
         return "ID: " + this.identificador +
                 " Edificio: " + this.edificio.getCodigo().toString() +

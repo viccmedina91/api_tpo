@@ -230,6 +230,16 @@ public class Controlador {
         return true;
     }
 
+    public Boolean liberarUnidad(int codigo) {
+        Unidad unidad = buscarUnidad(codigo);
+        if (unidad == null) {
+            return null;
+        }
+        unidad.liberar();
+        this.actualizarUnidad(unidad, unidad.getIdentificador());
+        return true;
+    }
+
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {
         Optional<Edificio> edificio = this.edificioRepository.findById(codigo);
         if (edificio.isPresent()) {
