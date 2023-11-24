@@ -50,8 +50,13 @@ public class Unidad {
     })
     private List<Persona> duenios;
 
-    @OneToMany(mappedBy = "unidad", fetch = FetchType.LAZY)
-    private List<Inquilino> inquilinos = new ArrayList<Inquilino>();
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "inquilinos", joinColumns = {
+            @JoinColumn(name = "identificador"),
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "documento")
+    })
+    private List<Persona> inquilinos;
 
     public Unidad() {
 
@@ -87,10 +92,6 @@ public class Unidad {
         this.habitado = habitado;
     }
 
-    public void addInquilinos(Inquilino inquilino) {
-        this.inquilinos.add(inquilino);
-    }
-
     public Edificio getEdificio() {
         return this.edificio;
     }
@@ -115,7 +116,7 @@ public class Unidad {
         return this.habitado;
     }
 
-    public List<Inquilino> getInquilinos() {
+    public List<Persona> getInquilinos() {
         return this.inquilinos;
     }
 

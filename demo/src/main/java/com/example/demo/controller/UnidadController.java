@@ -42,7 +42,17 @@ public class UnidadController {
         if (duenios == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + id);
         }
-        return ResponseEntity.ok(controlador.dueniosPorUnidad(id));
+        return ResponseEntity.ok(duenios);
+    }
+
+    @GetMapping("/inquilinos/{id}")
+    public ResponseEntity<?> obtenerInquilinos(@PathVariable int id) throws EdificioException {
+        // Dado un codigo de unidad, devuelve los inquilinos asociados
+        List<PersonaView> inquilinos = this.controlador.inquilinosPorUnidad(id);
+        if (inquilinos == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + id);
+        }
+        return ResponseEntity.ok(inquilinos);
     }
 
 }

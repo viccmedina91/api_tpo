@@ -102,6 +102,14 @@ public class Controlador {
         return edificio.duenios().stream().map(Persona::toView).toList();
     }
 
+    public List<PersonaView> inquilinosPorUnidad(int codigo) throws EdificioException {
+        Unidad unidad = this.buscarUnidad(codigo);
+        if (unidad == null) {
+            return null;
+        }
+        return unidad.getInquilinos().stream().map(Persona::toView).toList();
+    }
+
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {
         Optional<Edificio> edificio = this.edificioRepository.findById(codigo);
         if (edificio.isPresent()) {
