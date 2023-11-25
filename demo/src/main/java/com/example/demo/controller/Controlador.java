@@ -22,6 +22,7 @@ import com.example.demo.views.UnidadView;
 
 // Excepciones
 import com.example.demo.exceptions.EdificioException;
+import com.example.demo.exceptions.ReclamoException;
 
 @Controller
 public class Controlador {
@@ -271,6 +272,15 @@ public class Controlador {
         }
         return this.reclamoRepository.findAll().stream().filter(r -> r.getUnidad().getIdentificador() == codigo)
                 .map(Reclamo::toView).toList();
+    }
+
+    public ReclamoView reclamosPorNumero(int numero) throws ReclamoException {
+        Optional<Reclamo> reclamo = this.reclamoRepository.findById(numero);
+        if (reclamo.isPresent()) {
+            return reclamo.get().toView();
+        }
+
+        return null;
     }
 
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {

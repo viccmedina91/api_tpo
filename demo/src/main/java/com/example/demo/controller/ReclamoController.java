@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.exceptions.ReclamoException;
 import com.example.demo.views.ReclamoView;
 
 @RestController
@@ -43,6 +44,16 @@ public class ReclamoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + codigoUnidad);
         }
         return ResponseEntity.ok(reclamos);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> obtenerReclamoPorId(@PathVariable Integer id) throws ReclamoException {
+        // Dado un numero de reclamo, lo devolvemos
+        ReclamoView reclamo = controlador.reclamosPorNumero(id);
+        if (reclamo == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El reclamo no existe: " + id);
+        }
+        return ResponseEntity.ok(reclamo);
     }
 
 }
