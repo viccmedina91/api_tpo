@@ -9,12 +9,15 @@ import org.springframework.stereotype.Controller;
 // Entidades
 import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Persona;
+import com.example.demo.entity.Reclamo;
 import com.example.demo.entity.Unidad;
 import com.example.demo.entity.UnidadPersona;
+import com.example.demo.entity.Reclamo;
 // Views
 import com.example.demo.views.EdificioConUnidadesView;
 import com.example.demo.views.EdificioView;
 import com.example.demo.views.PersonaView;
+import com.example.demo.views.ReclamoView;
 import com.example.demo.views.UnidadView;
 
 // Excepciones
@@ -26,12 +29,14 @@ public class Controlador {
     private final EdificioRepository edificioRepository;
     private final PersonaRepository personaRepository;
     private final UnidadRepository unidadRepository;
+    private final ReclamoRepository reclamoRepository;
 
     private Controlador(EdificioRepository edificioRepository, PersonaRepository personaRepository,
-            UnidadRepository unidadRepository) {
+            UnidadRepository unidadRepository, ReclamoRepository reclamoRepository) {
         this.edificioRepository = edificioRepository;
         this.personaRepository = personaRepository;
         this.unidadRepository = unidadRepository;
+        this.reclamoRepository = reclamoRepository;
     }
 
     public List<EdificioView> getEdificios() {
@@ -248,6 +253,15 @@ public class Controlador {
         unidad.habitar();
         this.actualizarUnidad(unidad, unidad.getIdentificador());
         return true;
+    }
+
+    public List<ReclamoView> reclamosPorEdificio(int codigo) {
+        Edificio edificio = this.buscarEdificio(codigo);
+        if (edificio == null) {
+            return null;
+        }
+        return this.reclamoRepository.findAll().stream().filter(r -> r.getEdificio().getCodigo() == codigo)
+                .map(Reclamo::toView).toList();
     }
 
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.views.EdificioView;
+import com.example.demo.views.PersonaSinRolView;
 import com.example.demo.views.PersonaView;
 
 import jakarta.persistence.Column;
@@ -63,6 +64,10 @@ public class Persona {
 
     public PersonaView toView() {
         return new PersonaView(this.documento, this.nombre, this.mail, this.contrasenia);
+    }
+
+    public PersonaSinRolView toViewSinRol() {
+        return new PersonaSinRolView(this.documento, this.nombre, this.mail);
     }
 
     @Autowired

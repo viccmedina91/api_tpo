@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.demo.views.ImagenView;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,10 +22,6 @@ public class Imagen {
     @Column(name = "numero")
     private Integer numero;
 
-    @ManyToOne
-    @JoinColumn(name = "idreclamo")
-    private Reclamo reclamo;
-
     @Column(name = "path")
     private String path;
 
@@ -34,12 +32,14 @@ public class Imagen {
 
     }
 
-    public Integer getNumero() {
-        return this.numero;
+    public Imagen(Integer numero, String path, String tipo) {
+        this.numero = numero;
+        this.path = path;
+        this.tipo = tipo;
     }
 
-    public Reclamo getReclamo() {
-        return this.reclamo;
+    public Integer getNumero() {
+        return this.numero;
     }
 
     public String getPath() {
@@ -48,10 +48,6 @@ public class Imagen {
 
     public String getTipo() {
         return this.tipo;
-    }
-
-    public void setReclamo(Reclamo reclamo) {
-        this.reclamo = reclamo;
     }
 
     public void setNumero(Integer numero) {
@@ -66,11 +62,8 @@ public class Imagen {
         this.tipo = tipo;
     }
 
-    @Autowired
-    public String toString() {
-        return "Nro: " + this.numero +
-                " Path: " + this.path +
-                " Tipo: " + this.tipo;
+    public ImagenView toView() {
+        return new ImagenView(this.numero, this.path, this.tipo);
     }
 
 }

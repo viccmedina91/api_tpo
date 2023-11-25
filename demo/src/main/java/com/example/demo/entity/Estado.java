@@ -34,8 +34,4 @@ public class Estado {
         this.descripcion = descripcion;
     }
 
-    public String toString() {
-        return "ID: " + this.id +
-                " Descripcion: " + this.descripcion;
-    }
 }
