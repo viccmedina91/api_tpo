@@ -3,11 +3,13 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.stereotype.Controller;
 
 // Entidades
 import com.example.demo.entity.Edificio;
+import com.example.demo.entity.Estado;
 import com.example.demo.entity.Persona;
 import com.example.demo.entity.Reclamo;
 import com.example.demo.entity.Unidad;
@@ -16,6 +18,7 @@ import com.example.demo.entity.Reclamo;
 // Views
 import com.example.demo.views.EdificioConUnidadesView;
 import com.example.demo.views.EdificioView;
+import com.example.demo.views.NuevoReclamo;
 import com.example.demo.views.PersonaView;
 import com.example.demo.views.ReclamoView;
 import com.example.demo.views.UnidadView;
@@ -31,13 +34,16 @@ public class Controlador {
     private final PersonaRepository personaRepository;
     private final UnidadRepository unidadRepository;
     private final ReclamoRepository reclamoRepository;
+    private final EstadoRepository estadoRepository;
 
     private Controlador(EdificioRepository edificioRepository, PersonaRepository personaRepository,
-            UnidadRepository unidadRepository, ReclamoRepository reclamoRepository) {
+            UnidadRepository unidadRepository, ReclamoRepository reclamoRepository,
+            EstadoRepository estadoRepository) {
         this.edificioRepository = edificioRepository;
         this.personaRepository = personaRepository;
         this.unidadRepository = unidadRepository;
         this.reclamoRepository = reclamoRepository;
+        this.estadoRepository = estadoRepository;
     }
 
     public List<EdificioView> getEdificios() {
@@ -292,6 +298,32 @@ public class Controlador {
                 .map(Reclamo::toView).toList();
     }
 
+    public String agregarReclamo(NuevoReclamo reclamo) throws ReclamoException {
+        Edificio edificio = this.buscarEdificio(reclamo.getCodigo());
+        if (edificio == null) {
+            return "El edificio no existe" + reclamo.getCodigo();
+        }
+
+        Unidad unidad = this.buscarUnidad(reclamo.getIdentificador());
+        if (unidad == null) {
+            return "La unidad no existe: " + reclamo.getIdentificador();
+        }
+        Persona persona = this.buscarPersona(reclamo.getDocumento());
+        if (persona == null) {
+            return "La persona no existe: " + reclamo.getDocumento();
+        }
+        if ((unidad.getDuenios().contains(persona)) || (unidad.getInquilinos().contains(persona))) {
+            // La persona es duenio o es inquilino. Puede generar el reclamo.
+            Estado estado = this.estadoRepository.findById(1).get();
+            Reclamo nuevoReclamo = new Reclamo(persona, edificio, reclamo.getUbicacion(),
+                    reclamo.getDescripcion(), unidad, estado);
+            this.reclamoRepository.save(nuevoReclamo);
+        } else {
+            return "La persona no es dueña o inquilina: " + reclamo.getDocumento();
+        }
+        return "Guardado con Exito";
+    }
+
     public PersonaView agregarPersona(Persona persona) {
         Persona existe = this.buscarPersona(persona.getDocumento());
         if (existe != null) {
@@ -299,6 +331,10 @@ public class Controlador {
         }
 
         return this.personaRepository.save(persona).toView();
+    }
+
+    private boolean personaEnUnidad(Unidad unidad, Persona persona) {
+        return (unidad.getInquilinos().contains(persona) || unidad.getDuenios().contains(persona));
     }
 
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {

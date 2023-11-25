@@ -8,10 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Reclamo;
 import com.example.demo.exceptions.ReclamoException;
+import com.example.demo.views.NuevoReclamo;
 import com.example.demo.views.ReclamoView;
 
 @RestController
@@ -64,6 +68,12 @@ public class ReclamoController {
 
         }
         return ResponseEntity.ok(reclamos);
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> guardarReclamo(@RequestBody NuevoReclamo reclamo) throws ReclamoException {
+        // Para guardar un reclamo en la base de datos
+        return ResponseEntity.status(HttpStatus.CREATED).body(controlador.agregarReclamo(reclamo));
     }
 
 }
