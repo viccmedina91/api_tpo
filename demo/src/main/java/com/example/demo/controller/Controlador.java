@@ -286,11 +286,19 @@ public class Controlador {
     public List<ReclamoView> reclamosPorPersona(String documento) {
         Persona persona = this.buscarPersona(documento);
         if (persona == null) {
-            System.out.println("persona nula !!!!!");
             return null;
         }
         return this.reclamoRepository.findAll().stream().filter(r -> r.getUsuario().getDocumento().equals(documento))
                 .map(Reclamo::toView).toList();
+    }
+
+    public PersonaView agregarPersona(Persona persona) {
+        Persona existe = this.buscarPersona(persona.getDocumento());
+        if (existe != null) {
+            return null;
+        }
+
+        return this.personaRepository.save(persona).toView();
     }
 
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {
