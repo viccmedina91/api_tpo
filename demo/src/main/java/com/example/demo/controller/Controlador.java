@@ -283,6 +283,16 @@ public class Controlador {
         return null;
     }
 
+    public List<ReclamoView> reclamosPorPersona(String documento) {
+        Persona persona = this.buscarPersona(documento);
+        if (persona == null) {
+            System.out.println("persona nula !!!!!");
+            return null;
+        }
+        return this.reclamoRepository.findAll().stream().filter(r -> r.getUsuario().getDocumento().equals(documento))
+                .map(Reclamo::toView).toList();
+    }
+
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {
         Optional<Edificio> edificio = this.edificioRepository.findById(codigo);
         if (edificio.isPresent()) {
@@ -303,10 +313,10 @@ public class Controlador {
 
     private Persona buscarPersona(String documento) {
         Optional<Persona> persona = this.personaRepository.findById(documento);
-        if (persona == null) {
-            return null;
+        if (persona.isPresent()) {
+            return persona.get();
         }
-        return persona.get();
+        return null;
     }
 
 }

@@ -56,4 +56,14 @@ public class ReclamoController {
         return ResponseEntity.ok(reclamo);
     }
 
+    @GetMapping("/personas/{documento}")
+    public ResponseEntity<?> reclamosPorDni(@PathVariable String documento) {
+        List<ReclamoView> reclamos = this.controlador.reclamosPorPersona(documento);
+        if (reclamos == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La persona no existe: " + documento);
+
+        }
+        return ResponseEntity.ok(reclamos);
+    }
+
 }
