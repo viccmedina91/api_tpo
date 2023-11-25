@@ -264,6 +264,15 @@ public class Controlador {
                 .map(Reclamo::toView).toList();
     }
 
+    public List<ReclamoView> reclamosPorUnidad(int codigo) {
+        Unidad unidad = this.buscarUnidad(codigo);
+        if (unidad == null) {
+            return null;
+        }
+        return this.reclamoRepository.findAll().stream().filter(r -> r.getUnidad().getIdentificador() == codigo)
+                .map(Reclamo::toView).toList();
+    }
+
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {
         Optional<Edificio> edificio = this.edificioRepository.findById(codigo);
         if (edificio.isPresent()) {

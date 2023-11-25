@@ -27,9 +27,20 @@ public class ReclamoController {
 
     @GetMapping("/edificio/{id}")
     public ResponseEntity<?> obtenerReclamosPorEdificio(@PathVariable("id") int codigoEdificio) {
+        // Dado un codigo de edificio, devolvemos todos los reclamos asociados.
         List<ReclamoView> reclamos = this.controlador.reclamosPorEdificio(codigoEdificio);
         if (reclamos == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El Edificio no existe: " + codigoEdificio);
+        }
+        return ResponseEntity.ok(reclamos);
+    }
+
+    @GetMapping("/unidad/{id}")
+    public ResponseEntity<?> obtenerReclamosPorUnidad(@PathVariable("id") int codigoUnidad) {
+        // Dado un codigo de unidad, devolvemos todos los reclamos asociados
+        List<ReclamoView> reclamos = this.controlador.reclamosPorUnidad(codigoUnidad);
+        if (reclamos == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + codigoUnidad);
         }
         return ResponseEntity.ok(reclamos);
     }
