@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Imagen;
 import com.example.demo.entity.Reclamo;
 import com.example.demo.exceptions.ReclamoException;
 import com.example.demo.views.NuevoReclamo;
@@ -76,4 +78,11 @@ public class ReclamoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(controlador.agregarReclamo(reclamo));
     }
 
+    @PutMapping("/agregar/imagen/{reclamo}")
+    public ResponseEntity<?> agregarImagen(@PathVariable("reclamo") int idReclamo, @RequestBody List<Imagen> imagenes)
+            throws ReclamoException {
+        // Dado un reclamo existente, almacenamos las imagenes
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(this.controlador.agregarImagenAReclamo(idReclamo, imagenes));
+    }
 }

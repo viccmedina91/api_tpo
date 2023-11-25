@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 // Entidades
 import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Estado;
+import com.example.demo.entity.Imagen;
 import com.example.demo.entity.Persona;
 import com.example.demo.entity.Reclamo;
 import com.example.demo.entity.Unidad;
@@ -324,6 +325,16 @@ public class Controlador {
         return "Guardado con Exito";
     }
 
+    public String agregarImagenAReclamo(int numero, List<Imagen> imagenes) throws ReclamoException {
+        Reclamo reclamo = this.buscarReclamo(numero);
+        if (reclamo == null) {
+            return "Nro de reclamo desconocido: " + numero;
+        }
+        imagenes.forEach(imagen -> reclamo.agregarImagen(imagen.getPath(), imagen.getTipo()));
+        this.reclamoRepository.save(reclamo);
+        return "Guardado con Exito";
+    }
+
     public PersonaView agregarPersona(Persona persona) {
         Persona existe = this.buscarPersona(persona.getDocumento());
         if (existe != null) {
@@ -331,10 +342,6 @@ public class Controlador {
         }
 
         return this.personaRepository.save(persona).toView();
-    }
-
-    private boolean personaEnUnidad(Unidad unidad, Persona persona) {
-        return (unidad.getInquilinos().contains(persona) || unidad.getDuenios().contains(persona));
     }
 
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {
@@ -359,6 +366,14 @@ public class Controlador {
         Optional<Persona> persona = this.personaRepository.findById(documento);
         if (persona.isPresent()) {
             return persona.get();
+        }
+        return null;
+    }
+
+    private Reclamo buscarReclamo(Integer numero) {
+        Optional<Reclamo> reclamo = this.reclamoRepository.findById(numero);
+        if (reclamo.isPresent()) {
+            return reclamo.get();
         }
         return null;
     }

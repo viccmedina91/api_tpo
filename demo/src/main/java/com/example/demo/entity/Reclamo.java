@@ -127,6 +127,13 @@ public class Reclamo {
         this.estado = estado;
     }
 
+    public void agregarImagen(String path, String tipo) {
+        Imagen imagen = new Imagen();
+        imagen.setPath(path);
+        imagen.setTipo(tipo);
+        imagenes.add(imagen);
+    }
+
     public ReclamoView toView() {
         PersonaSinRolView auxPersona = this.usuario.toViewSinRol();
         EdificioView auxEdificio = edificio.toView();
