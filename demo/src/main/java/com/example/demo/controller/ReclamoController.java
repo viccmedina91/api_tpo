@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Imagen;
 import com.example.demo.entity.Reclamo;
 import com.example.demo.exceptions.ReclamoException;
+import com.example.demo.views.NuevoEstado;
 import com.example.demo.views.NuevoReclamo;
 import com.example.demo.views.ReclamoView;
 
@@ -84,5 +85,12 @@ public class ReclamoController {
         // Dado un reclamo existente, almacenamos las imagenes
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(this.controlador.agregarImagenAReclamo(idReclamo, imagenes));
+    }
+
+    @PutMapping("/cambiar/estado")
+    public ResponseEntity<?> cambiarEstado(@RequestBody NuevoEstado nuevoEstado) throws ReclamoException {
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(this.controlador.cambiarEstado(nuevoEstado));
     }
 }

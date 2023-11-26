@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import com.example.demo.entity.Reclamo;
 // Views
 import com.example.demo.views.EdificioConUnidadesView;
 import com.example.demo.views.EdificioView;
+import com.example.demo.views.NuevoEstado;
 import com.example.demo.views.NuevoReclamo;
 import com.example.demo.views.PersonaView;
 import com.example.demo.views.ReclamoView;
@@ -335,6 +338,36 @@ public class Controlador {
         return "Guardado con Exito";
     }
 
+    public String cambiarEstado(NuevoEstado nuevoEstado) {
+        // validamos el nro de reclamo
+        Reclamo reclamo = this.buscarReclamo(nuevoEstado.getNumero());
+        if (reclamo == null) {
+            return "Nro de reclamo desconocido: " + nuevoEstado.getNumero();
+        }
+        // validamos que el estado nuevo sea un valor valido
+        Estado estado = this.buscarEstado(nuevoEstado.getEstado());
+        if (estado == null) {
+            return "Estado nuevo inválido";
+        }
+        // estado nuevo es igual a estado actual
+        if (reclamo.getEstado().getID() == nuevoEstado.getEstado()) {
+            return "El estado actual y el estado nuevo son iguales";
+        }
+        // para estados 1,2,3 y quieran pasar a 4,5,6
+        Integer estadoActual = reclamo.getEstado().getID();
+        if ((estadoActual < nuevoEstado.getEstado()) && (estadoActual < 4)) {
+            reclamo.setEstado(estado);
+            this.reclamoRepository.save(reclamo);
+            return "Guardado con Exito";
+        }
+        // para los estados 4, 5 y 6 y quiere pasar a un estado anterior
+        if ((estadoActual >= 4) && (nuevoEstado.getEstado() < estadoActual)) {
+            return "El reclamo se encuentra en un estado final. No se puede cambiar.";
+        }
+
+        return "Error";
+    }
+
     public PersonaView agregarPersona(Persona persona) {
         Persona existe = this.buscarPersona(persona.getDocumento());
         if (existe != null) {
@@ -342,6 +375,15 @@ public class Controlador {
         }
 
         return this.personaRepository.save(persona).toView();
+    }
+
+    private Estado buscarEstado(Integer idEstado) {
+        Optional<Estado> estado = this.estadoRepository.findById(idEstado);
+        if (estado.isPresent()) {
+            return estado.get();
+        }
+        return null;
+
     }
 
     private Edificio buscarEdificio(Integer codigo) throws EdificioException {
