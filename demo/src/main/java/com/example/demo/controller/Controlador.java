@@ -409,6 +409,19 @@ public class Controlador {
         return "Error";
     }
 
+    public String actualizarPersona(PersonaView persona, String documento) {
+        // verificar si la persona existe
+        Persona personaExiste = this.buscarPersona(documento);
+        if (personaExiste == null) {
+            return "La persona no existe: " + documento;
+        }
+        personaExiste.setContrasenia(persona.getContrasenia());
+        personaExiste.setMail(persona.getMail());
+        personaExiste.setNombre(persona.getNombre());
+        this.personaRepository.save(personaExiste);
+        return "Actualización con éxito";
+    }
+
     public PersonaView agregarPersona(Persona persona) {
         Persona existe = this.buscarPersona(persona.getDocumento());
         if (existe != null) {
