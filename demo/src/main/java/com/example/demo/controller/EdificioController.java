@@ -60,7 +60,8 @@ public class EdificioController {
         // Dado un codigo de edificio, nos devuelve todas las unidades asociadas.
         List<UnidadView> unidades = this.controlador.getUnidadesPorEdificio(codigo);
         if (unidades == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + codigo);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, el codigo de edificio no encontrado: " + codigo + "\"}");
         }
         return ResponseEntity.ok(unidades);
     }

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import SearchEdificio from "./SearchEdificio";
 import ListadoEdificio from "./ListadoEdificio";
-import ListadoUnidad from "./ListadoUnidad";
+import UnidadesPorEdificio from "./UnidadesPorEdificio";
 import SearchHabitado from "./SearchHabitado";
 import ListadoPersona from "./ListadoPersona";
 import SearchPersona from "./SearchPersona";
@@ -37,7 +37,7 @@ export default function App() {
         <Route path="/edificio/buscar" element={<SearchEdificio />}></Route>
         <Route path="/edificio/listar" element={<ListadoEdificio />}></Route>
         <Route path="/edificio/con/unidades" element={<EdificioConUnidades />}></Route>
-        <Route path="/edificio/listar_unidades" element={<ListadoUnidad />}></Route>
+        <Route path="/edificio/unidades" element={<UnidadesPorEdificio />}></Route>
         <Route path="/edificio/unidades" element={<SearchUnidad />}></Route>
         <Route path="/unidad/habitada" element={<SearchHabitado />}></Route>
 

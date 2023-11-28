@@ -16,7 +16,9 @@ const PanelAdministracion = () => (
                     <Dropdown.Menu>
                         <Subseccion title="Listar Edificios" to="/edificio/listar" />
                         <Subseccion title="Buscar Edificio por código" to="/edificio/buscar" />
-                        <Subseccion title="Listas los Edificios con sus Unidades" to="/edificio/con/unidades" />
+                        <Subseccion title="Listar los Edificios con sus Unidades" to="/edificio/con/unidades" />
+                        <Subseccion title="Unidades por Edificio" to="/edificio/unidades" />
+
 
                         {/* Agrega más subsecciones según sea necesario */}
                     </Dropdown.Menu>
