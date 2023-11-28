@@ -111,7 +111,7 @@ public class UnidadController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha ocurrido un error");
     }
 
-    @DeleteMapping("/liberar/{id}")
+    @PutMapping("/liberar/{id}")
     public ResponseEntity<?> liberarUnidad(@PathVariable int id) {
         // Dado un codigo de unidad, la liberamos
         if (this.controlador.liberarUnidad(id) == null) {

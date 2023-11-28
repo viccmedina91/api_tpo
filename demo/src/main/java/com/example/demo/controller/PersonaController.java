@@ -10,7 +10,9 @@ import com.example.demo.entity.Persona;
 import com.example.demo.views.PersonaView;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -43,4 +45,13 @@ public class PersonaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nuevaPersona);
     }
 
+    @DeleteMapping("/{documento}")
+    public ResponseEntity<?> eliminarPersona(@PathVariable("documento") String documento) {
+        // Guarda un objeto persona en la base
+
+        if (this.controlador.eliminarPersona(documento) == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No es posible eliminar a esta persona");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body("Persona Eliminada");
+    }
 }

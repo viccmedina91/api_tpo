@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Estado;
 import com.example.demo.entity.Imagen;
+import com.example.demo.entity.Inquilino;
 import com.example.demo.entity.Persona;
 import com.example.demo.entity.Reclamo;
 import com.example.demo.entity.Unidad;
@@ -229,6 +231,28 @@ public class Controlador {
         return persona.toView();
     }
 
+    public String eliminarPersona(String documento) {
+        Persona persona = this.buscarPersona(documento);
+        if (persona == null) {
+            return "La persona no se encuentra registada";
+        }
+
+        // si la persona es dueño o inquilino, no se puede eliminar
+        if (this.esDuenioHabitante(persona)) {
+            return "La persona es Dueño o Inquilino activo, no se puede Eliminar";
+        }
+
+        // si la persona tiene reclamos iniciados, no se puede eliminar
+        List<ReclamoView> reclamos = this.reclamosPorPersona(documento);
+        if (reclamos.stream().filter(elemento -> elemento.getEstado().getID() < 4)
+                .collect(Collectors.toList()).size() > 0) {
+            return "La persona tiene reclamos activos";
+        }
+        this.personaRepository.delete(persona);
+        return "Persona eliminada con exito: DNI: " + documento;
+
+    }
+
     public Boolean agregarInquilinoUnidad(UnidadPersona unidadPersona) {
         Unidad unidad = this.buscarUnidad(Integer.parseInt(unidadPersona.getCodigoUnidad()));
         Persona persona = buscarPersona(unidadPersona.getDocumento());
@@ -392,6 +416,17 @@ public class Controlador {
         }
 
         return this.personaRepository.save(persona).toView();
+    }
+
+    private Boolean esDuenioHabitante(Persona persona) {
+        List<EdificioView> edificios = this.getEdificios();
+        for (EdificioView edificio : edificios) {
+            Edificio edi = this.buscarEdificio(edificio.getCodigo());
+            if ((edi.habitantes().contains(persona)) || (edi.duenios().contains(persona))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Estado buscarEstado(Integer idEstado) {
