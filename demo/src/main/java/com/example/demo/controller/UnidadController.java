@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Unidad;
 import com.example.demo.entity.UnidadPersona;
 import com.example.demo.exceptions.EdificioException;
-import com.example.demo.views.EdificioView;
 import com.example.demo.views.PersonaView;
 import com.example.demo.views.UnidadView;
 
@@ -37,7 +34,8 @@ public class UnidadController {
     public ResponseEntity<?> obtenerUnidadPorId(@PathVariable Integer id) throws EdificioException {
         UnidadView unidad = this.controlador.buscarUnidadPorCodigo(id);
         if (unidad == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, no se encuentra la unidad con código: " + id + "\"}");
         }
         return ResponseEntity.ok(unidad);
     }

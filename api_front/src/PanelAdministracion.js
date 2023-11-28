@@ -24,15 +24,22 @@ const PanelAdministracion = () => (
                         <Subseccion title="Crear Edificio" to="/edificio/agregar" />
                         <Subseccion title="Modificar Edificio" to="/edificio/modificar" />
                         <Subseccion title="Eliminar Edificio" to="/edificio/eliminar" />
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+            <div className="col-md-4">
+                <Dropdown>
+                    <Dropdown.Toggle variant="warning" id="dropdown-basic">
+                        Gestión de Unidades
+                    </Dropdown.Toggle>
 
-
-
-                        {/* Agrega más subsecciones según sea necesario */}
+                    <Dropdown.Menu>
+                        <Subseccion title="Buscar Unidad" to="/unidad/buscar" />
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
         </div>
-    </div>
+    </div >
 );
 
 export default PanelAdministracion;

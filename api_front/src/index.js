@@ -47,7 +47,7 @@ export default function App() {
         <Route path="/edificio/habilitados" element={<HabilitadosPorEdificio />}></Route>
 
 
-        <Route path="/edificio/unidades" element={<SearchUnidad />}></Route>
+        <Route path="/unidad/buscar" element={<SearchUnidad />}></Route>
 
 
         <Route path="/personas/listar" element={<ListadoPersona />}></Route>
