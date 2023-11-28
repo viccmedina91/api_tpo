@@ -100,11 +100,9 @@ public class Controlador {
     public EdificioView eliminarEdificio(Integer codigo) {
         Edificio edificio = this.buscarEdificio(codigo);
         if (edificio == null) {
-            System.out.println("edificio null");
             return null;
         }
         if (edificio.getUnidades().size() > 0) {
-            System.out.println("no hay unidades pero estro aca");
             return null;
         }
 

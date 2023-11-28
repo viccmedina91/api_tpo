@@ -22,7 +22,7 @@ const PanelAdministracion = () => (
                         <Subseccion title="Dueños por Edificio" to="/edificio/duenio/" />
                         <Subseccion title="Crear Edificio" to="/edificio/agregar" />
                         <Subseccion title="Modificar Edificio" to="/edificio/modificar" />
-
+                        <Subseccion title="Eliminar Edificio" to="/edificio/eliminar" />
 
                         {/* Agrega más subsecciones según sea necesario */}
                     </Dropdown.Menu>

@@ -24,7 +24,6 @@ function CrearEdificio() {
             direccion: direccionEdificio,
         };
         console.log(newItem);
-        // Realizar la solicitud POST al backend utilizando fetch
         fetch('http://localhost:8080/edificio', {
             method: 'POST',
             headers: {
@@ -39,14 +38,8 @@ function CrearEdificio() {
                 return response.json();
             })
             .then((data) => {
-                // Realizar acciones adicionales después de la inserción exitosa
                 console.log('Elemento agregado exitosamente:', data);
-                // Restablecer los campos del formulario
-
-                // Manejar la respuesta del backend, esto no se que hace, preguntar
                 setResponseData(data);
-
-
                 setNombreEdificio('');
                 setDireccionEdificio('');
 

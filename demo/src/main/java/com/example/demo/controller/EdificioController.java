@@ -113,7 +113,8 @@ public class EdificioController {
         // Dado un codigo de edificio, nos devuelve los habilitados
         List<PersonaView> habilitados = this.controlador.habilitadosPorEdificio(codigo);
         if (habilitados == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + codigo);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, el codigo de edificio no encontrado: " + codigo + "\"}");
         }
         return ResponseEntity.ok(habilitados);
     }
@@ -124,10 +125,11 @@ public class EdificioController {
         EdificioView eliminado = this.controlador.eliminarEdificio(edificio);
         if (eliminado == null) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"mensaje\": \"" + "Error, no se ha podido eliminar el Edificio: " + edificio + "\"}");
+                    .body("{\"mensaje\": \"" + "Error, no es posible eliminar el edificio: " + edificio + "\"}");
         }
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + "El edificio se ha eliminado exitosamente: " + edificio + "\"}");
     }
 
 }
