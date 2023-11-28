@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import FormSearch from './Forms/FormSearch';
 
-function ListadoPersona() {
+function SearchDuenioPorUnidad() {
     const [responseData, setResponseData] = useState(null);
+    const [error, setError] = useState(null);
 
-    const handleSubmit = () => {
-        // Devuelve todas las personas cargadas en la BD.
-        fetch(`http://localhost:8080/persona/getAllPersonas`)
+    const handleSubmit = (campo) => {
+        // Devuelve la unidad según el identificador ingresado
+        fetch(`http://localhost:8080/unidad/duenios/${campo}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -14,23 +16,24 @@ function ListadoPersona() {
                 return response.json();
             })
             .then((data) => {
-                // Manejar la respuesta del backend, esto no se que hace, preguntar
                 setResponseData(data);
                 console.log(typeof (responseData));
             })
             .catch((error) => {
+                setError(error.mensaje);
                 console.error('Error al hacer la solicitud:', error);
             });
     };
 
     return (
         <div>
-            <button onClick={handleSubmit}>Listar</button>
-
+            <h2>Buscar Dueño según Identificador de Unidad</h2>
+            <FormSearch onSubmit={handleSubmit} />
             {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
             )}
+            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }
 
-export default ListadoPersona;
+export default SearchDuenioPorUnidad;

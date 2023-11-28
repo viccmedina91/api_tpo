@@ -45,7 +45,8 @@ public class UnidadController {
         // Dado un codigo de unidad, devuelve los dueños asociados
         List<PersonaView> duenios = this.controlador.dueniosPorUnidad(id);
         if (duenios == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, no se encuentra la unidad con código: " + id + "\"}");
         }
         return ResponseEntity.ok(duenios);
     }
