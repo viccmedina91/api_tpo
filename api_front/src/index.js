@@ -7,7 +7,6 @@ import UnidadesPorEdificio from "./UnidadesPorEdificio";
 import SearchDuenioPorUnidad from "./SearchDuenioPorUnidad";
 import SearchPersona from "./SearchPersona";
 import ListadoDuenio from "./ListadoDuenio";
-import ListadoInquilino from "./ListadoInquilino";
 import SearchInquilino from "./SearchInquilino";
 import SearchUnidad from "./SearchUnidad";
 import ListadoReclamo from "./ListadoReclamo";
@@ -29,6 +28,7 @@ import EdificioConUnidades from "./EdificioConUnidades";
 import ModificarEdificio from "./ModificarEdificio";
 import EliminarEdificio from "./EliminarEdificio";
 import HabilitadosPorEdificio from "./HabilitadosPorEdificio";
+import SearchInquilinoPorUnidad from "./SearchInquilinoPorUnidad";
 
 export default function App() {
   return (
@@ -48,8 +48,8 @@ export default function App() {
 
 
         <Route path="/unidad/buscar" element={<SearchUnidad />}></Route>
-        <Route path="/unidad/duenios" element={<SearchDuenioPorUnidad />}></Route>
-
+        <Route path="/unidad/duenios" element={<SearchInquilinoPorUnidad />}></Route>
+        <Route path="/unidad/inquilinos" element={<SearchInquilinoPorUnidad />}></Route>
 
 
 
@@ -58,7 +58,7 @@ export default function App() {
 
 
 
-        <Route path="/personas/listar_inquilinos" element={<ListadoInquilino />}></Route>
+
 
         <Route path="/inquilino/agregar" element={<AddInquilino />}></Route>
         <Route path="/inquilino/buscar" element={<SearchInquilino />}></Route>

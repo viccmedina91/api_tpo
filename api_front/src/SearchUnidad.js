@@ -17,7 +17,6 @@ function SearchUnidad() {
                 return response.json();
             })
             .then((data) => {
-                // Manejar la respuesta del backend, esto no se que hace, preguntar
                 setResponseData(data);
                 console.log(typeof (responseData));
             })
