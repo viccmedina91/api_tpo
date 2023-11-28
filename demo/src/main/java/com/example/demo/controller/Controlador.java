@@ -23,6 +23,7 @@ import com.example.demo.entity.Reclamo;
 // Views
 import com.example.demo.views.EdificioConUnidadesView;
 import com.example.demo.views.EdificioView;
+import com.example.demo.views.Login;
 import com.example.demo.views.NuevoEstado;
 import com.example.demo.views.NuevoReclamo;
 import com.example.demo.views.PersonaView;
@@ -407,6 +408,28 @@ public class Controlador {
         }
 
         return "Error";
+    }
+
+    public String validarLogin(Login login) {
+        List<PersonaView> personas = this.getPersonas().stream()
+                .filter(elemento -> elemento.getMail() != null)
+                .filter(elemento -> elemento.getMail().equals(login.getMail()))
+                .collect(Collectors.toList());
+
+        if (personas.size() > 1) {
+            return "error";
+        }
+
+        if (personas.get(0).getContrasenia().equals(login.getContrasenia())) {
+            if (login.getMail().contains("admin")) {
+                return "admin";
+            } else {
+                return "otro";
+            }
+        }
+
+        return "error";
+
     }
 
     public String actualizarPersona(PersonaView persona, String documento) {

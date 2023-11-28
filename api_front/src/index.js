@@ -26,6 +26,7 @@ import AddInquilino from "./AddInquilino";
 import ListadoEstado from "./ListadoEstado";
 import AddImagen from "./AddImagen";
 import SearchImagenReclamo from "./SearchImagenReclamo";
+import PanelAdministracion from "./PanelAdministracion";
 
 export default function App() {
   return (
@@ -62,6 +63,8 @@ export default function App() {
         <Route path="/reclamos/actualizar/estado" element={<ActualizarEstadoReclamo />}></Route>
 
         <Route path="/estados/listar/" element={<ListadoEstado />}></Route>
+
+        <Route path="/admin/panel" element={<PanelAdministracion />}></Route>
 
       </Routes>
     </BrowserRouter>

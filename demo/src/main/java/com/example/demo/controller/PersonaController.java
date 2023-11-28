@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Persona;
+import com.example.demo.views.Login;
 import com.example.demo.views.PersonaView;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -61,5 +62,12 @@ public class PersonaController {
     public ResponseEntity<?> actualizarPersona(@RequestBody PersonaView persona,
             @PathVariable("documento") String documento) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.controlador.actualizarPersona(persona, documento));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Login login) {
+        // Guarda un objeto persona en la base
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + this.controlador.validarLogin(login) + "\"}");
     }
 }

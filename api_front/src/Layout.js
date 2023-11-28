@@ -1,107 +1,86 @@
-import { Outlet, Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Layout = () => {
+    const [mail, setMail] = useState('');
+    const [contrasenia, setContrasenia] = useState('');
+    const [redirectTo, setRedirectTo] = useState(null);
+    const [error, setError] = useState(null);
+
+    const authenticate = async () => {
+        try {
+            console.log(mail);
+            console.log(contrasenia)
+            // Simular una solicitud al servidor para verificar las credenciales
+            const response = await fetch('http://localhost:8080/persona/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ mail, contrasenia }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+
+                if (data.mensaje === "admin") {
+                    setRedirectTo('/admin/panel');
+                } else {
+                    setRedirectTo('/consulta');
+                }
+            } else {
+                setError('Credenciales inválidas');
+            }
+        } catch (error) {
+            console.error('Error al autenticar:', error);
+        }
+    };
+
+    if (redirectTo) {
+        return <Navigate to={redirectTo} />;
+    }
+
     return (
-        <>
-            <nav>
-                <ul>
-                    <li>
-                        <p>Gestión de Edificios</p>
-                        <ul>
-                            <li>
-                                <Link to="/edificio/buscar">Buscar por Código</Link>
-                            </li>
-                            <li>
-                                <Link to="/edificio/listar">Listar Edificios</Link>
-                            </li>
-                            <li>
-                                <Link to="/edificio/listar_unidades">Listar Unidaddes</Link>
-                            </li>
-                            <li>
-                                <Link to="/edificio/unidades">Unidades por Edificio</Link>
-                            </li>
-                            <li>
-                                <Link to="/unidad/habitada">Unidades por Habitadas</Link>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <p>Gestión de Personas</p>
-                        <ul>
-                            <li>
-                                <Link to="/personas/buscar">Buscar Persona por DNI</Link>
-                            </li>
-                            <li>
-                                <Link to="/personas/listar">Listar todas las Personas</Link>
-                            </li>
-                            <li>
-                                <Link to="/personas/listar_duenios">Listar todas los Dueños</Link>
-                            </li>
-                            <li>
-                                <Link to="/duenio/listar/edifcio">Listar todas los Dueños por Edificio</Link>
-                            </li>
-                            <li>
-                                <Link to="/duenio/buscar">Buscar Dueños por DNI</Link>
-                            </li>
-                            <li>
-                                <Link to="/duenio/agregar">Agregar Duenio</Link>
-                            </li>
-                            <li>
-                                <Link to="/personas/listar_inquilinos">Listar todas los Inquilinos</Link>
-                            </li>
-                            <li>
-                                <Link to="/inquilino/listar/edificio">Listar todas los Inquilinos por Edificio</Link>
-                            </li>
-                            <li>
-                                <Link to="/inquilino/buscar">Buscar Inquilinos por DNI</Link>
-                            </li>
-                            <li>
-                                <Link to="/inquilino/agregar">Agregar Inquilino</Link>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <p>Gestión de Reclamos</p>
-                        <ul>
-                            <li>
-                                <Link to="/reclamos/listar">Listar todos los Reclamos</Link>
-                            </li>
-                            <li>
-                                <Link to="/reclamos/listar/nro">Buscar Reclamo por Nro</Link>
-                            </li>
-                            <li>
-                                <Link to="/reclamos/listar/edificio">Listar todos los Reclamos por Edificio</Link>
-                            </li>
-                            <li>
-                                <Link to="/reclamos/listar/unidad">Listar todos los Reclamos por Unidad</Link>
-                            </li>
-                            <li>
-                                <Link to="/reclamos/listar/persona">Listar todos los Reclamos por Persona</Link>
-                            </li>
-                            <li>
-                                <Link to="/reclamos/agregar">Agregar Reclamo</Link>
-                            </li>
-                            <li>
-                                <Link to="/imagenes/agregar">Agregar Imagen a Reclamo</Link>
-                            </li>
-                            <li>
-                                <Link to="/imagenes/segun/reclamo">Imagen según Reclamo</Link>
-                            </li>
-                            <li>
-                                <Link to="/reclamos/actualizar/estado">Actualizar estado de Reclamo</Link>
-                            </li>
+        <div className="container mt-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card">
+                        <div className="card-body">
+                            <h2 className="card-title text-center">Login</h2>
 
-                            <li>
-                                <Link to="/estados/listar">Listar Estados</Link>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+                            <div className="mb-3">
+                                <label className="form-label">Email:</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={mail}
+                                    onChange={(e) => setMail(e.target.value)}
+                                />
+                            </div>
 
-            <Outlet />
-        </>
-    )
+                            <div className="mb-3">
+                                <label className="form-label">Contraseña:</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    value={contrasenia}
+                                    onChange={(e) => setContrasenia(e.target.value)}
+                                />
+                            </div>
+
+                            <button className="btn btn-primary" onClick={authenticate}>
+                                Iniciar Sesión
+                            </button>
+
+                            {error && <p className="text-danger mt-3">{error}</p>}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Layout;
