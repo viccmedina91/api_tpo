@@ -6,7 +6,7 @@ function ListadoEdificio() {
 
     const handleSubmit = () => {
         // Devuelve todos los edificios cargados en la BD.
-        fetch(`http://localhost:8080/edificio/getAllEdificios`)
+        fetch(`http://localhost:8080/edificio/listar`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

@@ -37,7 +37,8 @@ public class EdificioController {
     public ResponseEntity<?> obtenerEdificioPorId(@PathVariable Integer id) throws EdificioException {
         EdificioView edificio = this.controlador.buscarEdificioPorCodigo(id);
         if (edificio == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "El codigo ingresado no esciste: " + id + "\"}");
         }
         return ResponseEntity.ok(edificio);
     }
@@ -117,9 +118,8 @@ public class EdificioController {
         // Dado un codigo de edificio, se elimina
         EdificioView eliminado = this.controlador.eliminarEdificio(edificio);
         if (eliminado == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Error, no se ha podido eliminar el Edificio: " + edificio);
-
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, no se ha podido eliminar el Edificio: " + edificio + "\"}");
         }
 
         return ResponseEntity.status(HttpStatus.OK).build();
