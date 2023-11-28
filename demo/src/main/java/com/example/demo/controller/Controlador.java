@@ -332,21 +332,14 @@ public class Controlador {
 
         // si la unidad no esta habitada y la persona es dueño, puede hacer el reclamo
         if ((unidad.estaHabitado() == false) && (unidad.getDuenios().contains(persona))) {
-            Estado estado = this.estadoRepository.findById(1).get();
-            Reclamo nuevoReclamo = new Reclamo(persona, edificio, reclamo.getUbicacion(),
-                    reclamo.getDescripcion(), unidad, estado);
-            this.reclamoRepository.save(nuevoReclamo);
-            return "Guardado con Exito, nro de reclamo: " + nuevoReclamo.getNumero();
+            return "Guardado con Exito, nro de reclamo: "
+                    + this.almacenarReclamo(reclamo, persona, edificio, unidad).getNumero();
         }
 
         // si la unidad esta habitada y la persona es inquilino
         if ((unidad.estaHabitado()) && (unidad.getInquilinos().contains(persona))) {
-
-            Estado estado = this.estadoRepository.findById(1).get();
-            Reclamo nuevoReclamo = new Reclamo(persona, edificio, reclamo.getUbicacion(),
-                    reclamo.getDescripcion(), unidad, estado);
-            this.reclamoRepository.save(nuevoReclamo);
-            return "Guardado con Exito, nro de reclamo: " + nuevoReclamo.getNumero();
+            return "Guardado con Exito, nro de reclamo: "
+                    + this.almacenarReclamo(reclamo, persona, edificio, unidad).getNumero();
         }
 
         return "Error";
@@ -442,6 +435,14 @@ public class Controlador {
             return reclamo.get();
         }
         return null;
+    }
+
+    private Reclamo almacenarReclamo(NuevoReclamo reclamo, Persona persona, Edificio edificio, Unidad unidad) {
+        Estado estado = this.estadoRepository.findById(1).get();
+        Reclamo nuevoReclamo = new Reclamo(persona, edificio, reclamo.getUbicacion(),
+                reclamo.getDescripcion(), unidad, estado);
+        this.reclamoRepository.save(nuevoReclamo);
+        return nuevoReclamo;
     }
 
 }
