@@ -19,7 +19,6 @@ import ActualizarEstadoReclamo from "./ActualizarEstadoReclamo";
 import AddReclamo from "./AddReclamo";
 import CrearEdificio from "./Forms/CrearEdificio";
 import AddInquilino from "./AddInquilino";
-import AddImagen from "./AddImagen";
 import SearchImagenReclamo from "./SearchImagenReclamo";
 import PanelAdministracion from "./PanelAdministracion";
 import EdificioConUnidades from "./EdificioConUnidades";
@@ -28,6 +27,8 @@ import EliminarEdificio from "./EliminarEdificio";
 import HabilitadosPorEdificio from "./HabilitadosPorEdificio";
 import SearchInquilinoPorUnidad from "./SearchInquilinoPorUnidad";
 import CrearUnidad from "./CrearUnidad";
+import SearchDuenioPorUnidad from "./SearchDuenioPorUnidad";
+import ModificarUnidad from "./ModificarUnidad";
 
 export default function App() {
   return (
@@ -47,10 +48,10 @@ export default function App() {
 
 
         <Route path="/unidad/buscar" element={<SearchUnidad />}></Route>
-        <Route path="/unidad/duenios" element={<SearchInquilinoPorUnidad />}></Route>
+        <Route path="/unidad/duenios" element={<SearchDuenioPorUnidad />}></Route>
         <Route path="/unidad/inquilinos" element={<SearchInquilinoPorUnidad />}></Route>
         <Route path="/unidad/crear/" element={<CrearUnidad />}></Route>
-
+        <Route path="/unidad/modificar" element={<ModificarUnidad />}></Route>
 
 
 
@@ -76,7 +77,7 @@ export default function App() {
         <Route path="/reclamos/listar/unidad" element={<SearchReclamoUnidad />}></Route>
         <Route path="/reclamos/listar/persona" element={<SearchReclamoPersona />}></Route>
         <Route path="/reclamos/agregar" element={<AddReclamo />}></Route>
-        <Route path="/imagenes/agregar" element={<AddImagen />}></Route>
+
         <Route path="/reclamos/listar/nro" element={<SearchReclamo />}></Route>
         <Route path="/imagenes/segun/reclamo" element={<SearchImagenReclamo />}></Route>
         <Route path="/reclamos/actualizar/estado" element={<ActualizarEstadoReclamo />}></Route>

@@ -79,7 +79,8 @@ public class UnidadController {
         // Actualizar una unidad
         UnidadView unidadActualizado = this.controlador.actualizarUnidad(unidad, id);
         if (unidadActualizado == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unidad no encontrado con el código: " + id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, los datos ingresados no son correctos: " + id + "\"}");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(unidadActualizado);
     }

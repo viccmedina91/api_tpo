@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
 
-function CrearUnidad() {
+function ModificarUnidad() {
     const [pisoUnidad, setPisoUnidad] = useState('');
     const [habitadoUnidad, setHabitadoUnidad] = useState('');
     const [numeroUnidad, setNumeroUnidad] = useState('');
@@ -35,7 +35,7 @@ function CrearUnidad() {
         };
         console.log(newItem);
         fetch(`http://localhost:8080/unidad/${codigoEdificio}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -71,7 +71,7 @@ function CrearUnidad() {
                     <h2> Formulario para crear una Unidad </h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="Código del Edificio" className="form-label">Código</label>
+                            <label htmlFor="Identificador de la Unidad" className="form-label">Identificador Unidad</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -124,4 +124,4 @@ function CrearUnidad() {
     );
 }
 
-export default CrearUnidad;
+export default ModificarUnidad;
