@@ -4,11 +4,9 @@ import Layout from "./Layout";
 import SearchEdificio from "./SearchEdificio";
 import ListadoEdificio from "./ListadoEdificio";
 import UnidadesPorEdificio from "./UnidadesPorEdificio";
-import SearchHabitado from "./SearchHabitado";
 import ListadoPersona from "./ListadoPersona";
 import SearchPersona from "./SearchPersona";
 import ListadoDuenio from "./ListadoDuenio";
-import SearchDuenio from "./SearchDuenio";
 import ListadoInquilino from "./ListadoInquilino";
 import SearchInquilino from "./SearchInquilino";
 import SearchUnidad from "./SearchUnidad";
@@ -30,6 +28,7 @@ import PanelAdministracion from "./PanelAdministracion";
 import EdificioConUnidades from "./EdificioConUnidades";
 import ModificarEdificio from "./ModificarEdificio";
 import EliminarEdificio from "./EliminarEdificio";
+import HabilitadosPorEdificio from "./HabilitadosPorEdificio";
 
 export default function App() {
   return (
@@ -45,16 +44,14 @@ export default function App() {
         <Route path="/edificio/modificar" element={<ModificarEdificio />}></Route>
         <Route path="/edificio/inquilinos" element={<SearchInquilinoEdificio />}></Route>
         <Route path="/edificio/eliminar" element={<EliminarEdificio />}></Route>
-
+        <Route path="/edificio/habilitados" element={<HabilitadosPorEdificio />}></Route>
 
 
         <Route path="/edificio/unidades" element={<SearchUnidad />}></Route>
-        <Route path="/unidad/habitada" element={<SearchHabitado />}></Route>
 
 
         <Route path="/personas/listar" element={<ListadoPersona />}></Route>
         <Route path="/personas/buscar" element={<SearchPersona />}></Route>
-        <Route path="/duenio/buscar" element={<SearchDuenio />}></Route>
         <Route path="/personas/listar_duenios" element={<ListadoDuenio />}></Route>
 
 

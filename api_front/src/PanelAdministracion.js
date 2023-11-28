@@ -18,11 +18,14 @@ const PanelAdministracion = () => (
                         <Subseccion title="Buscar Edificio por código" to="/edificio/buscar" />
                         <Subseccion title="Listar los Edificios con sus Unidades" to="/edificio/con/unidades" />
                         <Subseccion title="Listar Inquilinos por Edificio" to="/edificio/inquilinos" />
+                        <Subseccion title="Listar habilitados por Edificio" to="/edificio/habilitados" />
                         <Subseccion title="Unidades por Edificio" to="/edificio/unidades" />
                         <Subseccion title="Dueños por Edificio" to="/edificio/duenio/" />
                         <Subseccion title="Crear Edificio" to="/edificio/agregar" />
                         <Subseccion title="Modificar Edificio" to="/edificio/modificar" />
                         <Subseccion title="Eliminar Edificio" to="/edificio/eliminar" />
+
+
 
                         {/* Agrega más subsecciones según sea necesario */}
                     </Dropdown.Menu>
