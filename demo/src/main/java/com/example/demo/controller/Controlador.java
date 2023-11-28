@@ -316,16 +316,34 @@ public class Controlador {
         if (persona == null) {
             return "La persona no existe: " + reclamo.getDocumento();
         }
-        if ((unidad.getDuenios().contains(persona)) || (unidad.getInquilinos().contains(persona))) {
-            // La persona es duenio o es inquilino. Puede generar el reclamo.
+
+        // si la unidad esta alquilada, solamente el inquilino puede generar el reclamo
+        if ((unidad.estaHabitado()) && (unidad.getDuenios().contains(persona))) {
+            // si la unidad esta alquilada y la persona que inicia el reclamo es dueño
+            // el reclamo no puede crearse.
+            return "La unidad está habitada y la persona es dueño";
+        }
+
+        // si la unidad no esta habitada y la persona es dueño, puede hacer el reclamo
+        if ((unidad.estaHabitado() == false) && (unidad.getDuenios().contains(persona))) {
             Estado estado = this.estadoRepository.findById(1).get();
             Reclamo nuevoReclamo = new Reclamo(persona, edificio, reclamo.getUbicacion(),
                     reclamo.getDescripcion(), unidad, estado);
             this.reclamoRepository.save(nuevoReclamo);
-        } else {
-            return "La persona no es dueña o inquilina: " + reclamo.getDocumento();
+            return "Guardado con Exito";
         }
-        return "Guardado con Exito";
+
+        // si la unidad esta habitada y la persona es inquilino
+        if ((unidad.estaHabitado()) && (unidad.getInquilinos().contains(persona))) {
+
+            Estado estado = this.estadoRepository.findById(1).get();
+            Reclamo nuevoReclamo = new Reclamo(persona, edificio, reclamo.getUbicacion(),
+                    reclamo.getDescripcion(), unidad, estado);
+            this.reclamoRepository.save(nuevoReclamo);
+            return "Guardado con Exito";
+        }
+
+        return "Error";
     }
 
     public String agregarImagenAReclamo(int numero, List<Imagen> imagenes) throws ReclamoException {
