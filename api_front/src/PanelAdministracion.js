@@ -37,6 +37,7 @@ const PanelAdministracion = () => (
                         <Subseccion title="Buscar Unidad" to="/unidad/buscar" />
                         <Subseccion title="Buscar Dueños por Unidad" to="/unidad/duenios" />
                         <Subseccion title="Buscar Inquilinos por Unidad" to="/unidad/inquilinos" />
+                        <Subseccion title="Crear Unidad" to="/unidad/crear" />
 
                     </Dropdown.Menu>
                 </Dropdown>

@@ -68,7 +68,8 @@ public class UnidadController {
         // Campos: Piso (String), Numero (String), Habitado, Codigo Edificio
         UnidadView unidadNueva = this.controlador.guardarUnidad(unidad, id);
         if (unidadNueva == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, no se encuentra el edificio con código: " + id + "\"}");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(unidadNueva);
     }
