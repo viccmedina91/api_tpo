@@ -71,7 +71,8 @@ public class EdificioController {
         // Dado un codigo de edificio, devolvemos todos los dueños
         List<PersonaView> duenios = this.controlador.dueniosPorEdificio(codigo);
         if (duenios == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + codigo);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, el codigo de edificio no encontrado: " + codigo + "\"}");
         }
         return ResponseEntity.ok(duenios);
 
