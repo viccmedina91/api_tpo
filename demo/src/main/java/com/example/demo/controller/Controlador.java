@@ -173,7 +173,7 @@ public class Controlador {
         }
         unidad.transferir(persona);
         this.unidadRepository.save(unidad);
-        return "200 OK";
+        return "Unidad transferida con éxito";
     }
 
     public List<PersonaView> dueniosPorUnidad(int codigo) throws EdificioException {

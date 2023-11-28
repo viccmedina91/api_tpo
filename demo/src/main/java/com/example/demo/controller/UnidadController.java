@@ -88,9 +88,9 @@ public class UnidadController {
     @PutMapping("/transferir/unidad")
     public ResponseEntity<?> transferirUnidad(@RequestBody UnidadPersona unidadPersona) {
         // Dado un documento de un dueño y el codigo de una unidad, se transfiere
-
         String operacion = this.controlador.transferirUnidad(unidadPersona);
-        return ResponseEntity.status(HttpStatus.CREATED).body(operacion);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + "Resultado de la Transferencia: " + operacion + "\"}");
     }
 
     @PostMapping("/agregar/duenio")
