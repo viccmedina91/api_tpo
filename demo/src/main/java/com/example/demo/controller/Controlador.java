@@ -312,9 +312,15 @@ public class Controlador {
         if (unidad == null) {
             return "La unidad no existe: " + reclamo.getIdentificador();
         }
+
         Persona persona = this.buscarPersona(reclamo.getDocumento());
         if (persona == null) {
             return "La persona no existe: " + reclamo.getDocumento();
+        }
+
+        // validamos que la unidad pertenezca al edificio
+        if (edificio.getUnidades().contains(unidad) == false) {
+            return "Error, la unidad no pertenece al edificio";
         }
 
         // si la unidad esta alquilada, solamente el inquilino puede generar el reclamo
@@ -330,7 +336,7 @@ public class Controlador {
             Reclamo nuevoReclamo = new Reclamo(persona, edificio, reclamo.getUbicacion(),
                     reclamo.getDescripcion(), unidad, estado);
             this.reclamoRepository.save(nuevoReclamo);
-            return "Guardado con Exito";
+            return "Guardado con Exito, nro de reclamo: " + nuevoReclamo.getNumero();
         }
 
         // si la unidad esta habitada y la persona es inquilino
@@ -340,7 +346,7 @@ public class Controlador {
             Reclamo nuevoReclamo = new Reclamo(persona, edificio, reclamo.getUbicacion(),
                     reclamo.getDescripcion(), unidad, estado);
             this.reclamoRepository.save(nuevoReclamo);
-            return "Guardado con Exito";
+            return "Guardado con Exito, nro de reclamo: " + nuevoReclamo.getNumero();
         }
 
         return "Error";
