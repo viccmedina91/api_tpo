@@ -27,6 +27,7 @@ import ListadoEstado from "./ListadoEstado";
 import AddImagen from "./AddImagen";
 import SearchImagenReclamo from "./SearchImagenReclamo";
 import PanelAdministracion from "./PanelAdministracion";
+import EdificioConUnidades from "./EdificioConUnidades";
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
         <Route index element={<Layout />} />
         <Route path="/edificio/buscar" element={<SearchEdificio />}></Route>
         <Route path="/edificio/listar" element={<ListadoEdificio />}></Route>
+        <Route path="/edificio/con/unidades" element={<EdificioConUnidades />}></Route>
         <Route path="/edificio/listar_unidades" element={<ListadoUnidad />}></Route>
         <Route path="/edificio/unidades" element={<SearchUnidad />}></Route>
         <Route path="/unidad/habitada" element={<SearchHabitado />}></Route>
