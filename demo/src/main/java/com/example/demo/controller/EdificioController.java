@@ -90,9 +90,11 @@ public class EdificioController {
         // Actualizar un edificio
         EdificioView edificioActualizado = this.controlador.actualizarEdificio(edificio, id);
         if (edificioActualizado == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, el codigo de edificio no encontrado: " + id + "\"}");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(edificioActualizado);
+
     }
 
     @GetMapping("/habitantes/{id}")
