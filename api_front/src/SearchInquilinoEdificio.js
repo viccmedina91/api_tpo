@@ -4,10 +4,11 @@ import FormSearch from './Forms/FormSearch';
 
 function SearchInquilinoEdificio() {
     const [responseData, setResponseData] = useState(null);
+    const [error, setError] = useState(null);
 
     const handleSubmit = (campo) => {
         // // Según el código de Edificio ingresado, devuelve todos los Inquilinos
-        fetch(`http://localhost:8080/inquilino/getInquilinos/edificio/${campo}`)
+        fetch(`http://localhost:8080/edificio/habitantes/${campo}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -21,6 +22,7 @@ function SearchInquilinoEdificio() {
             })
             .catch((error) => {
                 console.error('Error al hacer la solicitud:', error);
+                setError(error.mensaje);
             });
     };
 
@@ -30,6 +32,7 @@ function SearchInquilinoEdificio() {
             <FormSearch onSubmit={handleSubmit} />
             {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
             )}
+            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }

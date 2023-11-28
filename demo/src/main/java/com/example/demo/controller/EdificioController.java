@@ -102,7 +102,8 @@ public class EdificioController {
         // Dado un codigo de unidad, devolvemos los habitantes
         List<PersonaView> habitantes = this.controlador.habitantesPorEdificio(codigo);
         if (habitantes == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Edificio no encontrado con el código: " + codigo);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, el codigo de edificio no encontrado: " + codigo + "\"}");
         }
         return ResponseEntity.ok(habitantes);
     }

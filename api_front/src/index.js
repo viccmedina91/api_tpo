@@ -42,6 +42,8 @@ export default function App() {
         <Route path="/edificio/duenio/" element={<SearchDuenioEdificio />}></Route>
         <Route path="/edificio/agregar" element={<CrearEdificio />}></Route>
         <Route path="/edificio/modificar" element={<ModificarEdificio />}></Route>
+        <Route path="/edificio/inquilinos" element={<SearchInquilinoEdificio />}></Route>
+
 
         <Route path="/edificio/unidades" element={<SearchUnidad />}></Route>
         <Route path="/unidad/habitada" element={<SearchHabitado />}></Route>
@@ -55,7 +57,7 @@ export default function App() {
 
 
         <Route path="/personas/listar_inquilinos" element={<ListadoInquilino />}></Route>
-        <Route path="/inquilino/listar/edificio" element={<SearchInquilinoEdificio />}></Route>
+
         <Route path="/inquilino/agregar" element={<AddInquilino />}></Route>
         <Route path="/inquilino/buscar" element={<SearchInquilino />}></Route>
 
