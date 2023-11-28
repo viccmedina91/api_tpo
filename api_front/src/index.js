@@ -28,6 +28,7 @@ import AddImagen from "./AddImagen";
 import SearchImagenReclamo from "./SearchImagenReclamo";
 import PanelAdministracion from "./PanelAdministracion";
 import EdificioConUnidades from "./EdificioConUnidades";
+import ModificarEdificio from "./ModificarEdificio";
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/edificio/unidades" element={<UnidadesPorEdificio />}></Route>
         <Route path="/edificio/duenio/" element={<SearchDuenioEdificio />}></Route>
         <Route path="/edificio/agregar" element={<CrearEdificio />}></Route>
+        <Route path="/edificio/modificar" element={<ModificarEdificio />}></Route>
 
         <Route path="/edificio/unidades" element={<SearchUnidad />}></Route>
         <Route path="/unidad/habitada" element={<SearchHabitado />}></Route>
