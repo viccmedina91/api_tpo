@@ -21,7 +21,7 @@ import SearchReclamoUnidad from "./SearchReclamoUnidad";
 import SearchReclamoPersona from "./SearchReclamoPersona";
 import ActualizarEstadoReclamo from "./ActualizarEstadoReclamo";
 import AddReclamo from "./AddReclamo";
-import AddDuenio from "./AddDuenio";
+import CrearEdificio from "./Forms/CrearEdificio";
 import AddInquilino from "./AddInquilino";
 import ListadoEstado from "./ListadoEstado";
 import AddImagen from "./AddImagen";
@@ -39,7 +39,7 @@ export default function App() {
         <Route path="/edificio/con/unidades" element={<EdificioConUnidades />}></Route>
         <Route path="/edificio/unidades" element={<UnidadesPorEdificio />}></Route>
         <Route path="/edificio/duenio/" element={<SearchDuenioEdificio />}></Route>
-
+        <Route path="/edificio/agregar" element={<CrearEdificio />}></Route>
 
         <Route path="/edificio/unidades" element={<SearchUnidad />}></Route>
         <Route path="/unidad/habitada" element={<SearchHabitado />}></Route>
@@ -50,7 +50,7 @@ export default function App() {
         <Route path="/duenio/buscar" element={<SearchDuenio />}></Route>
         <Route path="/personas/listar_duenios" element={<ListadoDuenio />}></Route>
 
-        <Route path="/duenio/agregar" element={<AddDuenio />}></Route>
+
 
         <Route path="/personas/listar_inquilinos" element={<ListadoInquilino />}></Route>
         <Route path="/inquilino/listar/edificio" element={<SearchInquilinoEdificio />}></Route>
