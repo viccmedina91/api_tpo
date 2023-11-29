@@ -32,6 +32,7 @@ import AddImagen from "./AddImagen";
 import ListadoPersona from "./ListadoPersona";
 import CrearPersona from "./CrearPersona";
 import EliminarPersona from "./EliminarPersona";
+import ModificarPersona from "./ModificarPersona";
 
 export default function App() {
   return (
@@ -74,6 +75,8 @@ export default function App() {
         <Route path="/persona/listar" element={<ListadoPersona />}></Route>
         <Route path="/persona/crear" element={<CrearPersona />}></Route>
         <Route path="/persona/eliminar" element={<EliminarPersona />}></Route>
+        <Route path="/persona/modificar" element={<ModificarPersona />}></Route>
+
 
 
 

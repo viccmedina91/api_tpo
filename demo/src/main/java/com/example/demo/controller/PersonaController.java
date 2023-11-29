@@ -63,7 +63,10 @@ public class PersonaController {
     @PutMapping("/{documento}")
     public ResponseEntity<?> actualizarPersona(@RequestBody PersonaView persona,
             @PathVariable("documento") String documento) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.controlador.actualizarPersona(persona, documento));
+        String operacion = this.controlador.actualizarPersona(persona, documento);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + "El resultado de la operación es: "
+                        + operacion + "\"}");
     }
 
     @PostMapping("/login")

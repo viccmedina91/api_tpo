@@ -76,6 +76,7 @@ const PanelAdministracion = () => (
                             <Subseccion title="Listar todas las Personas" to="/persona/listar" />
                             <Subseccion title="Crear Persona" to="/persona/crear" />
                             <Subseccion title="Eliminar Persona" to="/persona/eliminar" />
+                            <Subseccion title="Modificar Persona" to="/persona/modificar" />
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
