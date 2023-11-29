@@ -134,9 +134,11 @@ public class UnidadController {
     public ResponseEntity<?> habitarUnidad(@PathVariable int id) {
         // Dado un codigo de unidad, la ponemos como habitada
         if (controlador.habitarUnidad(id) == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha ocurrido un error");
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "El codigo de la unidad no existe: " + id + "\"}");
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + "Operación con éxito, la unidad se ha liberado: " + id + "\"}");
     }
 
 }

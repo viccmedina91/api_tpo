@@ -29,6 +29,7 @@ import TransferirUnidad from "./TransferirUnidad";
 import AgregarDuenioAUnidad from "./AgregarDuenioAUnidad";
 import AgregarInquilinoAUnidad from "./AgregarInquilinoAUnidad";
 import LiberarUnidad from "./LiberarUnidad";
+import HabitarUnidad from "./HabitarUnidad";
 
 export default function App() {
   return (
@@ -56,7 +57,7 @@ export default function App() {
         <Route path="/unidad/agregar/duenio/unidad" element={<AgregarDuenioAUnidad />}></Route>
         <Route path="/unidad/agregar/inquilino/unidad" element={<AgregarInquilinoAUnidad />}></Route>
         <Route path="/unidad/liberar" element={<LiberarUnidad />}></Route>
-
+        <Route path="/unidad/habitar" element={<HabitarUnidad />}></Route>
 
 
 

@@ -43,6 +43,7 @@ const PanelAdministracion = () => (
                         <Subseccion title="Agregar Duenio a Unidad" to="/unidad/agregar/duenio/unidad" />
                         <Subseccion title="Agregar Inquilino a Unidad" to="/unidad/agregar/inquilino/unidad" />
                         <Subseccion title="Liberar Unidad" to="/unidad/liberar" />
+                        <Subseccion title="Habitar Unidad" to="/unidad/habitar" />
 
 
 
