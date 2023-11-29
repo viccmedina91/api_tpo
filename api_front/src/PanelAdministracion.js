@@ -55,6 +55,9 @@ const PanelAdministracion = () => (
                     <Dropdown.Menu>
                         <Subseccion title="Listar Reclamos por Edificio" to="/reclamos/edificio" />
                         <Subseccion title="Listar Reclamos por Unidad" to="/reclamos/unidad" />
+                        <Subseccion title="Buscar Reclamos por Nro." to="/reclamos/nro" />
+
+
                     </Dropdown.Menu>
                 </Dropdown>
             </div>

@@ -60,7 +60,8 @@ public class ReclamoController {
         // Dado un numero de reclamo, lo devolvemos
         ReclamoView reclamo = controlador.reclamosPorNumero(id);
         if (reclamo == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El reclamo no existe: " + id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "El codigo reclamo no existe: " + id + "\"}");
         }
         return ResponseEntity.ok(reclamo);
     }
