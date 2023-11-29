@@ -120,10 +120,13 @@ public class UnidadController {
     public ResponseEntity<?> liberarUnidad(@PathVariable int id) {
         // Dado un codigo de unidad, la liberamos
         if (this.controlador.liberarUnidad(id) == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ha ocurrido un error");
-
+            System.out.println("UNIDAD NULA");
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, los datos ingresados no son correctos: " + id + "\"}");
         }
-        return ResponseEntity.ok().build();
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + "Operación con éxito, la unidad se ha liberado " + id + "\"}");
 
     }
 

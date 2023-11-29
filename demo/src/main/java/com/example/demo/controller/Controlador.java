@@ -271,8 +271,9 @@ public class Controlador {
     }
 
     public Boolean liberarUnidad(int codigo) {
-        Unidad unidad = buscarUnidad(codigo);
+        Unidad unidad = this.buscarUnidad(codigo);
         if (unidad == null) {
+            System.out.println("UNIDAD NULA");
             return null;
         }
         unidad.liberar();
