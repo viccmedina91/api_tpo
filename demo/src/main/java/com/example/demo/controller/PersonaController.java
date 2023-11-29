@@ -43,9 +43,11 @@ public class PersonaController {
         // Guarda un objeto persona en la base
         PersonaView nuevaPersona = controlador.agregarPersona(persona);
         if (nuevaPersona == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La persona no existe: " + persona.toView());
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error, el documento ya se encuentra registrado: "
+                            + persona.getDocumento() + "\"}");
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaPersona);
+        return ResponseEntity.ok(nuevaPersona);
     }
 
     @DeleteMapping("/{documento}")

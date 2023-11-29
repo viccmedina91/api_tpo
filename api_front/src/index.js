@@ -30,6 +30,7 @@ import LiberarUnidad from "./LiberarUnidad";
 import HabitarUnidad from "./HabitarUnidad";
 import AddImagen from "./AddImagen";
 import ListadoPersona from "./ListadoPersona";
+import CrearPersona from "./CrearPersona";
 
 export default function App() {
   return (
@@ -76,6 +77,7 @@ export default function App() {
 
 
         <Route path="/persona/listar" element={<ListadoPersona />}></Route>
+        <Route path="/persona/crear" element={<CrearPersona />}></Route>
 
 
 
