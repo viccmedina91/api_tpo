@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import ShowList from "./ShowList";
 
 function AddImagen() {
     const [reclamoid, setReclamoID] = useState('');
+    const [responseData, setResponseData] = useState(null);
+    const [error, setError] = useState(null);
     const [path, setPath] = useState('');
     const [tipo, setTipo] = useState('');
 
@@ -31,8 +34,8 @@ function AddImagen() {
         };
         console.log(newItem);
         // Realizar la solicitud POST al backend utilizando fetch
-        fetch('http://localhost:8080/imagenes/crear', {
-            method: 'POST',
+        fetch(`http://localhost:8080/reclamo/agregar/imagen/${reclamoid}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -48,6 +51,7 @@ function AddImagen() {
                 // Realizar acciones adicionales después de la inserción exitosa
                 console.log('Elemento agregado exitosamente:', data);
                 // Restablecer los campos del formulario
+                setResponseData(data);
                 setReclamoID('');
                 setPath('');
                 setTipo('');
@@ -55,42 +59,56 @@ function AddImagen() {
             })
             .catch((error) => {
                 console.error('Error al agregar el elemento:', error);
+                setError(error.mensaje);
             });
     };
 
     return (
-        <div>
-            <h2>Agregar Imagen a Reclamo</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="reclamoid">Nro. Reclamo:</label>
-                    <input
-                        type="number"
-                        id="reclamoid"
-                        value={reclamoid}
-                        onChange={handleReclamoChange}
-                    />
+
+        <div className="container mt-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <h2> Agregar Imagen a Reclamo </h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="Nro de Reclamo" className="form-label">Nro de Reclamo</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="campoTexto"
+                                value={reclamoid}
+                                onChange={handleReclamoChange}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="Tipo" className="form-label">Tipo</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="campoTexto"
+                                value={tipo}
+                                onChange={handleTipoChange}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="Path" className="form-label">Path de Imagen</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="campoTexto"
+                                value={path}
+                                onChange={handlePathChange}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Enviar</button>
+                    </form>
                 </div>
-                <div>
-                    <label htmlFor="path">Path:</label>
-                    <input
-                        type="text"
-                        id="path"
-                        value={path}
-                        onChange={handlePathChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="tipo">Tipo:</label>
-                    <input
-                        type="text"
-                        id="tipo"
-                        value={tipo}
-                        onChange={handleTipoChange}
-                    />
-                </div>
-                <button type="submit">Agregar</button>
-            </form>
+            </div>
+            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
+            )}
         </div>
     );
 }

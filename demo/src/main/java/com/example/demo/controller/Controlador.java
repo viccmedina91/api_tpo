@@ -369,12 +369,12 @@ public class Controlador {
         return "Error";
     }
 
-    public String agregarImagenAReclamo(int numero, List<Imagen> imagenes) throws ReclamoException {
+    public String agregarImagenAReclamo(int numero, Imagen imagenes) throws ReclamoException {
         Reclamo reclamo = this.buscarReclamo(numero);
         if (reclamo == null) {
             return "Nro de reclamo desconocido: " + numero;
         }
-        imagenes.forEach(imagen -> reclamo.agregarImagen(imagen.getPath(), imagen.getTipo()));
+        reclamo.agregarImagen(imagenes.getPath(), imagenes.getTipo());
         this.reclamoRepository.save(reclamo);
         return "Guardado con Exito";
     }

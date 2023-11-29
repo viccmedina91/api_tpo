@@ -87,11 +87,14 @@ public class ReclamoController {
     }
 
     @PutMapping("/agregar/imagen/{reclamo}")
-    public ResponseEntity<?> agregarImagen(@PathVariable("reclamo") int idReclamo, @RequestBody List<Imagen> imagenes)
+    public ResponseEntity<?> agregarImagen(@PathVariable("reclamo") int idReclamo, @RequestBody Imagen imagenes)
             throws ReclamoException {
         // Dado un reclamo existente, almacenamos las imagenes
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.controlador.agregarImagenAReclamo(idReclamo, imagenes));
+        String operacion = this.controlador.agregarImagenAReclamo(idReclamo, imagenes);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + operacion + "\"}");
+
     }
 
     @PutMapping("/cambiar/estado")

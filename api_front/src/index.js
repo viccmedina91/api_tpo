@@ -30,6 +30,7 @@ import AgregarDuenioAUnidad from "./AgregarDuenioAUnidad";
 import AgregarInquilinoAUnidad from "./AgregarInquilinoAUnidad";
 import LiberarUnidad from "./LiberarUnidad";
 import HabitarUnidad from "./HabitarUnidad";
+import AddImagen from "./AddImagen";
 
 export default function App() {
   return (
@@ -65,6 +66,7 @@ export default function App() {
         <Route path="/reclamos/nro" element={<SearchReclamo />}></Route>
         <Route path="/reclamos/persona" element={<SearchReclamoPersona />}></Route>
         <Route path="/reclamos/crear" element={<AddReclamo />}></Route>
+        <Route path="/reclamos/agregar/imagen" element={<AddImagen />}></Route>
 
 
 

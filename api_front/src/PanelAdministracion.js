@@ -58,6 +58,7 @@ const PanelAdministracion = () => (
                         <Subseccion title="Buscar Reclamos por Nro." to="/reclamos/nro" />
                         <Subseccion title="Buscar Reclamos por Documento" to="/reclamos/persona" />
                         <Subseccion title="Crear Reclamos" to="/reclamos/crear" />
+                        <Subseccion title="Agregar Imagen a Reclamos" to="/reclamos/agregar/imagen" />
 
 
                     </Dropdown.Menu>
