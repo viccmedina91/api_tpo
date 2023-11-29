@@ -5,7 +5,6 @@ import SearchEdificio from "./SearchEdificio";
 import ListadoEdificio from "./ListadoEdificio";
 import UnidadesPorEdificio from "./UnidadesPorEdificio";
 import SearchUnidad from "./SearchUnidad";
-import ListadoReclamo from "./ListadoReclamo";
 import SearchReclamo from "./SearchReclamo";
 import SearchInquilinoEdificio from "./SearchInquilinoEdificio";
 import SearchDuenioEdificio from "./SearchDuenioEdificio";
@@ -15,7 +14,6 @@ import SearchReclamoPersona from "./SearchReclamoPersona";
 import ActualizarEstadoReclamo from "./ActualizarEstadoReclamo";
 import AddReclamo from "./AddReclamo";
 import CrearEdificio from "./Forms/CrearEdificio";
-import SearchImagenReclamo from "./SearchImagenReclamo";
 import PanelAdministracion from "./PanelAdministracion";
 import EdificioConUnidades from "./EdificioConUnidades";
 import ModificarEdificio from "./ModificarEdificio";
@@ -31,6 +29,7 @@ import AgregarInquilinoAUnidad from "./AgregarInquilinoAUnidad";
 import LiberarUnidad from "./LiberarUnidad";
 import HabitarUnidad from "./HabitarUnidad";
 import AddImagen from "./AddImagen";
+import ListadoPersona from "./ListadoPersona";
 
 export default function App() {
   return (
@@ -76,14 +75,13 @@ export default function App() {
 
 
 
-        <Route path="/reclamos/listar" element={<ListadoReclamo />}></Route>
+        <Route path="/persona/listar" element={<ListadoPersona />}></Route>
 
 
 
 
 
 
-        <Route path="/imagenes/segun/reclamo" element={<SearchImagenReclamo />}></Route>
 
 
 
