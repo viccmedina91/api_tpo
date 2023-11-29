@@ -44,13 +44,20 @@ const PanelAdministracion = () => (
                         <Subseccion title="Agregar Inquilino a Unidad" to="/unidad/agregar/inquilino/unidad" />
                         <Subseccion title="Liberar Unidad" to="/unidad/liberar" />
                         <Subseccion title="Habitar Unidad" to="/unidad/habitar" />
-
-
-
-
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
+            <div className="col-md-4">
+                <Dropdown>
+                    <Dropdown.Toggle variant="danger" id="dropdown-basic">
+                        Gestión de Reclamos
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Subseccion title="Listar Reclamos por Edificio" to="/reclamos/edificio" />
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+
         </div>
     </div >
 );
