@@ -16,7 +16,6 @@ import SearchReclamoPersona from "./SearchReclamoPersona";
 import ActualizarEstadoReclamo from "./ActualizarEstadoReclamo";
 import AddReclamo from "./AddReclamo";
 import CrearEdificio from "./Forms/CrearEdificio";
-import AddInquilino from "./AddInquilino";
 import SearchImagenReclamo from "./SearchImagenReclamo";
 import PanelAdministracion from "./PanelAdministracion";
 import EdificioConUnidades from "./EdificioConUnidades";
@@ -29,6 +28,7 @@ import SearchDuenioPorUnidad from "./SearchDuenioPorUnidad";
 import ModificarUnidad from "./ModificarUnidad";
 import TransferirUnidad from "./TransferirUnidad";
 import AgregarDuenioAUnidad from "./AgregarDuenioAUnidad";
+import AgregarInquilinoAUnidad from "./AgregarInquilinoAUnidad";
 
 
 export default function App() {
@@ -55,6 +55,7 @@ export default function App() {
         <Route path="/unidad/modificar" element={<ModificarUnidad />}></Route>
         <Route path="/unidad/transferir" element={<TransferirUnidad />}></Route>
         <Route path="/unidad/agregar/duenio/unidad" element={<AgregarDuenioAUnidad />}></Route>
+        <Route path="/unidad/agregar/inquilino/unidad" element={<AgregarInquilinoAUnidad />}></Route>
 
 
 
@@ -70,7 +71,6 @@ export default function App() {
 
 
 
-        <Route path="/inquilino/agregar" element={<AddInquilino />}></Route>
         <Route path="/inquilino/buscar" element={<SearchInquilino />}></Route>
 
         <Route path="/reclamos/listar" element={<ListadoReclamo />}></Route>
