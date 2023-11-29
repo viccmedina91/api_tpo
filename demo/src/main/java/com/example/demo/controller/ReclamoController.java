@@ -99,8 +99,10 @@ public class ReclamoController {
 
     @PutMapping("/cambiar/estado")
     public ResponseEntity<?> cambiarEstado(@RequestBody NuevoEstado nuevoEstado) throws ReclamoException {
+        String operacion = this.controlador.cambiarEstado(nuevoEstado);
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(this.controlador.cambiarEstado(nuevoEstado));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + operacion + "\"}");
+
     }
 }
