@@ -80,7 +80,10 @@ public class ReclamoController {
     @PostMapping()
     public ResponseEntity<?> guardarReclamo(@RequestBody NuevoReclamo reclamo) throws ReclamoException {
         // Para guardar un reclamo en la base de datos
-        return ResponseEntity.status(HttpStatus.CREATED).body(controlador.agregarReclamo(reclamo));
+        String operacion = this.controlador.agregarReclamo(reclamo);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + operacion + "\"}");
     }
 
     @PutMapping("/agregar/imagen/{reclamo}")

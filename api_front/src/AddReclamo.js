@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ShowList from "./ShowList";
 
 function AddReclamo() {
     const [ubicacion, setUbicacion] = useState('');
@@ -6,6 +7,8 @@ function AddReclamo() {
     const [documento, setDocumento] = useState('');
     const [codigo, setCodigo] = useState('');
     const [identificador, setIdentificador] = useState('');
+    const [error, setError] = useState(null);
+    const [responseData, setResponseData] = useState(null);
 
     const handleUbicacionChange = (e) => {
         setUbicacion(e.target.value);
@@ -39,8 +42,7 @@ function AddReclamo() {
             identificador: identificador,
         };
         console.log(newItem);
-        // Realizar la solicitud POST al backend utilizando fetch
-        fetch('http://localhost:8080/reclamo/crear', {
+        fetch('http://localhost:8080/reclamo', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,6 +59,7 @@ function AddReclamo() {
                 // Realizar acciones adicionales después de la inserción exitosa
                 console.log('Elemento agregado exitosamente:', data);
                 // Restablecer los campos del formulario
+                setResponseData(data);
                 setDescripcion('');
                 setUbicacion('');
                 setDocumento('');
@@ -66,60 +69,78 @@ function AddReclamo() {
             })
             .catch((error) => {
                 console.error('Error al agregar el elemento:', error);
+                setError(error.mensaje);
             });
     };
 
     return (
-        <div>
-            <h2>Agregar un Nuevo Reclamo</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="ubicacion">Ubicación:</label>
-                    <input
-                        type="text"
-                        id="ubicacion"
-                        value={ubicacion}
-                        onChange={handleUbicacionChange}
-                    />
+        <div className="container mt-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <h2> Formulario para agregar un Reclamo</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="Documento" className="form-label">Documento</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="campoTexto"
+                                value={documento}
+                                onChange={handleDocumentoChange}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="Código Edificio" className="form-label">Código Edificio</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="campoTexto"
+                                value={codigo}
+                                onChange={handleCodigoChange}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="Ubicación" className="form-label">Ubicación</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="campoTexto"
+                                value={ubicacion}
+                                onChange={handleUbicacionChange}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="Descripción" className="form-label">Descripción</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="campoTexto"
+                                value={descripcion}
+                                onChange={handleDescripcionChange}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="Identificador Unidad" className="form-label">Identificador Unidad</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="campoTexto"
+                                value={identificador}
+                                onChange={handleIdentificadorChange}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Enviar</button>
+                    </form>
                 </div>
-                <div>
-                    <label htmlFor="descripcion">Descripcion:</label>
-                    <input
-                        type="text"
-                        id="descripcion"
-                        value={descripcion}
-                        onChange={handleDescripcionChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="documento">Documento:</label>
-                    <input
-                        type="text"
-                        id="documento"
-                        value={documento}
-                        onChange={handleDocumentoChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="codigo">Código Edificio:</label>
-                    <input
-                        type="text"
-                        id="codigo"
-                        value={codigo}
-                        onChange={handleCodigoChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="identificador">Número de Unidad:</label>
-                    <input
-                        type="text"
-                        id="identificador"
-                        value={identificador}
-                        onChange={handleIdentificadorChange}
-                    />
-                </div>
-                <button type="submit">Agregar</button>
-            </form>
+            </div>
+            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
+            )}
+            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }
