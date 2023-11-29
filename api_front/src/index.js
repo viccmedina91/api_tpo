@@ -31,6 +31,7 @@ import HabitarUnidad from "./HabitarUnidad";
 import AddImagen from "./AddImagen";
 import ListadoPersona from "./ListadoPersona";
 import CrearPersona from "./CrearPersona";
+import EliminarPersona from "./EliminarPersona";
 
 export default function App() {
   return (
@@ -70,14 +71,9 @@ export default function App() {
         <Route path="/reclamos/actualizar/estado" element={<ActualizarEstadoReclamo />}></Route>
 
 
-
-
-
-
-
-
         <Route path="/persona/listar" element={<ListadoPersona />}></Route>
         <Route path="/persona/crear" element={<CrearPersona />}></Route>
+        <Route path="/persona/eliminar" element={<EliminarPersona />}></Route>
 
 
 

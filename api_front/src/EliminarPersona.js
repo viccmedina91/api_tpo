@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import ShowList from "./ShowList";
 import FormSearch from './Forms/FormSearch';
 
-function EliminarEdificio() {
+function EliminarPersona() {
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
+
     const handleSubmit = (campo) => {
-        fetch(`http://localhost:8080/edificio/${campo}`, {
+        fetch(`http://localhost:8080/persona/${campo}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,7 +33,7 @@ function EliminarEdificio() {
 
     return (
         <div>
-            <h2>Eliminar Edificio según Código</h2>
+            <h2>Eliminar una Persona por Documento</h2>
             <FormSearch onSubmit={handleSubmit} />
             {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
             )}
@@ -41,4 +42,4 @@ function EliminarEdificio() {
     );
 }
 
-export default EliminarEdificio;
+export default EliminarPersona;

@@ -52,12 +52,12 @@ public class PersonaController {
 
     @DeleteMapping("/{documento}")
     public ResponseEntity<?> eliminarPersona(@PathVariable("documento") String documento) {
-        // Guarda un objeto persona en la base
+        // Eliminar una persona segun el documento
+        String operacion = this.controlador.eliminarPersona(documento);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + "El resultado de la operación es: "
+                        + operacion + "\"}");
 
-        if (this.controlador.eliminarPersona(documento) == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No es posible eliminar a esta persona");
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body("Persona Eliminada");
     }
 
     @PutMapping("/{documento}")
