@@ -40,7 +40,7 @@ const PanelAdministracion = () => (
                         <Subseccion title="Crear Unidad" to="/unidad/crear" />
                         <Subseccion title="Modificar Unidad" to="/unidad/modificar" />
                         <Subseccion title="Transferir Unidad" to="/unidad/transferir" />
-
+                        <Subseccion title="Agregar Duenio a Unidad" to="/unidad/agregar/duenio/unidad" />
                     </Dropdown.Menu>
                 </Dropdown>
             </div>

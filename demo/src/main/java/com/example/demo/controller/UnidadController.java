@@ -96,9 +96,14 @@ public class UnidadController {
     @PostMapping("/agregar/duenio")
     public ResponseEntity<?> agregarDuenio(@RequestBody UnidadPersona unidadPersona) {
         // Dado un documento y un codigo de unidad, le asignamos la propiedad
+        System.out.println("-------------------");
+        System.out.println(unidadPersona.getDocumento());
+        System.out.println(unidadPersona.getCodigoUnidad());
+
         PersonaView persona = this.controlador.agregarDuenioUnidad(unidadPersona);
         if (persona == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unidad o Persona inexistente");
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "Error en los datos: " + "\"}");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(persona);
     }

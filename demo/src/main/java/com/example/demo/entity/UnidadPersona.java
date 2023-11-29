@@ -6,8 +6,9 @@ public class UnidadPersona {
     private String documento;
 
     public UnidadPersona(String documento, String codigoUnidad) {
-        this.codigoUnidad = codigoUnidad;
         this.documento = documento;
+        this.codigoUnidad = codigoUnidad;
+
     }
 
     public String getDocumento() {

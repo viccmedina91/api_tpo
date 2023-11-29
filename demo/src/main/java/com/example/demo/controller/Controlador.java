@@ -217,11 +217,12 @@ public class Controlador {
     }
 
     public PersonaView agregarDuenioUnidad(UnidadPersona unidadPersona) {
-        Unidad unidad = buscarUnidad(Integer.parseInt(unidadPersona.getCodigoUnidad()));
-        Persona persona = buscarPersona(unidadPersona.getDocumento());
+        Unidad unidad = this.buscarUnidad(Integer.parseInt(unidadPersona.getCodigoUnidad()));
         if (unidad == null) {
             return null;
         }
+
+        Persona persona = buscarPersona(unidadPersona.getDocumento());
         if (persona == null) {
             return null;
         }

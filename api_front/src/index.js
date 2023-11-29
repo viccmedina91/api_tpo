@@ -4,7 +4,6 @@ import Layout from "./Layout";
 import SearchEdificio from "./SearchEdificio";
 import ListadoEdificio from "./ListadoEdificio";
 import UnidadesPorEdificio from "./UnidadesPorEdificio";
-import ListadoDuenio from "./ListadoDuenio";
 import SearchInquilino from "./SearchInquilino";
 import SearchUnidad from "./SearchUnidad";
 import ListadoReclamo from "./ListadoReclamo";
@@ -29,6 +28,8 @@ import CrearUnidad from "./CrearUnidad";
 import SearchDuenioPorUnidad from "./SearchDuenioPorUnidad";
 import ModificarUnidad from "./ModificarUnidad";
 import TransferirUnidad from "./TransferirUnidad";
+import AgregarDuenioAUnidad from "./AgregarDuenioAUnidad";
+
 
 export default function App() {
   return (
@@ -53,6 +54,7 @@ export default function App() {
         <Route path="/unidad/crear/" element={<CrearUnidad />}></Route>
         <Route path="/unidad/modificar" element={<ModificarUnidad />}></Route>
         <Route path="/unidad/transferir" element={<TransferirUnidad />}></Route>
+        <Route path="/unidad/agregar/duenio/unidad" element={<AgregarDuenioAUnidad />}></Route>
 
 
 
@@ -63,7 +65,6 @@ export default function App() {
 
 
 
-        <Route path="/personas/listar_duenios" element={<ListadoDuenio />}></Route>
 
 
 
