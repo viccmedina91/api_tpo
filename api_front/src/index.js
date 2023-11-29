@@ -61,7 +61,7 @@ export default function App() {
 
 
         <Route path="/reclamos/edificio" element={<SearchReclamoEdificio />}></Route>
-
+        <Route path="/reclamos/unidad" element={<SearchReclamoUnidad />}></Route>
 
 
 
@@ -75,7 +75,7 @@ export default function App() {
 
         <Route path="/reclamos/listar" element={<ListadoReclamo />}></Route>
 
-        <Route path="/reclamos/listar/unidad" element={<SearchReclamoUnidad />}></Route>
+
         <Route path="/reclamos/listar/persona" element={<SearchReclamoPersona />}></Route>
         <Route path="/reclamos/agregar" element={<AddReclamo />}></Route>
 

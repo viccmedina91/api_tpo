@@ -49,7 +49,8 @@ public class ReclamoController {
         // Dado un codigo de unidad, devolvemos todos los reclamos asociados
         List<ReclamoView> reclamos = this.controlador.reclamosPorUnidad(codigoUnidad);
         if (reclamos == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("La unidad no existe: " + codigoUnidad);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("{\"mensaje\": \"" + "El codigo unidad no existe: " + codigoUnidad + "\"}");
         }
         return ResponseEntity.ok(reclamos);
     }

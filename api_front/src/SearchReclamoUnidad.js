@@ -5,10 +5,11 @@ import FormSearch from './Forms/FormSearch';
 
 function SearchReclamoUnidad() {
     const [responseData, setResponseData] = useState(null);
+    const [error, setError] = useState(null);
 
     const handleSubmit = (campo) => {
         // Busca un edificio según el código ingresado
-        fetch(`http://localhost:8080/reclamo/unidad/listar/${campo}`)
+        fetch(`http://localhost:8080/reclamo/unidad/${campo}`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -16,12 +17,12 @@ function SearchReclamoUnidad() {
                 return response.json();
             })
             .then((data) => {
-                // Manejar la respuesta del backend, esto no se que hace, preguntar
                 setResponseData(data);
                 console.log(typeof (responseData));
             })
             .catch((error) => {
                 console.error('Error al hacer la solicitud:', error);
+                setError(error.mensaje);
             });
     };
 
@@ -31,6 +32,7 @@ function SearchReclamoUnidad() {
             <FormSearch onSubmit={handleSubmit} />
             {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
             )}
+            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }
