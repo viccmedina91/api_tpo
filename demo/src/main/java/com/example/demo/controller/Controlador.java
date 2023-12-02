@@ -418,16 +418,17 @@ public class Controlador {
 
     public String validarLogin(Login login) {
         List<PersonaView> personas = this.getPersonas().stream()
-                .filter(elemento -> elemento.getMail() != null)
-                .filter(elemento -> elemento.getMail().equals(login.getMail()))
+                .filter(elemento -> elemento.getDocumento() != null)
+                .filter(elemento -> elemento.getDocumento().equals(login.getDocumento()))
                 .collect(Collectors.toList());
 
         if (personas.size() > 1) {
             return "error";
         }
         System.out.println("............. " + personas.get(0).getDocumento());
-        if (personas.get(0).getContrasenia().equals(login.getContrasenia())) {
-            if (login.getMail().contains("admin")) {
+        PersonaView persona = personas.get(0);
+        if (persona.getContrasenia().equals(login.getContrasenia())) {
+            if (persona.getMail().contains("admin")) {
                 return "admin";
             } else {
                 return "otro";

@@ -1,10 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Subseccion from './Subseccion';
+import Logout from './Logout';
 import { Dropdown } from 'react-bootstrap';
 
 const PanelAdministracion = () => (
+
     <div className="container mt-5">
+        <Logout />
+
         <div className="row">
             {/* Tarjetas superiores */}
             <div className="col-md-4">

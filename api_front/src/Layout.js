@@ -3,14 +3,14 @@ import { Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Layout = () => {
-    const [mail, setMail] = useState('');
+    const [documento, setDocumento] = useState('');
     const [contrasenia, setContrasenia] = useState('');
     const [redirectTo, setRedirectTo] = useState(null);
     const [error, setError] = useState(null);
 
     const authenticate = async () => {
         try {
-            console.log(mail);
+            console.log(documento);
             console.log(contrasenia)
             // Simular una solicitud al servidor para verificar las credenciales
             const response = await fetch('http://localhost:8080/persona/login', {
@@ -18,13 +18,13 @@ const Layout = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ mail, contrasenia }),
+                body: JSON.stringify({ documento, contrasenia }),
             });
 
             if (response.ok) {
                 const data = await response.json();
                 console.log(data);
-
+                localStorage.setItem("documento", documento);
                 if (data.mensaje === "admin") {
                     setRedirectTo('/admin/panel');
                 } else {
@@ -51,12 +51,12 @@ const Layout = () => {
                             <h2 className="card-title text-center">Login</h2>
 
                             <div className="mb-3">
-                                <label className="form-label">Email:</label>
+                                <label className="form-label">Documento:</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    value={mail}
-                                    onChange={(e) => setMail(e.target.value)}
+                                    value={documento}
+                                    onChange={(e) => setDocumento(e.target.value)}
                                 />
                             </div>
 

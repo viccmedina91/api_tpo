@@ -34,6 +34,7 @@ import CrearPersona from "./CrearPersona";
 import EliminarPersona from "./EliminarPersona";
 import ModificarPersona from "./ModificarPersona";
 import PanelUsuario from "./PanelUsuario";
+import MisReclamos from "./MisReclamos";
 
 export default function App() {
   return (
@@ -71,6 +72,8 @@ export default function App() {
         <Route path="/reclamos/crear" element={<AddReclamo />}></Route>
         <Route path="/reclamos/agregar/imagen" element={<AddImagen />}></Route>
         <Route path="/reclamos/actualizar/estado" element={<ActualizarEstadoReclamo />}></Route>
+        <Route path="/reclamos/mis" element={<MisReclamos />}></Route>
+
 
 
         <Route path="/persona/listar" element={<ListadoPersona />}></Route>

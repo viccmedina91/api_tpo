@@ -2,11 +2,14 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Subseccion from './Subseccion';
 import { Dropdown } from 'react-bootstrap';
+import Logout from './Logout';
 
 const PanelUsuario = () => (
     <div className="container mt-5">
         <div className="row">
             {/* Tarjetas superiores */}
+            <Logout />
+
             <div className="col-md-4">
                 <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -42,7 +45,7 @@ const PanelUsuario = () => (
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Subseccion title="Buscar Reclamos por Nro." to="/reclamos/nro" />
-                        <Subseccion title="Buscar Reclamos por Documento" to="/reclamos/persona" />
+                        <Subseccion title="Listar Mis Reclamos" to="/reclamos/mis" />
                         <Subseccion title="Crear Reclamos" to="/reclamos/crear" />
                         <Subseccion title="Agregar Imagen a Reclamos" to="/reclamos/agregar/imagen" />
                         <Subseccion title="Cambiar de estado a Reclamo" to="/reclamos/actualizar/estado" />

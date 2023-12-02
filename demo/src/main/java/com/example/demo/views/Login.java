@@ -2,20 +2,20 @@ package com.example.demo.views;
 
 public class Login {
 
-    private String mail;
+    private String documento;
     private String contrasenia;
 
-    public Login(String mail, String contrasenia) {
-        this.mail = mail;
+    public Login(String documento, String contrasenia) {
+        this.documento = documento;
         this.contrasenia = contrasenia;
     }
 
-    public String getMail() {
-        return this.mail;
+    public String getDocumento() {
+        return this.documento;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     public String getContrasenia() {
