@@ -71,7 +71,8 @@ public class UnidadController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body("{\"mensaje\": \"" + "Error, no se encuentra el edificio con código: " + id + "\"}");
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(unidadNueva);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("{\"mensaje\": \"" + "OK, unidad creada: " + unidadNueva + "\"}");
     }
 
     @PutMapping("/{id}")

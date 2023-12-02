@@ -1,45 +1,24 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import FormCrearUnidad from './Forms/FormCrearUnidad';
+import Error from './Error';
 
 function CrearUnidad() {
-    const [pisoUnidad, setPisoUnidad] = useState('');
-    const [habitadoUnidad, setHabitadoUnidad] = useState('');
-    const [numeroUnidad, setNumeroUnidad] = useState('');
-    const [codigoEdificio, setCodigoEdificio] = useState('');
+
     const [responseData, setResponseData] = useState(null);
-
-    const handleCodigoEdificioChange = (e) => {
-        setCodigoEdificio(e.target.value);
-    };
-    const handlePisoUnidadChange = (e) => {
-        setPisoUnidad(e.target.value);
-    };
-
-    const handleHabitadoUnidadChange = (e) => {
-        setHabitadoUnidad(e.target.value);
-    };
-
-    const handleNumeroChange = (e) => {
-        setNumeroUnidad(e.target.value);
-    };
+    const [error, setError] = useState(false);
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
 
-        // Crear un objeto con los datos del formulario
-        const newItem = {
-            piso: pisoUnidad,
-            habitado: habitadoUnidad,
-            numero: numeroUnidad
-        };
-        console.log(newItem);
-        fetch(`http://localhost:8080/unidad/${codigoEdificio}`, {
+
+    const handleSubmit = (datos) => {
+
+        fetch(`http://localhost:8080/unidad/${datos.newItem.codigoEdificio}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(newItem),
+            body: JSON.stringify(datos.newItem),
         })
             .then((response) => {
                 if (!response.ok) {
@@ -52,10 +31,12 @@ function CrearUnidad() {
                 // Restablecer los campos del formulario
 
                 setResponseData(data);
-                setCodigoEdificio('');
-                setPisoUnidad('');
-                setNumeroUnidad('');
-                setHabitadoUnidad('');
+                console.log('..........');
+                console.log(data);
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
+
 
             })
             .catch((error) => {
@@ -65,61 +46,22 @@ function CrearUnidad() {
 
     return (
 
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <h2> Formulario para crear una Unidad </h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label htmlFor="Código del Edificio" className="form-label">Código</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={codigoEdificio}
-                                onChange={handleCodigoEdificioChange}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="Piso" className="form-label">Piso</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={pisoUnidad}
-                                onChange={handlePisoUnidadChange}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="Habitado" className="form-label">Habitado</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={habitadoUnidad}
-                                onChange={handleHabitadoUnidadChange}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="Numero" className="form-label">Número</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={numeroUnidad}
-                                onChange={handleNumeroChange}
-                                required
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-primary">Enviar</button>
-                    </form>
+        <div>
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <h2>Crear Unidad</h2>
+                        <FormCrearUnidad onFormSubmit={handleSubmit} />
+                        {responseData && (
+                            <div>
+                                {error ? (
+                                    <Error message={error} />
+                                ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-            )}
         </div>
     );
 }
