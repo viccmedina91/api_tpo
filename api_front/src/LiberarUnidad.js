@@ -38,16 +38,17 @@ function LiberarUnidad() {
         <div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
-                    <div className="col-md-6"></div>
-                    <h2>Liberar Unidad</h2>
-                    <FormSearch onSubmit={handleSubmit} />
-                    {responseData && (
-                        <div>
-                            {error ? (
-                                <Error message={error} />
-                            ) : <ShowList result={JSON.stringify(responseData.mensaje, null, 2)} />}
-                        </div>
-                    )}
+                    <div className="col-md-6">
+                        <h2>Liberar Unidad</h2>
+                        <FormSearch onSubmit={handleSubmit} />
+                        {responseData && (
+                            <div>
+                                {error ? (
+                                    <Error message={error} />
+                                ) : <ShowList result={JSON.stringify(responseData.mensaje, null, 2)} />}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
