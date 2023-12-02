@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import Error from './Error';
 
 function AgregarInquilinoAUnidad() {
     const [codigoUnidad, setCodigoUnidad] = useState('');
     const [documento, setDocumento] = useState('');
     const [responseData, setResponseData] = useState(null);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
 
     const handleCodigoUnidadChange = (e) => {
         setCodigoUnidad(e.target.value);
@@ -44,6 +45,10 @@ function AgregarInquilinoAUnidad() {
                 setResponseData(data);
                 setDocumento('');
                 setCodigoUnidad('');
+                setResponseData(data);
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
 
             })
             .catch((error) => {
@@ -84,9 +89,13 @@ function AgregarInquilinoAUnidad() {
                     </form>
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
+            {responseData && (
+                <div>
+                    {error ? (
+                        <Error message={error} />
+                    ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                </div>
             )}
-            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }

@@ -109,12 +109,10 @@ public class UnidadController {
     public ResponseEntity<?> agregarInquilino(@RequestBody UnidadPersona unidadPersona) {
         // Dado un documento y un codigo de unidad, agregamos a la persona como
         // inquilino de la misma
-        if (this.controlador.agregarInquilinoUnidad(unidadPersona)) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"mensaje\": \"" + "Inquilino agregado con éxito: " + "\"}");
-        }
+        String operacion = this.controlador.agregarInquilinoUnidad(unidadPersona);
         return ResponseEntity.status(HttpStatus.OK)
-                .body("{\"mensaje\": \"" + "Error en los datos ingresados" + "\"}");
+                .body("{\"mensaje\": \"" + operacion + "\"}");
+
     }
 
     @PutMapping("/liberar/{id}")

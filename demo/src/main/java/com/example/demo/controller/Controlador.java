@@ -253,9 +253,15 @@ public class Controlador {
 
     }
 
-    public Boolean agregarInquilinoUnidad(UnidadPersona unidadPersona) {
+    public String agregarInquilinoUnidad(UnidadPersona unidadPersona) {
         Unidad unidad = this.buscarUnidad(Integer.parseInt(unidadPersona.getCodigoUnidad()));
+        if (unidad == null) {
+            return "Error, el Nro de unidad no existe: " + unidadPersona.getCodigoUnidad();
+        }
         Persona persona = buscarPersona(unidadPersona.getDocumento());
+        if (persona == null) {
+            return "Error, la persona no existe: " + unidadPersona.getDocumento();
+        }
         if (unidad.getInquilinos().isEmpty()) {
             unidad.alquilar(persona);
         } else {
@@ -263,11 +269,12 @@ public class Controlador {
                 unidad.agregarInquilino(persona);
 
             } else {
-                return false;
+                return "Error, la persona ya es Inquilina";
             }
         }
         this.actualizarUnidad(unidad, unidad.getIdentificador());
-        return true;
+        return "OK, la operación fue exitosa, inquilino: " + unidadPersona.getDocumento() + " agreado a unidad: "
+                + unidadPersona.getCodigoUnidad();
     }
 
     public Boolean liberarUnidad(int codigo) {
