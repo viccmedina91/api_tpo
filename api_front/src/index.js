@@ -33,6 +33,7 @@ import ListadoPersona from "./ListadoPersona";
 import CrearPersona from "./CrearPersona";
 import EliminarPersona from "./EliminarPersona";
 import ModificarPersona from "./ModificarPersona";
+import PanelUsuario from "./PanelUsuario";
 
 export default function App() {
   return (
@@ -84,7 +85,7 @@ export default function App() {
 
 
 
-
+        <Route path="/usuario/panel" element={<PanelUsuario />}></Route>
 
         <Route path="/admin/panel" element={<PanelAdministracion />}></Route>
 

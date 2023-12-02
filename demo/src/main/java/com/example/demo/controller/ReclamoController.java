@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Imagen;
-import com.example.demo.entity.Reclamo;
 import com.example.demo.exceptions.ReclamoException;
 import com.example.demo.views.NuevoEstado;
 import com.example.demo.views.NuevoReclamo;
@@ -39,7 +38,7 @@ public class ReclamoController {
         List<ReclamoView> reclamos = this.controlador.reclamosPorEdificio(codigoEdificio);
         if (reclamos == null) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"mensaje\": \"" + "El codigo edificio no existe: " + codigoEdificio + "\"}");
+                    .body("{\"mensaje\": \"" + "Error, El codigo edificio no existe: " + codigoEdificio + "\"}");
         }
         return ResponseEntity.ok(reclamos);
     }
@@ -50,7 +49,7 @@ public class ReclamoController {
         List<ReclamoView> reclamos = this.controlador.reclamosPorUnidad(codigoUnidad);
         if (reclamos == null) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"mensaje\": \"" + "El codigo unidad no existe: " + codigoUnidad + "\"}");
+                    .body("{\"mensaje\": \"" + "Error, El codigo unidad no existe: " + codigoUnidad + "\"}");
         }
         return ResponseEntity.ok(reclamos);
     }
@@ -61,7 +60,7 @@ public class ReclamoController {
         ReclamoView reclamo = controlador.reclamosPorNumero(id);
         if (reclamo == null) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"mensaje\": \"" + "El codigo reclamo no existe: " + id + "\"}");
+                    .body("{\"mensaje\": \"" + "Error, El codigo reclamo no existe: " + id + "\"}");
         }
         return ResponseEntity.ok(reclamo);
     }
@@ -71,7 +70,7 @@ public class ReclamoController {
         List<ReclamoView> reclamos = this.controlador.reclamosPorPersona(documento);
         if (reclamos == null) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"mensaje\": \"" + "El documento ingresad no existe: " + documento + "\"}");
+                    .body("{\"mensaje\": \"" + "Error, El documento ingresado no existe: " + documento + "\"}");
 
         }
         return ResponseEntity.ok(reclamos);

@@ -372,7 +372,7 @@ public class Controlador {
     public String agregarImagenAReclamo(int numero, Imagen imagenes) throws ReclamoException {
         Reclamo reclamo = this.buscarReclamo(numero);
         if (reclamo == null) {
-            return "Nro de reclamo desconocido: " + numero;
+            return "Error, Nro de reclamo desconocido: " + numero;
         }
         reclamo.agregarImagen(imagenes.getPath(), imagenes.getTipo());
         this.reclamoRepository.save(reclamo);
@@ -383,7 +383,7 @@ public class Controlador {
         // validamos el nro de reclamo
         Reclamo reclamo = this.buscarReclamo(nuevoEstado.getNumero());
         if (reclamo == null) {
-            return "Nro de reclamo desconocido: " + nuevoEstado.getNumero();
+            return "Error, Nro de reclamo desconocido: " + nuevoEstado.getNumero();
         }
         // validamos que el estado nuevo sea un valor valido
         Estado estado = this.buscarEstado(nuevoEstado.getEstado());
@@ -418,7 +418,7 @@ public class Controlador {
         if (personas.size() > 1) {
             return "error";
         }
-
+        System.out.println("............. " + personas.get(0).getDocumento());
         if (personas.get(0).getContrasenia().equals(login.getContrasenia())) {
             if (login.getMail().contains("admin")) {
                 return "admin";

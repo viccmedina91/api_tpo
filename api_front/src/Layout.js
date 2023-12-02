@@ -28,7 +28,7 @@ const Layout = () => {
                 if (data.mensaje === "admin") {
                     setRedirectTo('/admin/panel');
                 } else {
-                    setRedirectTo('/consulta');
+                    setRedirectTo('/usuario/panel');
                 }
             } else {
                 setError('Credenciales inválidas');

@@ -13,26 +13,20 @@ function FormSearch({ onSubmit }) {
     };
 
     return (
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label htmlFor="Ingrese un valor" className="form-label">Ingresar</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={campo}
-                                onChange={handleCampoChange}
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-primary">Enviar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
 
+        <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+                <label htmlFor="Ingrese un valor" className="form-label">Ingresar</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="campoTexto"
+                    value={campo}
+                    onChange={handleCampoChange}
+                />
+            </div>
+            <button type="submit" className="btn btn-primary">Enviar</button>
+        </form>
     )
 
 }
