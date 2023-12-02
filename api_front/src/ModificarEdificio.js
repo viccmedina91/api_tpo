@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import ShowList from './ShowList';
+import Error from './Error';
 
 function ModificarEdificio() {
     const [direccionEdificio, setDireccionEdificio] = useState('');
     const [nombreEdificio, setNombreEdificio] = useState('');
     const [codigoEdificio, setCodigoEdificio] = useState('');
+    const [error, setError] = useState(false);
     const [responseData, setResponseData] = useState(null);
 
     const handleCodigoEdificioChange = (e) => {
@@ -46,6 +48,9 @@ function ModificarEdificio() {
                 // Restablecer los campos del formulario
 
                 setResponseData(data);
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
                 setCodigoEdificio('')
                 setNombreEdificio('');
                 setDireccionEdificio('');
@@ -100,7 +105,12 @@ function ModificarEdificio() {
                     </form>
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
+            {responseData && (
+                <div>
+                    {error ? (
+                        <Error message={error} />
+                    ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                </div>
             )}
         </div>
     );

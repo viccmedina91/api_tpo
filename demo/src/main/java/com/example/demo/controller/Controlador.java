@@ -91,8 +91,8 @@ public class Controlador {
             return null;
         }
 
-        edificioExistente.setNombre(edificio.getDireccion());
-        edificioExistente.setDireccion(edificio.getNombre());
+        edificioExistente.setNombre(edificio.getNombre());
+        edificioExistente.setDireccion(edificio.getDireccion());
         this.edificioRepository.save(edificioExistente);
         return edificioExistente.toView();
     }
