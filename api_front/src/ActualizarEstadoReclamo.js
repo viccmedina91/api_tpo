@@ -46,15 +46,16 @@ function ActualizarEstadoReclamo() {
         <div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
-                    <div className="col-md-6"></div>
-                    <FormCambiarEstado onFormSubmit={handleSubmit} />
-                    {responseData && (
-                        <div>
-                            {error ? (
-                                <Error message={error} />
-                            ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
-                        </div>
-                    )}
+                    <div className="col-md-6">
+                        <FormCambiarEstado onFormSubmit={handleSubmit} />
+                        {responseData && (
+                            <div>
+                                {error ? (
+                                    <Error message={error} />
+                                ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
