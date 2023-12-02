@@ -216,19 +216,19 @@ public class Controlador {
         return edificio.habitantes().stream().map(Persona::toView).toList();
     }
 
-    public PersonaView agregarDuenioUnidad(UnidadPersona unidadPersona) {
+    public String agregarDuenioUnidad(UnidadPersona unidadPersona) {
         Unidad unidad = this.buscarUnidad(Integer.parseInt(unidadPersona.getCodigoUnidad()));
         if (unidad == null) {
-            return null;
+            return "Error, el Nro de unidad ingresado no existe: " + unidadPersona.getCodigoUnidad();
         }
 
         Persona persona = buscarPersona(unidadPersona.getDocumento());
         if (persona == null) {
-            return null;
+            return "Error, la persona ingresada no existe: " + unidadPersona.getDocumento();
         }
         unidad.agregarDuenio(persona);
         this.unidadRepository.save(unidad);
-        return persona.toView();
+        return "OK, la persona se ha agregado con éxito";
     }
 
     public String eliminarPersona(String documento) {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import Error from './Error';
 
 function AgregarDuenioAUnidad() {
     const [codigoUnidad, setCodigoUnidad] = useState('');
@@ -40,8 +41,10 @@ function AgregarDuenioAUnidad() {
                 return response.json();
             })
             .then((data) => {
-                console.log('Elemento agregado exitosamente:', data);
                 setResponseData(data);
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
                 setDocumento('');
                 setCodigoUnidad('');
 
@@ -56,7 +59,7 @@ function AgregarDuenioAUnidad() {
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-6">
-                    <h2> Formulario para agregar Duenios a Unidad </h2>
+                    <h2> Formulario para agregar Dueños a Unidad </h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="Código de Unidad" className="form-label">Indentificador Unidad</label>
@@ -82,11 +85,16 @@ function AgregarDuenioAUnidad() {
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    {responseData && (
+                        <div>
+                            {error ? (
+                                <Error message={error} />
+                            ) : <ShowList result={JSON.stringify(responseData.mensaje, null, 2)} />}
+                        </div>
+
+                    )}
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-            )}
-            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }

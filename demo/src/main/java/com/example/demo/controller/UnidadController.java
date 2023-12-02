@@ -98,12 +98,11 @@ public class UnidadController {
     @PostMapping("/agregar/duenio")
     public ResponseEntity<?> agregarDuenio(@RequestBody UnidadPersona unidadPersona) {
         // Dado un documento y un codigo de unidad, le asignamos la propiedad
-        PersonaView persona = this.controlador.agregarDuenioUnidad(unidadPersona);
-        if (persona == null) {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"mensaje\": \"" + "Error en los datos: " + "\"}");
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(persona);
+        String operacion = this.controlador.agregarDuenioUnidad(unidadPersona);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("{\"mensaje\": \"" + "Resultado: " + operacion + "\"}");
+
     }
 
     @PostMapping("/agregar/inquilino")

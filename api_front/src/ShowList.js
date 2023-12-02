@@ -2,11 +2,10 @@ import React from 'react';
 
 function ShowList({ result }) {
     return (
-        <div>
-            <h2>Respuesta del Backend:</h2>
-            <pre>{result}</pre>
+        <div className="alert alert-success" role="alert">
+            {result}
         </div>
-    )
+    );
 
 }
 
