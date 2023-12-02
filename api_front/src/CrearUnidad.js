@@ -31,8 +31,6 @@ function CrearUnidad() {
                 // Restablecer los campos del formulario
 
                 setResponseData(data);
-                console.log('..........');
-                console.log(data);
                 if (data.mensaje.toLowerCase().includes('error')) {
                     setError(data.mensaje);
                 }

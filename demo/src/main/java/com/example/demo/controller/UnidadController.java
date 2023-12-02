@@ -83,7 +83,8 @@ public class UnidadController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body("{\"mensaje\": \"" + "Error, los datos ingresados no son correctos: " + id + "\"}");
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(unidadActualizado);
+        return ResponseEntity.status(HttpStatus.CREATED).body("{\"mensaje\": \""
+                + "OK, Actualización realizasa en Unidad Nro: " + id + "\"}");
     }
 
     @PutMapping("/transferir/unidad")

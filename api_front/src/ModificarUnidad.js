@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import Error from './Error';
 
 function ModificarUnidad() {
     const [pisoUnidad, setPisoUnidad] = useState('');
+    const [error, setError] = useState(false);
     const [habitadoUnidad, setHabitadoUnidad] = useState('');
     const [numeroUnidad, setNumeroUnidad] = useState('');
-    const [codigoEdificio, setCodigoEdificio] = useState('');
+    const [codigoUnidad, setCodigoUnidad] = useState('');
     const [responseData, setResponseData] = useState(null);
 
-    const handleCodigoEdificioChange = (e) => {
-        setCodigoEdificio(e.target.value);
+    const handleCodigoUnidadChange = (e) => {
+        setCodigoUnidad(e.target.value);
     };
     const handlePisoUnidadChange = (e) => {
         setPisoUnidad(e.target.value);
@@ -26,7 +28,6 @@ function ModificarUnidad() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         // Crear un objeto con los datos del formulario
         const newItem = {
             piso: pisoUnidad,
@@ -34,7 +35,7 @@ function ModificarUnidad() {
             numero: numeroUnidad
         };
         console.log(newItem);
-        fetch(`http://localhost:8080/unidad/${codigoEdificio}`, {
+        fetch(`http://localhost:8080/unidad/${codigoUnidad}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,9 +51,11 @@ function ModificarUnidad() {
             .then((data) => {
                 console.log('Elemento agregado exitosamente:', data);
                 // Restablecer los campos del formulario
-
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
                 setResponseData(data);
-                setCodigoEdificio('');
+                setCodigoUnidad('');
                 setPisoUnidad('');
                 setNumeroUnidad('');
                 setHabitadoUnidad('');
@@ -68,7 +71,7 @@ function ModificarUnidad() {
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-6">
-                    <h2> Formulario para crear una Unidad </h2>
+                    <h2> Formulario para modificar  una Unidad </h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="Identificador de la Unidad" className="form-label">Identificador Unidad</label>
@@ -76,8 +79,8 @@ function ModificarUnidad() {
                                 type="text"
                                 className="form-control"
                                 id="campoTexto"
-                                value={codigoEdificio}
-                                onChange={handleCodigoEdificioChange}
+                                value={codigoUnidad}
+                                onChange={handleCodigoUnidadChange}
                                 required
                             />
                         </div>
@@ -118,7 +121,12 @@ function ModificarUnidad() {
                     </form>
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
+            {responseData && (
+                <div>
+                    {error ? (
+                        <Error message={error} />
+                    ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                </div>
             )}
         </div>
     );
