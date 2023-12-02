@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
 import FormSearch from './Forms/FormSearch';
+import Error from './Error';
 
 function LiberarUnidad() {
     const [responseData, setResponseData] = useState(null);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
 
     const handleSubmit = (campo) => {
 
@@ -23,6 +24,9 @@ function LiberarUnidad() {
             })
             .then((data) => {
                 setResponseData(data);
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
             })
             .catch((error) => {
                 console.error('Error al hacer la solicitud:', error);
@@ -32,11 +36,20 @@ function LiberarUnidad() {
 
     return (
         <div>
-            <h2>Liberar Unidad</h2>
-            <FormSearch onSubmit={handleSubmit} />
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-            )}
-            {error && <p className="text-danger mt-3">{error}</p>}
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-6"></div>
+                    <h2>Liberar Unidad</h2>
+                    <FormSearch onSubmit={handleSubmit} />
+                    {responseData && (
+                        <div>
+                            {error ? (
+                                <Error message={error} />
+                            ) : <ShowList result={JSON.stringify(responseData.mensaje, null, 2)} />}
+                        </div>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }
