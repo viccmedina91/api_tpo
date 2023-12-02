@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import Error from './Error';
 
 function CrearPersona() {
     const [nombre, setNombre] = useState('');
@@ -59,6 +60,9 @@ function CrearPersona() {
                 setNombre('');
                 setMail('');
                 setContrasenia('');
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
             })
             .catch((error) => {
                 console.error('Error al agregar el elemento:', error);
@@ -118,11 +122,16 @@ function CrearPersona() {
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    {responseData && (
+                        <div>
+                            {error ? (
+                                <Error message={error} />
+                            ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                        </div>
+                    )}
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-            )}
-            {error && <p className="text-danger mt-3">{error}</p>}
+
         </div>
     );
 }

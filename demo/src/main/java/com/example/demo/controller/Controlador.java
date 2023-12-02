@@ -234,19 +234,19 @@ public class Controlador {
     public String eliminarPersona(String documento) {
         Persona persona = this.buscarPersona(documento);
         if (persona == null) {
-            return "La persona no se encuentra registada";
+            return "Error, La persona no se encuentra registada";
         }
 
         // si la persona es dueño o inquilino, no se puede eliminar
         if (this.esDuenioHabitante(persona)) {
-            return "La persona es Dueño o Inquilino activo, no se puede Eliminar";
+            return "Error, La persona es Dueño o Inquilino activo, no se puede Eliminar";
         }
 
         // si la persona tiene reclamos iniciados, no se puede eliminar
         List<ReclamoView> reclamos = this.reclamosPorPersona(documento);
         if (reclamos.stream().filter(elemento -> elemento.getEstado().getID() < 4)
                 .collect(Collectors.toList()).size() > 0) {
-            return "La persona tiene reclamos activos";
+            return "Error, La persona tiene reclamos activos";
         }
         this.personaRepository.delete(persona);
         return "Persona eliminada con exito: DNI: " + documento;
@@ -442,7 +442,7 @@ public class Controlador {
         // verificar si la persona existe
         Persona personaExiste = this.buscarPersona(documento);
         if (personaExiste == null) {
-            return "La persona no existe: " + documento;
+            return "Error, La persona no existe: " + documento;
         }
         personaExiste.setContrasenia(persona.getContrasenia());
         personaExiste.setMail(persona.getMail());

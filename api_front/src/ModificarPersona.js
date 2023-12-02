@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import Error from './Error';
 
 function ModificarPersona() {
     const [nombre, setNombre] = useState('');
@@ -69,7 +70,7 @@ function ModificarPersona() {
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-6">
-                    <h2> Formulario para agregar una Persona</h2>
+                    <h2> Formulario para modificar una Persona</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="Documento" className="form-label">Documento</label>
@@ -117,11 +118,15 @@ function ModificarPersona() {
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    {responseData && (
+                        <div>
+                            {error ? (
+                                <Error message={error} />
+                            ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                        </div>
+                    )}
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-            )}
-            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }

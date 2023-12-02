@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
 import FormSearch from './Forms/FormSearch';
+import Error from './Error';
 
 function EliminarEdificio() {
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(null);
+
+
     const handleSubmit = (campo) => {
         fetch(`http://localhost:8080/edificio/${campo}`, {
             method: 'DELETE',
@@ -20,9 +23,10 @@ function EliminarEdificio() {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
                 setResponseData(data);
-                setError('');
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
             })
             .catch((error) => {
                 console.error('Error al hacer la solicitud:', error);
@@ -32,11 +36,21 @@ function EliminarEdificio() {
 
     return (
         <div>
-            <h2>Eliminar Edificio según Código</h2>
-            <FormSearch onSubmit={handleSubmit} />
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-            )}
-            {error && <p className="text-danger mt-3">{error}</p>}
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <h2>Eliminar Edificio según Código</h2>
+                        <FormSearch onSubmit={handleSubmit} />
+                        {responseData && (
+                            <div>
+                                {error ? (
+                                    <Error message={error} />
+                                ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
