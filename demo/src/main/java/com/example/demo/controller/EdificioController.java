@@ -38,7 +38,7 @@ public class EdificioController {
         EdificioView edificio = this.controlador.buscarEdificioPorCodigo(id);
         if (edificio == null) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"mensaje\": \"" + "El codigo ingresado no esciste: " + id + "\"}");
+                    .body("{\"mensaje\": \"" + "Error, El código ingresado no existe: " + id + "\"}");
         }
         return ResponseEntity.ok(edificio);
     }
