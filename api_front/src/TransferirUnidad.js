@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import Error from './Error';
+
 
 function TransferirUnidad() {
     const [documentoPersona, setDocumentoPersona] = useState('');
     const [numeroUnidad, setNumeroUnidad] = useState('');
     const [responseData, setResponseData] = useState(null);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
 
     const handleDocumentoPersonaChange = (e) => {
         setDocumentoPersona(e.target.value);
@@ -24,7 +26,6 @@ function TransferirUnidad() {
             documento: documentoPersona,
             codigoUnidad: numeroUnidad
         };
-        console.log(newItem);
         fetch('http://localhost:8080/unidad/transferir/unidad', {
             method: 'PUT',
             headers: {
@@ -41,8 +42,11 @@ function TransferirUnidad() {
             .then((data) => {
                 console.log('Elemento agregado exitosamente:', data);
                 // Restablecer los campos del formulario
-
+                console.log(data.mensaje);
                 setResponseData(data);
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
                 setDocumentoPersona('');
                 setNumeroUnidad('');
 
@@ -87,9 +91,13 @@ function TransferirUnidad() {
                     </form>
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
+            {responseData && (
+                <div>
+                    {error ? (
+                        <Error message={error} />
+                    ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                </div>
             )}
-            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }

@@ -164,12 +164,12 @@ public class Controlador {
     public String transferirUnidad(UnidadPersona unidadPersona) {
         Unidad unidad = this.buscarUnidad(Integer.parseInt(unidadPersona.getCodigoUnidad()));
         if (unidad == null) {
-            return "La unidad no existe";
+            return "Error, La unidad no existe";
         }
-
         Persona persona = this.buscarPersona(unidadPersona.getDocumento());
         if (persona == null) {
-            return "La persona no existe";
+            System.out.println("LA PERSONA NO EXISTE");
+            return "Error, La persona no existe";
         }
         unidad.transferir(persona);
         this.unidadRepository.save(unidad);
