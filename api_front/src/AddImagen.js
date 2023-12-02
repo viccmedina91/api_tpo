@@ -24,7 +24,6 @@ function AddImagen() {
             .then((data) => {
                 // Realizar acciones adicionales después de la inserción exitosa
                 console.log('Elemento agregado exitosamente:', data);
-                // Restablecer los campos del formulario
                 setResponseData(data);
                 if (data.mensaje.toLowerCase().includes('error')) {
                     setError(data.mensaje);
@@ -37,7 +36,6 @@ function AddImagen() {
     };
 
     return (
-
         <div>
             <div className="container mt-5">
                 <div className="row justify-content-center">

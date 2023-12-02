@@ -1,37 +1,25 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import FormCambiarEstado from './Forms/FormCambiarEstado';
+import Error from './Error';
 
 function ActualizarEstadoReclamo() {
-    const [reclamoid, setReclamoid] = useState('');
-    const [estado, setEstado] = useState('');
-    const [error, setError] = useState(null);
+
+    const [error, setError] = useState(false);
     const [responseData, setResponseData] = useState(null);
 
-    const handleReclamoidChange = (e) => {
-        setReclamoid(e.target.value);
-    };
-
-    const handleEstadoChange = (e) => {
-        setEstado(e.target.value);
-    };
 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
 
-        // Crear un objeto con los datos del formulario
-        const newItem = {
-            numero: reclamoid,
-            estado: estado,
-        };
-        console.log(newItem);
+    const handleSubmit = (datos) => {
+        console.log(datos.newItem);
         // Realizar la solicitud POST al backend utilizando fetch
         fetch('http://localhost:8080/reclamo/cambiar/estado', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(newItem),
+            body: JSON.stringify(datos.newItem),
         })
             .then((response) => {
                 if (!response.ok) {
@@ -42,10 +30,11 @@ function ActualizarEstadoReclamo() {
             .then((data) => {
                 // Realizar acciones adicionales después de la inserción exitosa
                 console.log('Elemento agregado exitosamente:', data);
-                // Restablecer los campos del formulario
-                setReclamoid('');
-                setEstado('');
                 setResponseData(data);
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }// Rstablecer los campos del formularioe
+
             })
             .catch((error) => {
                 console.error('Error al agregar el elemento:', error);
@@ -54,40 +43,20 @@ function ActualizarEstadoReclamo() {
     };
 
     return (
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <h2> Actualizar Estado a Reclamo </h2>
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label htmlFor="Nro de Reclamo" className="form-label">Nro de Reclamo</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={reclamoid}
-                                onChange={handleReclamoidChange}
-                                required
-                            />
+        <div>
+            <div className="container mt-5">
+                <div className="row justify-content-center">
+                    <div className="col-md-6"></div>
+                    <FormCambiarEstado onFormSubmit={handleSubmit} />
+                    {responseData && (
+                        <div>
+                            {error ? (
+                                <Error message={error} />
+                            ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="Estado" className="form-label">Estado</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={estado}
-                                onChange={handleEstadoChange}
-                                required
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-primary">Enviar</button>
-                    </form>
+                    )}
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-            )}
-            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }
