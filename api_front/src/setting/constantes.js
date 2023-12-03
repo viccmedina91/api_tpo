@@ -15,3 +15,8 @@ export const ESPACIOS_COMUNES = [
     { id: 4, descripcion: 'Ascensor' },
     { id: 5, descripcion: 'Terraza' },
 ];
+
+export const FORMATO_IMAGENES = [
+    { id: 1, descripcion: 'JPG' },
+    { id: 2, descripcion: 'PNG' },
+];

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FORMATO_IMAGENES } from '../setting/constantes'
 
 function FormAgregarImagen({ onFormSubmit }) {
     const [reclamoid, setReclamoID] = useState('');
@@ -45,15 +46,17 @@ function FormAgregarImagen({ onFormSubmit }) {
                 />
             </div>
             <div className="mb-3">
-                <label htmlFor="Tipo" className="form-label">Tipo</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="campoTexto"
-                    value={tipo}
-                    onChange={handleTipoChange}
-                    required
-                />
+                <label>
+                    Formato:
+                    <select class="form-select form-select-sm" value={tipo} onChange={handleTipoChange}>
+                        <option value="">Selecciona un estado</option>
+                        {FORMATO_IMAGENES.map((formato) => (
+                            <option key={formato.id} value={formato.descripcion}>
+                                {formato.descripcion}
+                            </option>
+                        ))}
+                    </select>
+                </label>
             </div>
             <div className="mb-3">
                 <label htmlFor="Path" className="form-label">Path de Imagen</label>
