@@ -45,7 +45,7 @@ function EliminarEdificio() {
                             <div>
                                 {error ? (
                                     <Error message={error} />
-                                ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                                ) : <ShowList result={JSON.stringify(responseData.mensaje, null, 2)} />}
                             </div>
                         )}
                     </div>

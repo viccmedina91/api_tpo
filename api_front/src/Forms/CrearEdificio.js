@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ShowList from '../ShowList';
+import Edificio from '../Entidades/Edificio';
 
 function CrearEdificio() {
     const [direccionEdificio, setDireccionEdificio] = useState('');
@@ -39,7 +39,7 @@ function CrearEdificio() {
             })
             .then((data) => {
                 console.log('Elemento agregado exitosamente:', data);
-                setResponseData(data);
+                setResponseData(data.mensaje);
                 setNombreEdificio('');
                 setDireccionEdificio('');
 
@@ -80,10 +80,11 @@ function CrearEdificio() {
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    <br></br>
+
+                    {responseData && (<Edificio result={responseData} />)}
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
-            )}
         </div>
     );
 }
