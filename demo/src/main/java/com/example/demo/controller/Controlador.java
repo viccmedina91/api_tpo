@@ -1,12 +1,10 @@
 package com.example.demo.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Controller;
 
@@ -14,12 +12,10 @@ import org.springframework.stereotype.Controller;
 import com.example.demo.entity.Edificio;
 import com.example.demo.entity.Estado;
 import com.example.demo.entity.Imagen;
-import com.example.demo.entity.Inquilino;
 import com.example.demo.entity.Persona;
 import com.example.demo.entity.Reclamo;
 import com.example.demo.entity.Unidad;
 import com.example.demo.entity.UnidadPersona;
-import com.example.demo.entity.Reclamo;
 // Views
 import com.example.demo.views.EdificioConUnidadesView;
 import com.example.demo.views.EdificioView;
@@ -55,13 +51,26 @@ public class Controlador {
 
     public List<EdificioView> getEdificios() {
         List<Edificio> edificios = this.edificioRepository.findAll();
-        System.out.println(edificios.toString());
-        List<EdificioView> edificiosView = new ArrayList<>();
+        List<EdificioView> edificiosView = new ArrayList<EdificioView>();
         for (Edificio edificio : edificios) {
             edificiosView.add(edificio.toView());
 
         }
         return edificiosView;
+    }
+
+    public List<UnidadView> getUnidadesPorPersona(String documento) {
+        Persona interesado = this.buscarPersona(documento);
+        List<UnidadView> unidadesResult = new ArrayList<UnidadView>();
+        List<Edificio> edificios = this.edificioRepository.findAll();
+        for (Edificio edificio : edificios) {
+            for (Unidad unidad : edificio.getUnidades()) {
+                if (unidad.getDuenios().contains(interesado) || unidad.getInquilinos().contains(interesado)) {
+                    unidadesResult.add(unidad.toView());
+                }
+            }
+        }
+        return unidadesResult;
     }
 
     public List<PersonaView> getPersonas() {
@@ -425,7 +434,6 @@ public class Controlador {
         if (personas.size() > 1) {
             return "error";
         }
-        System.out.println("............. " + personas.get(0).getDocumento());
         PersonaView persona = personas.get(0);
         if (persona.getContrasenia().equals(login.getContrasenia())) {
             if (persona.getMail().contains("admin")) {

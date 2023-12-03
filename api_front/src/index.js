@@ -35,6 +35,7 @@ import EliminarPersona from "./EliminarPersona";
 import ModificarPersona from "./ModificarPersona";
 import PanelUsuario from "./PanelUsuario";
 import MisReclamos from "./MisReclamos";
+import MisUnidades from "./MisUnidades";
 
 export default function App() {
   return (
@@ -63,7 +64,7 @@ export default function App() {
         <Route path="/unidad/agregar/inquilino/unidad" element={<AgregarInquilinoAUnidad />}></Route>
         <Route path="/unidad/liberar" element={<LiberarUnidad />}></Route>
         <Route path="/unidad/habitar" element={<HabitarUnidad />}></Route>
-
+        <Route path="/unidad/mis" element={<MisUnidades />}></Route>
 
         <Route path="/reclamos/edificio" element={<SearchReclamoEdificio />}></Route>
         <Route path="/reclamos/unidad" element={<SearchReclamoUnidad />}></Route>

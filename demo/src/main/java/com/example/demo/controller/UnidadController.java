@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.entity.Unidad;
 import com.example.demo.entity.UnidadPersona;
 import com.example.demo.exceptions.EdificioException;
+import com.example.demo.views.EdificioView;
 import com.example.demo.views.PersonaView;
 import com.example.demo.views.UnidadView;
 
@@ -28,6 +29,12 @@ public class UnidadController {
     @Autowired
     public UnidadController(Controlador controlador) {
         this.controlador = controlador;
+    }
+
+    @GetMapping("/listar/{documento}")
+    public ResponseEntity<?> unidadListar(@PathVariable String documento) {
+        // Devuelve el listado de edificios
+        return ResponseEntity.ok(this.controlador.getUnidadesPorPersona(documento));
     }
 
     @GetMapping("/{id}")
@@ -119,7 +126,6 @@ public class UnidadController {
     public ResponseEntity<?> liberarUnidad(@PathVariable int id) {
         // Dado un codigo de unidad, la liberamos
         if (this.controlador.liberarUnidad(id) == null) {
-            System.out.println("UNIDAD NULA");
             return ResponseEntity.status(HttpStatus.OK)
                     .body("{\"mensaje\": \"" + "Error, los datos ingresados no son correctos: " + id + "\"}");
         }

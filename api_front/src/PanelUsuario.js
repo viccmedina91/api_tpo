@@ -6,25 +6,11 @@ import Logout from './Logout';
 
 const PanelUsuario = () => (
     <div className="container mt-5">
+        <Logout />
+
         <div className="row">
             {/* Tarjetas superiores */}
-            <Logout />
 
-            <div className="col-md-4">
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Gestión de Edificios
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Subseccion title="Listar Edificios" to="/edificio/listar" />
-                        <Subseccion title="Buscar Edificio por código" to="/edificio/buscar" />
-                        <Subseccion title="Listar Inquilinos por Edificio" to="/edificio/inquilinos" />
-                        <Subseccion title="Unidades por Edificio" to="/edificio/unidades" />
-                        <Subseccion title="Dueños por Edificio" to="/edificio/duenio/" />
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div>
             <div className="col-md-4">
                 <Dropdown>
                     <Dropdown.Toggle variant="warning" id="dropdown-basic">
@@ -32,9 +18,7 @@ const PanelUsuario = () => (
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Subseccion title="Buscar Unidad" to="/unidad/buscar" />
-                        <Subseccion title="Buscar Dueños por Unidad" to="/unidad/duenios" />
-                        <Subseccion title="Buscar Inquilinos por Unidad" to="/unidad/inquilinos" />
+                        <Subseccion title="Mis Unidades" to="/unidad/mis" />
                     </Dropdown.Menu>
                 </Dropdown>
             </div>
@@ -44,7 +28,6 @@ const PanelUsuario = () => (
                         Gestión de Reclamos
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Subseccion title="Buscar Reclamos por Nro." to="/reclamos/nro" />
                         <Subseccion title="Listar Mis Reclamos" to="/reclamos/mis" />
                         <Subseccion title="Crear Reclamos" to="/reclamos/crear" />
                         <Subseccion title="Agregar Imagen a Reclamos" to="/reclamos/agregar/imagen" />
