@@ -343,43 +343,47 @@ public class Controlador {
     }
 
     public String agregarReclamo(NuevoReclamo reclamo) throws ReclamoException {
-        Edificio edificio = this.buscarEdificio(reclamo.getCodigo());
-        if (edificio == null) {
-            return "El edificio no existe" + reclamo.getCodigo();
-        }
-
-        Unidad unidad = this.buscarUnidad(reclamo.getIdentificador());
-        if (unidad == null) {
-            return "La unidad no existe: " + reclamo.getIdentificador();
-        }
-
         Persona persona = this.buscarPersona(reclamo.getDocumento());
         if (persona == null) {
-            return "La persona no existe: " + reclamo.getDocumento();
+            return "Error, La persona no existe: " + reclamo.getDocumento();
         }
+        if (reclamo.getAreaComun()) {
+            Edificio edificio = this.buscarEdificio(reclamo.getCodigo());
+            if (edificio == null) {
+                return "Error, El edificio no existe" + reclamo.getCodigo();
+            }
 
-        // validamos que la unidad pertenezca al edificio
-        if (edificio.getUnidades().contains(unidad) == false) {
-            return "Error, la unidad no pertenece al edificio";
-        }
+            if (edificio.duenios().contains(persona) == false) {
+                return "Error, La persona no es dueña de una unidad del edificio";
+            }
 
-        // si la unidad esta alquilada, solamente el inquilino puede generar el reclamo
-        if ((unidad.estaHabitado()) && (unidad.getDuenios().contains(persona))) {
-            // si la unidad esta alquilada y la persona que inicia el reclamo es dueño
-            // el reclamo no puede crearse.
-            return "La unidad está habitada y la persona es dueño";
-        }
-
-        // si la unidad no esta habitada y la persona es dueño, puede hacer el reclamo
-        if ((unidad.estaHabitado() == false) && (unidad.getDuenios().contains(persona))) {
             return "Guardado con Exito, nro de reclamo: "
-                    + this.almacenarReclamo(reclamo, persona, edificio, unidad).getNumero();
-        }
+                    + this.almacenarReclamo(reclamo, persona, edificio, null).getNumero();
 
-        // si la unidad esta habitada y la persona es inquilino
-        if ((unidad.estaHabitado()) && (unidad.getInquilinos().contains(persona))) {
-            return "Guardado con Exito, nro de reclamo: "
-                    + this.almacenarReclamo(reclamo, persona, edificio, unidad).getNumero();
+        } else {
+            Unidad unidad = this.buscarUnidad(reclamo.getIdentificador());
+            if (unidad == null) {
+                return "Error, La unidad no existe: " + reclamo.getIdentificador();
+            }
+
+            // si la unidad esta alquilada, solamente el inquilino puede generar el reclamo
+            if ((unidad.estaHabitado()) && (unidad.getDuenios().contains(persona))) {
+                // si la unidad esta alquilada y la persona que inicia el reclamo es dueño
+                // el reclamo no puede crearse.
+                return "Error, La unidad está habitada y la persona es dueño";
+            }
+
+            // si la unidad no esta habitada y la persona es dueño, puede hacer el reclamo
+            if ((unidad.estaHabitado() == false) && (unidad.getDuenios().contains(persona))) {
+                return "Guardado con Exito, nro de reclamo: "
+                        + this.almacenarReclamo(reclamo, persona, unidad.getEdificio(), unidad).getNumero();
+            }
+
+            // si la unidad esta habitada y la persona es inquilino
+            if ((unidad.estaHabitado()) && (unidad.getInquilinos().contains(persona))) {
+                return "Guardado con Exito, nro de reclamo: "
+                        + this.almacenarReclamo(reclamo, persona, unidad.getEdificio(), unidad).getNumero();
+            }
         }
 
         return "Error";

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
+import { ESPACIOS_COMUNES } from './setting/constantes';
+import Error from './Error';
 
 function AddReclamo() {
     const [ubicacion, setUbicacion] = useState('');
@@ -9,6 +11,7 @@ function AddReclamo() {
     const [identificador, setIdentificador] = useState('');
     const [error, setError] = useState(null);
     const [responseData, setResponseData] = useState(null);
+    const [esAreaComun, setEsAreaComun] = useState(false);
 
     const handleUbicacionChange = (e) => {
         setUbicacion(e.target.value);
@@ -30,6 +33,10 @@ function AddReclamo() {
         setIdentificador(e.target.value);
     };
 
+    const handleChangeTipoReclamo = (e) => {
+        setEsAreaComun(e.target.value === 'areaComun');
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -38,9 +45,15 @@ function AddReclamo() {
             ubicacion: ubicacion,
             descripcion: descripcion,
             documento: documento,
-            codigo: codigo,
-            identificador: identificador,
+            areaComun: esAreaComun
         };
+        if (esAreaComun) {
+            newItem.codigo = codigo;
+            newItem.identidicador = null;
+        } else {
+            newItem.codigo = null;
+            newItem.identificador = identificador;
+        }
         console.log(newItem);
         fetch('http://localhost:8080/reclamo', {
             method: 'POST',
@@ -60,6 +73,9 @@ function AddReclamo() {
                 console.log('Elemento agregado exitosamente:', data);
                 // Restablecer los campos del formulario
                 setResponseData(data);
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
                 setDescripcion('');
                 setUbicacion('');
                 setDocumento('');
@@ -90,57 +106,105 @@ function AddReclamo() {
                                 required
                             />
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="Código Edificio" className="form-label">Código Edificio</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={codigo}
-                                onChange={handleCodigoChange}
-                                required
-                            />
+                        <div className="form-group">
+                            <label>Tipo de reclamo:</label>
+                            <div className="form-check">
+                                <input
+                                    type="radio"
+                                    id="areaComun"
+                                    name="tipoReclamo"
+                                    value="areaComun"
+                                    checked={esAreaComun}
+                                    onChange={handleChangeTipoReclamo}
+                                    className="form-check-input"
+                                />
+                                <label htmlFor="areaComun" className="form-check-label">Área común</label>
+                            </div>
+                            <div className="form-check">
+                                <input
+                                    type="radio"
+                                    id="noAreaComun"
+                                    name="tipoReclamo"
+                                    value="noAreaComun"
+                                    checked={!esAreaComun}
+                                    onChange={handleChangeTipoReclamo}
+                                    className="form-check-input"
+                                />
+                                <label htmlFor="noAreaComun" className="form-check-label">No es área común</label>
+                            </div>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="Ubicación" className="form-label">Ubicación</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={ubicacion}
-                                onChange={handleUbicacionChange}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="Descripción" className="form-label">Descripción</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={descripcion}
-                                onChange={handleDescripcionChange}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="Identificador Unidad" className="form-label">Identificador Unidad</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="campoTexto"
-                                value={identificador}
-                                onChange={handleIdentificadorChange}
-                                required
-                            />
-                        </div>
+                        {esAreaComun ? (
+                            <div className="form-group">
+                                <label htmlFor="codigoEdificio">Código de Edificio:</label>
+                                <input
+                                    type="text"
+                                    id="codigo"
+                                    className="form-control"
+                                    value={codigo}
+                                    onChange={handleCodigoChange}
+                                />
+
+                                <label>
+                                    Área Común:
+                                    <select class="form-select form-select-sm" value={ubicacion} onChange={handleUbicacionChange}>
+                                        <option value="ubicacion">Área afectada</option>
+                                        {ESPACIOS_COMUNES.map((espacio) => (
+                                            <option key={espacio.id} value={espacio.descripcion}>
+                                                {espacio.descripcion}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </label>
+                                <div className="mb-3">
+                                    <label htmlFor="Descripción" className="form-label">Descripción</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="campoTexto"
+                                        value={descripcion}
+                                        onChange={handleDescripcionChange}
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                        ) : (
+                            <div>
+                                <div className="form-group">
+                                    <label htmlFor="codigoUnidad">Código de Unidad:</label>
+                                    <input
+                                        type="text"
+                                        id="iedntificador"
+                                        className="form-control"
+                                        value={identificador}
+                                        onChange={handleIdentificadorChange}
+                                    />
+                                </div>
+
+                                <div className="mb-3">
+                                    <label htmlFor="Descripción" className="form-label">Descripción</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="campoTexto"
+                                        value={descripcion}
+                                        onChange={handleDescripcionChange}
+                                        required
+                                    />
+                                </div>
+                            </div>
+                        )}
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
                 </div>
             </div>
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
+            {responseData && (
+                <div>
+                    {error ? (
+                        <Error message={error} />
+                    ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                </div>
             )}
-            {error && <p className="text-danger mt-3">{error}</p>}
         </div>
     );
 }

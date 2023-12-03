@@ -6,15 +6,24 @@ public class NuevoReclamo {
     private Integer identificador;
     private String ubicacion;
     private String descripcion;
+    private Boolean areaComun;
 
     public NuevoReclamo(String documento, Integer codigo, Integer identificador,
-            String ubicacion, String descripcion) {
+            String ubicacion, String descripcion, Boolean areaComun) {
         this.documento = documento;
         this.codigo = codigo;
         this.identificador = identificador;
         this.ubicacion = ubicacion;
         this.descripcion = descripcion;
+        this.areaComun = areaComun;
+    }
 
+    public Boolean getAreaComun() {
+        return this.areaComun;
+    }
+
+    public void setAreaComun(Boolean areaComun) {
+        this.areaComun = areaComun;
     }
 
     public String getDocumento() {

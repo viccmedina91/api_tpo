@@ -7,3 +7,11 @@ export const ESTADOS_RECLAMO = [
     { id: 5, descripcion: 'Anulado' },
     { id: 6, descripcion: 'Terminado' },
 ];
+
+export const ESPACIOS_COMUNES = [
+    { id: 1, descripcion: 'Pasillo Central' },
+    { id: 2, descripcion: 'Jardín' },
+    { id: 3, descripcion: 'Escaleras' },
+    { id: 4, descripcion: 'Ascensor' },
+    { id: 5, descripcion: 'Terraza' },
+];
