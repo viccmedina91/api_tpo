@@ -4,6 +4,15 @@ function FormCambiarEstado({ onFormSubmit }) {
     const [numero, setNumero] = useState('');
     const [estado, setEstado] = useState('');
 
+    const estadosPosibles = [
+        { id: 1, descripcion: 'Nuevo' },
+        { id: 2, descripcion: 'Abierto' },
+        { id: 3, descripcion: 'En proceso' },
+        { id: 4, descripcion: 'Desestimado' },
+        { id: 5, descripcion: 'Anulado' },
+        { id: 6, descripcion: 'Terminado' },
+    ];
+
     const handleNumeroChange = (e) => {
         setNumero(e.target.value);
     };
@@ -38,15 +47,17 @@ function FormCambiarEstado({ onFormSubmit }) {
                     />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="Estado" className="form-label">Estado</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="campoTexto"
-                        value={estado}
-                        onChange={handleEstadoChange}
-                        required
-                    />
+                    <label>
+                        Estado del reclamo:
+                        <select class="form-select form-select-sm" value={estado} onChange={handleEstadoChange}>
+                            <option value="">Selecciona un estado</option>
+                            {estadosPosibles.map((estado) => (
+                                <option key={estado.id} value={estado.id}>
+                                    {estado.descripcion}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
                 </div>
                 <button type="submit" className="btn btn-primary">Enviar</button>
             </form>

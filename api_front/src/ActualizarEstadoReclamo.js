@@ -8,11 +8,7 @@ function ActualizarEstadoReclamo() {
     const [error, setError] = useState(false);
     const [responseData, setResponseData] = useState(null);
 
-
-
-
     const handleSubmit = (datos) => {
-        console.log(datos.newItem);
         // Realizar la solicitud POST al backend utilizando fetch
         fetch('http://localhost:8080/reclamo/cambiar/estado', {
             method: 'PUT',
@@ -52,7 +48,7 @@ function ActualizarEstadoReclamo() {
                             <div>
                                 {error ? (
                                     <Error message={error} />
-                                ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                                ) : <ShowList result={JSON.stringify(responseData.mensaje, null, 2)} />}
                             </div>
                         )}
                     </div>

@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 const TablaUnidades = ({ result }) => {
     const unidades = JSON.parse(result);
 
