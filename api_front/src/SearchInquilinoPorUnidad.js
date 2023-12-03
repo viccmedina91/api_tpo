@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ShowList from "./ShowList";
 import FormSearch from './Forms/FormSearch';
 import Error from './Error';
+import TablaPersonas from './Tablas/TablaPersonas';
 
 
 function SearchInquilinoPorUnidad() {
@@ -36,16 +36,23 @@ function SearchInquilinoPorUnidad() {
                     <div className="col-md-6">
                         <h2>Buscar Inquilinos según Unidad</h2>
                         <FormSearch onSubmit={handleSubmit} />
-                        {responseData && (
-                            <div>
-                                {error ? (
-                                    <Error message={error} />
-                                ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
-                            </div>
-                        )}
+
                     </div>
                 </div>
             </div>
+            {responseData && (
+                <div>
+                    {error ? (
+                        <div className="container mt-5">
+                            <div className="row justify-content-center">
+                                <div className="col-md-6">
+                                    <Error message={error} />
+                                </div>
+                            </div>
+                        </div>
+                    ) : <TablaPersonas result={JSON.stringify(responseData, null, 2)} />}
+                </div>
+            )}
         </div>
 
     );

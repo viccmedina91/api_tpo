@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ShowList from "./ShowList";
+import TablaPersonas from './Tablas/TablaPersonas';
 
 function ListadoPersona() {
     const [responseData, setResponseData] = useState(null);
@@ -27,7 +27,7 @@ function ListadoPersona() {
         <div>
             <button onClick={handleSubmit}>Listar</button>
 
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
+            {responseData && (<TablaPersonas result={JSON.stringify(responseData, null, 2)} />
             )}
         </div>
     );

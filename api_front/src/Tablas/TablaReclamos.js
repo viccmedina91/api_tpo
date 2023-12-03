@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 const TablaReclamos = ({ result }) => {
     const [mostrarModal, setMostrarModal] = useState(false);
     const [imagenSeleccionada, setImagenSeleccionada] = useState('');
-    const reclamos = JSON.parse(result);
+
+    const respuesta = JSON.parse(result);
+    const reclamos = Array.isArray(respuesta) ? respuesta : [respuesta];
 
     const abrirModal = (imagen) => {
         setImagenSeleccionada(imagen);
