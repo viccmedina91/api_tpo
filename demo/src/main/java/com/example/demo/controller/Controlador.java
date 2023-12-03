@@ -311,8 +311,10 @@ public class Controlador {
         if (edificio == null) {
             return null;
         }
-        return this.reclamoRepository.findAll().stream().filter(r -> r.getEdificio().getCodigo() == codigo)
+        List<ReclamoView> res = this.reclamoRepository.findAll().stream()
+                .filter(r -> r.getEdificio().getCodigo() == codigo)
                 .map(Reclamo::toView).toList();
+        return res;
     }
 
     public List<ReclamoView> reclamosPorUnidad(int codigo) {
@@ -320,8 +322,13 @@ public class Controlador {
         if (unidad == null) {
             return null;
         }
-        return this.reclamoRepository.findAll().stream().filter(r -> r.getUnidad().getIdentificador() == codigo)
-                .map(Reclamo::toView).toList();
+        return this.reclamoRepository.findAll().stream()
+                .filter(r -> {
+                    Unidad unidadr = r.getUnidad();
+                    return unidadr != null && unidadr.getIdentificador() == codigo;
+                })
+                .map(Reclamo::toView)
+                .toList();
     }
 
     public ReclamoView reclamosPorNumero(int numero) throws ReclamoException {

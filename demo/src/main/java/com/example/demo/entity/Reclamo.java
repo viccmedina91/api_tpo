@@ -136,8 +136,16 @@ public class Reclamo {
 
     public ReclamoView toView() {
         PersonaSinRolView auxPersona = this.usuario.toViewSinRol();
-        EdificioView auxEdificio = edificio.toView();
-        UnidadView auxUnidad = unidad.toView();
+        EdificioView auxEdificio = null;
+
+        if (this.edificio != null) {
+
+            auxEdificio = edificio.toView();
+        }
+        UnidadView auxUnidad = null;
+        if (this.unidad != null) {
+            auxUnidad = unidad.toView();
+        }
         List<ImagenView> auxImagen = new ArrayList<ImagenView>();
         for (Imagen img : imagenes) {
             auxImagen.add(img.toView());

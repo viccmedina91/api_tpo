@@ -52,8 +52,8 @@ const TablaReclamos = ({ result }) => {
                     {reclamos.map((reclamo, index) => (
                         <tr key={index}>
                             <td>{reclamo.numero}</td>
-                            <td>{reclamo.edificio.nombre}</td>
-                            <td>{reclamo.unidad.identificador}</td>
+                            <td>{reclamo.edificio ? reclamo.edificio.nombre : 'N/A'}</td>
+                            <td>{reclamo.unidad ? reclamo.unidad.identificador : 'N/A'}</td>
                             <td>{reclamo.descripcion}</td>
                             <td>{reclamo.estado.descripcion}</td>
                             <td>
