@@ -25,8 +25,12 @@ function ListadoPersona() {
 
     return (
         <div>
-            <button onClick={handleSubmit}>Listar</button>
-
+            <h2>Listado de Personas</h2>
+            <div className="container mt-3">
+                <button type="button" class="btn btn-primary" onClick={handleSubmit}>
+                    Listar
+                </button>
+            </div>
             {responseData && (<TablaPersonas result={JSON.stringify(responseData, null, 2)} />
             )}
         </div>

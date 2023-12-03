@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ShowList from "./ShowList";
+import TablaReclamos from './Tablas/TablaReclamos';
 
 function ListadoReclamo() {
     const [responseData, setResponseData] = useState(null);
@@ -25,9 +25,14 @@ function ListadoReclamo() {
 
     return (
         <div>
-            <button onClick={handleSubmit}>Listar</button>
+            <h2>Listado de Reclamos</h2>
+            <div className="container mt-3">
+                <button type="button" class="btn btn-primary" onClick={handleSubmit}>
+                    Listar
+                </button>
+            </div>
 
-            {responseData && (<ShowList result={JSON.stringify(responseData, null, 2)} />
+            {responseData && (<TablaReclamos result={JSON.stringify(responseData, null, 2)} />
             )}
         </div>
     );

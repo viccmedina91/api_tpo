@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ShowList from "./ShowList";
+import TablaEdificios from './Tablas/TablaEdificios';
 import FormSearch from './Forms/FormSearch';
 import Error from './Error';
 
@@ -40,7 +40,7 @@ function SearchEdificio() {
                             <div>
                                 {error ? (
                                     <Error message={error} />
-                                ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                                ) : <TablaEdificios result={JSON.stringify(responseData, null, 2)} />}
                             </div>
                         )}
                     </div>
