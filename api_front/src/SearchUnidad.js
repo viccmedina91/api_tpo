@@ -32,16 +32,17 @@ function SearchUnidad() {
         <div>
             <div className="container mt-5">
                 <div className="row justify-content-center">
-                    <div className="col-md-6"></div>
-                    <h2>Buscar Unidad según Identificador</h2>
-                    <FormSearch onSubmit={handleSubmit} />
-                    {responseData && (
-                        <div>
-                            {error ? (
-                                <Error message={error} />
-                            ) : <TablaUnidades result={JSON.stringify(responseData, null, 2)} />}
-                        </div>
-                    )}
+                    <div className="col-md-6">
+                        <h2>Buscar Unidad según Identificador</h2>
+                        <FormSearch onSubmit={handleSubmit} />
+                        {responseData && (
+                            <div>
+                                {error ? (
+                                    <Error message={error} />
+                                ) : <TablaUnidades result={JSON.stringify(responseData, null, 2)} />}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
