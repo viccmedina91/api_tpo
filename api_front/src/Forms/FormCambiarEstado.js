@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
+import { ESTADOS_RECLAMO } from '../setting/constantes';
 
 function FormCambiarEstado({ onFormSubmit }) {
     const [numero, setNumero] = useState('');
     const [estado, setEstado] = useState('');
-
-    const estadosPosibles = [
-        { id: 1, descripcion: 'Nuevo' },
-        { id: 2, descripcion: 'Abierto' },
-        { id: 3, descripcion: 'En proceso' },
-        { id: 4, descripcion: 'Desestimado' },
-        { id: 5, descripcion: 'Anulado' },
-        { id: 6, descripcion: 'Terminado' },
-    ];
 
     const handleNumeroChange = (e) => {
         setNumero(e.target.value);
@@ -51,7 +43,7 @@ function FormCambiarEstado({ onFormSubmit }) {
                         Estado del reclamo:
                         <select class="form-select form-select-sm" value={estado} onChange={handleEstadoChange}>
                             <option value="">Selecciona un estado</option>
-                            {estadosPosibles.map((estado) => (
+                            {ESTADOS_RECLAMO.map((estado) => (
                                 <option key={estado.id} value={estado.id}>
                                     {estado.descripcion}
                                 </option>
