@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ShowList from './ShowList';
 import Error from './Error';
+import Edificio from './Entidades/Edificio';
 
 function ModificarEdificio() {
     const [direccionEdificio, setDireccionEdificio] = useState('');
@@ -103,15 +103,18 @@ function ModificarEdificio() {
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    <br></br>
+                    {responseData && (
+                        <div>
+                            {error ? (
+                                <Error message={error} />
+                            ) : <Edificio result={responseData} />}
+                        </div>
+                    )}
                 </div>
+
             </div>
-            {responseData && (
-                <div>
-                    {error ? (
-                        <Error message={error} />
-                    ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
-                </div>
-            )}
+
         </div>
     );
 }
