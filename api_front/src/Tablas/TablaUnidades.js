@@ -1,6 +1,8 @@
 const TablaUnidades = ({ result }) => {
+
     const respuesta = JSON.parse(result);
     const unidades = Array.isArray(respuesta) ? respuesta : [respuesta];
+
     console.log(unidades);
     if (!unidades || unidades.length === 0) {
         return <p className="text-muted">No hay unidades para mostrar.</p>;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ShowList from "./ShowList";
 import FormSearch from './Forms/FormSearch';
 import Error from './Error';
+import TablaPersonas from './Tablas/TablaPersonas';
 
 function SearchDuenioPorUnidad() {
     const [responseData, setResponseData] = useState(null);
@@ -39,7 +39,7 @@ function SearchDuenioPorUnidad() {
                             <div>
                                 {error ? (
                                     <Error message={error} />
-                                ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                                ) : <TablaPersonas result={JSON.stringify(responseData, null, 2)} />}
                             </div>
                         )}
                     </div>
