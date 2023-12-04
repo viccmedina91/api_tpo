@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ShowList from "./ShowList";
+import Unidad from './Entidades/Unidad';
 import FormCrearUnidad from './Forms/FormCrearUnidad';
 import Error from './Error';
 
@@ -50,11 +50,12 @@ function CrearUnidad() {
                     <div className="col-md-6">
                         <h2>Crear Unidad</h2>
                         <FormCrearUnidad onFormSubmit={handleSubmit} />
+                        <br></br>
                         {responseData && (
                             <div>
                                 {error ? (
                                     <Error message={error} />
-                                ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                                ) : <Unidad result={responseData} />}
                             </div>
                         )}
                     </div>

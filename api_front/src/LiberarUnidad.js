@@ -41,6 +41,7 @@ function LiberarUnidad() {
                     <div className="col-md-6">
                         <h2>Liberar Unidad</h2>
                         <FormSearch onSubmit={handleSubmit} />
+                        <br></br>
                         {responseData && (
                             <div>
                                 {error ? (

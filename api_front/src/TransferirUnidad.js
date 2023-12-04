@@ -89,15 +89,16 @@ function TransferirUnidad() {
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    <br></br>
+                    {responseData && (
+                        <div>
+                            {error ? (
+                                <Error message={error} />
+                            ) : <ShowList result={JSON.stringify(responseData.mensaje, null, 2)} />}
+                        </div>
+                    )}
                 </div>
             </div>
-            {responseData && (
-                <div>
-                    {error ? (
-                        <Error message={error} />
-                    ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
-                </div>
-            )}
         </div>
     );
 }

@@ -78,8 +78,7 @@ public class UnidadController {
             return ResponseEntity.status(HttpStatus.OK)
                     .body("{\"mensaje\": \"" + "Error, no se encuentra el edificio con código: " + id + "\"}");
         }
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body("{\"mensaje\": \"" + "OK, unidad creada: " + unidadNueva + "\"}");
+        return ResponseEntity.ok(unidadNueva);
     }
 
     @PutMapping("/{id}")
@@ -140,7 +139,7 @@ public class UnidadController {
         // Dado un codigo de unidad, la ponemos como habitada
         if (controlador.habitarUnidad(id) == null) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("{\"mensaje\": \"" + "El codigo de la unidad no existe: " + id + "\"}");
+                    .body("{\"mensaje\": \"" + "Error, El código de la unidad no existe: " + id + "\"}");
         }
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{\"mensaje\": \"" + "Operación con éxito, la unidad se ha liberado: " + id + "\"}");

@@ -85,6 +85,7 @@ function AgregarDuenioAUnidad() {
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    <br></br>
                     {responseData && (
                         <div>
                             {error ? (
