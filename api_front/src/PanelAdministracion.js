@@ -2,88 +2,108 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Subseccion from './Subseccion';
 import Logout from './Logout';
-import { Dropdown } from 'react-bootstrap';
 
 const PanelAdministracion = () => (
 
     <div className="container mt-5">
         <Logout />
 
-        <div className="row">
-            {/* Tarjetas superiores */}
-            <div className="col-md-4">
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Gestión de Edificios
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Subseccion title="Listar Edificios" to="/edificio/listar" />
-                        <Subseccion title="Buscar Edificio por código" to="/edificio/buscar" />
-                        <Subseccion title="Listar los Edificios con sus Unidades" to="/edificio/con/unidades" />
-                        <Subseccion title="Listar Inquilinos por Edificio" to="/edificio/inquilinos" />
-                        <Subseccion title="Listar habilitados por Edificio" to="/edificio/habilitados" />
-                        <Subseccion title="Unidades por Edificio" to="/edificio/unidades" />
-                        <Subseccion title="Dueños por Edificio" to="/edificio/duenio/" />
-                        <Subseccion title="Crear Edificio" to="/edificio/agregar" />
-                        <Subseccion title="Modificar Edificio" to="/edificio/modificar" />
-                        <Subseccion title="Eliminar Edificio" to="/edificio/eliminar" />
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div>
-            <div className="col-md-4">
-                <Dropdown>
-                    <Dropdown.Toggle variant="warning" id="dropdown-basic">
-                        Gestión de Unidades
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Subseccion title="Buscar Unidad" to="/unidad/buscar" />
-                        <Subseccion title="Buscar Dueños por Unidad" to="/unidad/duenios" />
-                        <Subseccion title="Buscar Inquilinos por Unidad" to="/unidad/inquilinos" />
-                        <Subseccion title="Crear Unidad" to="/unidad/crear" />
-                        <Subseccion title="Modificar Unidad" to="/unidad/modificar" />
-                        <Subseccion title="Transferir Unidad" to="/unidad/transferir" />
-                        <Subseccion title="Agregar Duenio a Unidad" to="/unidad/agregar/duenio/unidad" />
-                        <Subseccion title="Agregar Inquilino a Unidad" to="/unidad/agregar/inquilino/unidad" />
-                        <Subseccion title="Liberar Unidad" to="/unidad/liberar" />
-                        <Subseccion title="Habitar Unidad" to="/unidad/habitar" />
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div>
-            <div className="col-md-4">
-                <Dropdown>
-                    <Dropdown.Toggle variant="danger" id="dropdown-basic">
-                        Gestión de Reclamos
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Subseccion title="Listar Reclamos por Edificio" to="/reclamos/edificio" />
-                        <Subseccion title="Listar Reclamos por Unidad" to="/reclamos/unidad" />
-                        <Subseccion title="Buscar Reclamos por Nro." to="/reclamos/nro" />
-                        <Subseccion title="Buscar Reclamos por Documento" to="/reclamos/persona" />
-                        <Subseccion title="Crear Reclamos" to="/reclamos/crear" />
-                        <Subseccion title="Agregar Imagen a Reclamos" to="/reclamos/agregar/imagen" />
-                        <Subseccion title="Cambiar de estado a Reclamo" to="/reclamos/actualizar/estado" />
-                    </Dropdown.Menu>
-                </Dropdown>
+        <div class="card mb-3">
+            <img src={process.env.PUBLIC_URL + '/img/gedificio.jpg'} className="card-img-top" alt="Gestión de Edificio" style={{ height: '200px' }} />
+            <div class="card-body">
+                <h5 class="card-title">Gestión de Edificios</h5>
+                <p class="card-text">En esta sección encontrarás todo lo necesario para administrar los Edificios</p>
+                <ul>
+                    <li> <Subseccion title="Listar Edificios" to="/edificio/listar" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Buscar Edificio por código" to="/edificio/buscar" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Listar los Edificios con sus Unidades" to="/edificio/con/unidades" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Listar Inquilinos por Edificio" to="/edificio/inquilinos" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Listar habilitados por Edificio" to="/edificio/habilitados" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Unidades por Edificio" to="/edificio/unidades" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Dueños por Edificio" to="/edificio/duenio/" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Crear Edificio" to="/edificio/agregar" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Modificar Edificio" to="/edificio/modificar" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Eliminar Edificio" to="/edificio/eliminar" /></li>
+                </ul>
             </div>
         </div>
-        <div className="container mt-5">
-            <div className="row">
 
-                <div className="col-md-4">
-                    <Dropdown>
-                        <Dropdown.Toggle variant="info" id="dropdown-basic">
-                            Gestión de Personas
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Subseccion title="Listar todas las Personas" to="/persona/listar" />
-                            <Subseccion title="Crear Persona" to="/persona/crear" />
-                            <Subseccion title="Eliminar Persona" to="/persona/eliminar" />
-                            <Subseccion title="Modificar Persona" to="/persona/modificar" />
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </div>
+        <div class="card mb-3">
+            <img src={process.env.PUBLIC_URL + '/img/gunidades.jpg'} className="card-img-top" alt="Gestión de Unidades" style={{ height: '200px' }} />
+            <div class="card-body">
+                <h5 class="card-title">Gestión de Unidades</h5>
+                <p class="card-text">En esta sección encontrarás todo lo necesario para administrar las Unidades</p>
+                <ul>
+                    <li> <Subseccion title="Buscar Unidad" to="/unidad/buscar" /></li>
+                    <hr></hr>
+                    <li>   <Subseccion title="Buscar Dueños por Unidad" to="/unidad/duenios" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Buscar Inquilinos por Unidad" to="/unidad/inquilinos" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Crear Unidad" to="/unidad/crear" /></li>
+                    <hr></hr>
+                    <li>   <Subseccion title="Modificar Unidad" to="/unidad/modificar" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Transferir Unidad" to="/unidad/transferir" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Agregar Duenio a Unidad" to="/unidad/agregar/duenio/unidad" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Agregar Inquilino a Unidad" to="/unidad/agregar/inquilino/unidad" /></li>
+                    <hr></hr>
+                    <li>  <Subseccion title="Liberar Unidad" to="/unidad/liberar" /></li>
+                    <hr></hr>
+                    <li> <Subseccion title="Habitar Unidad" to="/unidad/habitar" /></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <img src={process.env.PUBLIC_URL + '/img/greclamos.jpg'} className="card-img-top" alt="Gestión de Reclamos" style={{ height: '200px' }} />
+            <div class="card-body">
+                <h5 class="card-title">Gestión de Reclamos</h5>
+                <p class="card-text">En esta sección encontrarás todo lo necesario para administrar los Reclamos</p>
+                <ul>
+                    <li><Subseccion title="Listar Reclamos por Edificio" to="/reclamos/edificio" /></li>
+                    <hr></hr>
+                    <li><Subseccion title="Listar Reclamos por Unidad" to="/reclamos/unidad" /></li>
+                    <hr></hr>
+                    <li><Subseccion title="Buscar Reclamos por Nro." to="/reclamos/nro" /></li>
+                    <hr></hr>
+                    <li><Subseccion title="Buscar Reclamos por Documento" to="/reclamos/persona" /></li>
+                    <hr></hr>
+                    <li><Subseccion title="Crear Reclamo" to="/reclamos/crear" /></li>
+                    <hr></hr>
+                    <li><Subseccion title="Agregar Imagen a Reclamo" to="/reclamos/agregar/imagen" /></li>
+                    <hr></hr>
+                    <li><Subseccion title="Cambiar de estado a Reclamo" to="/reclamos/actualizar/estado" /></li>
+                    <hr></hr>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <img src={process.env.PUBLIC_URL + '/img/gpersona.jpg'} className="card-img-top" alt="Gestión de Personas" style={{ height: '200px' }} />
+            <div class="card-body">
+                <h5 class="card-title">Gestión de Personas</h5>
+                <p class="card-text">En esta sección encontrarás todo lo necesario para administrar los Inquilinos Y Dueños</p>
+                <ul>
+                    <li><Subseccion title="Listar todas las Personas" to="/persona/listar" /></li>
+                    <hr></hr>
+                    <li><Subseccion title="Crear Persona" to="/persona/crear" /></li>
+                    <hr></hr>
+                    <li><Subseccion title="Eliminar Persona" to="/persona/eliminar" /></li>
+                    <hr></hr>
+                    <li><Subseccion title="Modificar Persona" to="/persona/modificar" /></li>
+                </ul>
             </div>
         </div>
     </div >
