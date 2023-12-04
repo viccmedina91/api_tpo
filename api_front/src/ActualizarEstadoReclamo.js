@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ShowList from "./ShowList";
 import FormCambiarEstado from './Forms/FormCambiarEstado';
 import Error from './Error';
+import BarraNavegacion from './BarraNavegacion';
 
 function ActualizarEstadoReclamo() {
 
@@ -41,8 +42,11 @@ function ActualizarEstadoReclamo() {
     return (
         <div>
             <div className="container mt-5">
-                <div className="row justify-content-center">
-                    <div className="col-md-6">
+                <div className="row">
+                    <div className="col-4">
+                        <BarraNavegacion />
+                    </div>
+                    <div className="col-8">
                         <FormCambiarEstado onFormSubmit={handleSubmit} />
                         <br></br>
                         {responseData && (

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TablaReclamos from "./Tablas/TablaReclamos";
 import Error from "./Error";
 import FormSearch from './Forms/FormSearch';
+import BarraNavegacion from './BarraNavegacion';
 
 function SearchReclamoEdificio() {
     const [responseData, setResponseData] = useState(null);
@@ -30,8 +31,11 @@ function SearchReclamoEdificio() {
     return (
         <div>
             <div className="container mt-5">
-                <div className="row justify-content-center">
-                    <div className="col-md-6">
+                <div className="row">
+                    <div className="col-4">
+                        <BarraNavegacion />
+                    </div>
+                    <div className="col-8">
                         <h2>Listar Reclamos por Edificio</h2>
                         <FormSearch onSubmit={handleSubmit} />
 
