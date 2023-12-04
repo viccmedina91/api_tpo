@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Error from './Error';
 import Edificio from './Entidades/Edificio';
+import BarraNavegacion from './BarraNavegacion';
 
 function ModificarEdificio() {
     const [direccionEdificio, setDireccionEdificio] = useState('');
@@ -64,8 +65,11 @@ function ModificarEdificio() {
     return (
 
         <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
+            <div className="row">
+                <div className="col-4">
+                    <BarraNavegacion />
+                </div>
+                <div className="col-8">
                     <h2> Formulario para modificar un Edificio </h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">

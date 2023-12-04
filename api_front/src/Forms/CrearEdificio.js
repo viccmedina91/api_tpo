@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import Edificio from '../Entidades/Edificio';
+import Error from '../Error';
+import BarraNavegacion from '../BarraNavegacion';
 
 function CrearEdificio() {
     const [direccionEdificio, setDireccionEdificio] = useState('');
     const [nombreEdificio, setNombreEdificio] = useState('');
     const [responseData, setResponseData] = useState(null);
+    const [error, setError] = useState(false);
 
     const handleDireccionEdificioChange = (e) => {
         setDireccionEdificio(e.target.value);
@@ -39,7 +42,10 @@ function CrearEdificio() {
             })
             .then((data) => {
                 console.log('Elemento agregado exitosamente:', data);
-                setResponseData(data.mensaje);
+                setResponseData(data)
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                };
                 setNombreEdificio('');
                 setDireccionEdificio('');
 
@@ -52,8 +58,11 @@ function CrearEdificio() {
     return (
 
         <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
+            <div className="row">
+                <div className="col-4">
+                    <BarraNavegacion />
+                </div>
+                <div className="col-8">
                     <h2> Formulario para crear un Edificio </h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
@@ -82,7 +91,13 @@ function CrearEdificio() {
                     </form>
                     <br></br>
 
-                    {responseData && (<Edificio result={responseData} />)}
+                    {responseData && (
+                        <div>
+                            {error ? (
+                                <Error message={error} />
+                            ) : <Edificio result={responseData} />}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

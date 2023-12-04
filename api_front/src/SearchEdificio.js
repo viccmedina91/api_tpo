@@ -34,11 +34,9 @@ function SearchEdificio() {
         <div>
             <div className="container mt-5">
                 <div className="row">
-                    {/* Menú en la columna de 4 */}
                     <div className="col-4">
                         <BarraNavegacion />
                     </div>
-                    {/* Contenido de búsqueda y tabla en la columna de 8 */}
                     <div className="col-8">
                         <h2>Buscar Edificio según Código</h2>
                         <FormSearch onSubmit={handleSubmit} />

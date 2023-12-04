@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TablaEdificiosUnidad from './Tablas/TablaEdificioUnidad';
+import BarraNavegacion from './BarraNavegacion';
 
 function EdificioConUnidades() {
     const [responseData, setResponseData] = useState(null);
@@ -25,10 +26,19 @@ function EdificioConUnidades() {
 
     return (
         <div>
-            <h2>Listado de Edificios y sus Unidades</h2>
-            <button onClick={handleSubmit} className="btn btn-primary">Listar</button>
-            {responseData && (<TablaEdificiosUnidad result={JSON.stringify(responseData, null, 2)} />
-            )}
+            <div className="container mt-5">
+                <div className="row">
+                    <div className="col-4">
+                        <BarraNavegacion />
+                    </div>
+                    <div className="col-8">
+                        <h2>Listado de Edificios y sus Unidades</h2>
+                        <button onClick={handleSubmit} className="btn btn-primary">Listar</button>
+                        {responseData && (<TablaEdificiosUnidad result={JSON.stringify(responseData, null, 2)} />
+                        )}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
