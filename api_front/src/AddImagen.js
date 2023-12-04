@@ -42,6 +42,7 @@ function AddImagen() {
                     <div className="col-md-6">
                         <h2>Agregar Imagen a Reclamo</h2>
                         <FormAgregarImagen onFormSubmit={handleSubmit} />
+                        <br></br>
                         {responseData && (
                             <div>
                                 {error ? (

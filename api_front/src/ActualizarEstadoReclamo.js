@@ -44,6 +44,7 @@ function ActualizarEstadoReclamo() {
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <FormCambiarEstado onFormSubmit={handleSubmit} />
+                        <br></br>
                         {responseData && (
                             <div>
                                 {error ? (
