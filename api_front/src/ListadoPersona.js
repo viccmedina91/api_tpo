@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TablaPersonas from './Tablas/TablaPersonas';
+import BarraNavegacion from './BarraNavegacion';
 
 function ListadoPersona() {
     const [responseData, setResponseData] = useState(null);
@@ -25,11 +26,21 @@ function ListadoPersona() {
 
     return (
         <div>
-            <h2>Listado de Personas</h2>
-            <div className="container mt-3">
-                <button type="button" class="btn btn-primary" onClick={handleSubmit}>
-                    Listar
-                </button>
+            <div className="container mt-5">
+                <div className="row">
+                    <div className="col-4">
+                        <BarraNavegacion />
+                    </div>
+                    <div className="col-8">
+                        <h2>Listado de Personas</h2>
+                        <div className="container mt-3">
+                            <button type="button" class="btn btn-primary" onClick={handleSubmit}>
+                                Listar
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
             </div>
             {responseData && (<TablaPersonas result={JSON.stringify(responseData, null, 2)} />
             )}
