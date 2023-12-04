@@ -55,6 +55,9 @@ function ModificarPersona() {
                 console.log('Elemento agregado exitosamente:', data);
                 // Restablecer los campos del formulario
                 setResponseData(data);
+                if (data.mensaje.toLowerCase().includes('error')) {
+                    setError(data.mensaje);
+                }
                 setDocumento('');
                 setNombre('');
                 setMail('');
@@ -70,7 +73,7 @@ function ModificarPersona() {
         <div className="container mt-5">
             <div className="row justify-content-center">
                 <div className="col-md-6">
-                    <h2> Formulario para modificar una Persona</h2>
+                    <h2> Formulario para Modificar una Persona</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="Documento" className="form-label">Documento</label>
@@ -92,6 +95,7 @@ function ModificarPersona() {
                                 value={nombre}
                                 onChange={handleNombreChange}
                                 required
+                                autoComplete='off'
                             />
                         </div>
                         <div className="mb-3">
@@ -103,26 +107,29 @@ function ModificarPersona() {
                                 value={mail}
                                 onChange={handleMailChange}
                                 required
+                                autoComplete='off'
                             />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="Contraseña" className="form-label">Contraseña</label>
                             <input
-                                type="text"
+                                type="password"
                                 className="form-control"
                                 id="campoTexto"
                                 value={contrasenia}
                                 onChange={handleContraseniaChange}
                                 required
+                                autoComplete='off'
                             />
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    <br></br>
                     {responseData && (
                         <div>
                             {error ? (
                                 <Error message={error} />
-                            ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                            ) : <ShowList result={JSON.stringify(responseData.mensaje, null, 2)} />}
                         </div>
                     )}
                 </div>

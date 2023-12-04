@@ -10,9 +10,6 @@ const Layout = () => {
 
     const authenticate = async () => {
         try {
-            console.log(documento);
-            console.log(contrasenia)
-            // Simular una solicitud al servidor para verificar las credenciales
             const response = await fetch('http://localhost:8080/persona/login', {
                 method: 'POST',
                 headers: {
@@ -23,7 +20,6 @@ const Layout = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log(data);
                 localStorage.setItem("documento", documento);
                 if (data.mensaje === "admin") {
                     setRedirectTo('/admin/panel');
@@ -57,6 +53,7 @@ const Layout = () => {
                                     className="form-control"
                                     value={documento}
                                     onChange={(e) => setDocumento(e.target.value)}
+                                    autoComplete='off'
                                 />
                             </div>
 
@@ -67,6 +64,7 @@ const Layout = () => {
                                     className="form-control"
                                     value={contrasenia}
                                     onChange={(e) => setContrasenia(e.target.value)}
+                                    autoComplete='off'
                                 />
                             </div>
 

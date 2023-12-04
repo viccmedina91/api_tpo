@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
 import Error from './Error';
+import Persona from './Entidades/Persona';
 
 function CrearPersona() {
     const [nombre, setNombre] = useState('');
@@ -112,7 +113,7 @@ function CrearPersona() {
                         <div className="mb-3">
                             <label htmlFor="Contraseña" className="form-label">Contraseña</label>
                             <input
-                                type="text"
+                                type="password"
                                 className="form-control"
                                 id="campoTexto"
                                 value={contrasenia}
@@ -122,11 +123,12 @@ function CrearPersona() {
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    <br></br>
                     {responseData && (
                         <div>
                             {error ? (
                                 <Error message={error} />
-                            ) : <ShowList result={JSON.stringify(responseData, null, 2)} />}
+                            ) : <Persona result={responseData} />}
                         </div>
                     )}
                 </div>
