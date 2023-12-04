@@ -14,14 +14,9 @@ const Logout = () => {
         return <Navigate to={redirectTo} />;
     }
     return (
-        <nav class="navbar fixed-top bg-body-tertiary">
-            <div class="container-fluid">
-                <button type="button" class="btn btn-primary" onClick={handleLogout}>
-                    Cerrar Sesión
-                </button>
-            </div>
-        </nav>
-
+        <button type="button" class="btn btn-primary" onClick={handleLogout}>
+            Cerrar Sesión
+        </button>
     );
 };
 

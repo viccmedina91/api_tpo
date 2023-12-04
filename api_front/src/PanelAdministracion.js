@@ -6,7 +6,11 @@ import Logout from './Logout';
 const PanelAdministracion = () => (
 
     <div className="container mt-5">
-        <Logout />
+        <nav class="navbar fixed-top bg-body-tertiary">
+            <div class="container-fluid">
+                <Logout />
+            </div>
+        </nav>
 
         <div class="card mb-3">
             <img src={process.env.PUBLIC_URL + '/img/gedificio.jpg'} className="card-img-top" alt="Gestión de Edificio" style={{ height: '200px' }} />

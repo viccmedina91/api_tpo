@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TablaEdificios from './Tablas/TablaEdificios';
 import FormSearch from './Forms/FormSearch';
 import Error from './Error';
+import BarraNavegacion from './BarraNavegacion';
 
 function SearchEdificio() {
     const [responseData, setResponseData] = useState(null);
@@ -32,8 +33,13 @@ function SearchEdificio() {
     return (
         <div>
             <div className="container mt-5">
-                <div className="row justify-content-center">
-                    <div className="col-md-6">
+                <div className="row">
+                    {/* Menú en la columna de 4 */}
+                    <div className="col-4">
+                        <BarraNavegacion />
+                    </div>
+                    {/* Contenido de búsqueda y tabla en la columna de 8 */}
+                    <div className="col-8">
                         <h2>Buscar Edificio según Código</h2>
                         <FormSearch onSubmit={handleSubmit} />
                         {responseData && (
