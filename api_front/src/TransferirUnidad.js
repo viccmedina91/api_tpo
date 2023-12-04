@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
 import Error from './Error';
-
+import BarraNavegacion from './BarraNavegacion';
 
 function TransferirUnidad() {
     const [documentoPersona, setDocumentoPersona] = useState('');
@@ -60,8 +60,11 @@ function TransferirUnidad() {
     return (
 
         <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
+            <div className="row">
+                <div className="col-4">
+                    <BarraNavegacion />
+                </div>
+                <div className="col-8">
                     <h2> Formulario para crear una Unidad </h2>
                     <form onSubmit={handleSubmit}>
 

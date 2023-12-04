@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FormSearch from './Forms/FormSearch';
 import Error from './Error';
 import TablaPersonas from './Tablas/TablaPersonas';
-
+import BarraNavegacion from './BarraNavegacion';
 
 function SearchInquilinoPorUnidad() {
     const [responseData, setResponseData] = useState(null);
@@ -32,8 +32,11 @@ function SearchInquilinoPorUnidad() {
     return (
         <div>
             <div className="container mt-5">
-                <div className="row justify-content-center">
-                    <div className="col-md-6">
+                <div className="row">
+                    <div className="col-4">
+                        <BarraNavegacion />
+                    </div>
+                    <div className="col-8">
                         <h2>Buscar Inquilinos según Unidad</h2>
                         <FormSearch onSubmit={handleSubmit} />
 

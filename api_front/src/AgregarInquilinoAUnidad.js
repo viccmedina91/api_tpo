@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ShowList from "./ShowList";
 import Error from './Error';
+import BarraNavegacion from './BarraNavegacion';
 
 function AgregarInquilinoAUnidad() {
     const [codigoUnidad, setCodigoUnidad] = useState('');
@@ -59,8 +60,11 @@ function AgregarInquilinoAUnidad() {
     return (
 
         <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-md-6">
+            <div className="row">
+                <div className="col-4">
+                    <BarraNavegacion />
+                </div>
+                <div className="col-8">
                     <h2> Formulario para agregar Inquilino a Unidad </h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
@@ -87,6 +91,7 @@ function AgregarInquilinoAUnidad() {
                         </div>
                         <button type="submit" className="btn btn-primary">Enviar</button>
                     </form>
+                    <br></br>
                 </div>
             </div>
             {responseData && (

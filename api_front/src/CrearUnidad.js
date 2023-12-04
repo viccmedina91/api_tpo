@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import Unidad from './Entidades/Unidad';
 import FormCrearUnidad from './Forms/FormCrearUnidad';
 import Error from './Error';
+import BarraNavegacion from './BarraNavegacion';
 
 function CrearUnidad() {
 
     const [responseData, setResponseData] = useState(null);
     const [error, setError] = useState(false);
-
-
-
 
     const handleSubmit = (datos) => {
 
@@ -46,8 +44,11 @@ function CrearUnidad() {
 
         <div>
             <div className="container mt-5">
-                <div className="row justify-content-center">
-                    <div className="col-md-6">
+                <div className="row">
+                    <div className="col-4">
+                        <BarraNavegacion />
+                    </div>
+                    <div className="col-8">
                         <h2>Crear Unidad</h2>
                         <FormCrearUnidad onFormSubmit={handleSubmit} />
                         <br></br>

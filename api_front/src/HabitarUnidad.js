@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ShowList from "./ShowList";
 import FormSearch from './Forms/FormSearch';
 import Error from './Error';
+import BarraNavegacion from './BarraNavegacion';
 
 function HabitarUnidad() {
     const [responseData, setResponseData] = useState(null);
@@ -37,8 +38,11 @@ function HabitarUnidad() {
     return (
         <div>
             <div className="container mt-5">
-                <div className="row justify-content-center">
-                    <div className="col-md-6">
+                <div className="row">
+                    <div className="col-4">
+                        <BarraNavegacion />
+                    </div>
+                    <div className="col-8">
                         <h2>Habitar Unidad</h2>
                         <FormSearch onSubmit={handleSubmit} />
                         <br></br>
