@@ -3,10 +3,20 @@ package com.example.demo.views;
 public class NuevoEstado {
     private Integer numero;
     private Integer estado;
+    private String documento;
 
-    public NuevoEstado(Integer numero, Integer estado) {
+    public NuevoEstado(Integer numero, Integer estado, String documento) {
         this.numero = numero;
         this.estado = estado;
+        this.documento = documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public String getDocumento() {
+        return this.documento;
     }
 
     public Integer getEstado() {

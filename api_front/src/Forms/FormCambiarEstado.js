@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { ESTADOS_RECLAMO } from '../setting/constantes';
+import { ESTADOS_RECLAMO, ESTADOS_RECLAMO_USUARIO } from '../setting/constantes';
 
 function FormCambiarEstado({ onFormSubmit }) {
     const [numero, setNumero] = useState('');
     const [estado, setEstado] = useState('');
 
+    let listado_estado = ESTADOS_RECLAMO;
+    if (localStorage.getItem('documento') !== '1234') {
+        listado_estado = ESTADOS_RECLAMO_USUARIO;
+    }
     const handleNumeroChange = (e) => {
         setNumero(e.target.value);
     };
@@ -19,6 +23,7 @@ function FormCambiarEstado({ onFormSubmit }) {
         const newItem = {
             numero: numero,
             estado: estado,
+            documento: localStorage.getItem('documento'),
         };
         onFormSubmit({ newItem });
     };
@@ -43,7 +48,7 @@ function FormCambiarEstado({ onFormSubmit }) {
                         Estado del reclamo:
                         <select class="form-select form-select-sm" value={estado} onChange={handleEstadoChange}>
                             <option value="">Selecciona un estado</option>
-                            {ESTADOS_RECLAMO.map((estado) => (
+                            {listado_estado.map((estado) => (
                                 <option key={estado.id} value={estado.id}>
                                     {estado.descripcion}
                                 </option>
