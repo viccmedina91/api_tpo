@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SECCIONES, SECCIONES_USUARIO } from './setting/constantes';
+import Logout from './Logout';
 
 const BarraNavegacion = ({ usuario }) => {
     console.log("----------");
@@ -54,6 +55,7 @@ const BarraNavegacion = ({ usuario }) => {
                     </div>
                 </div>
             ))}
+            <Logout></Logout>
         </div>
     )
 };

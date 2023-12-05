@@ -79,7 +79,6 @@ export const SECCIONES = [
             { nombre: 'Modificar Persona', url: '/persona/modificar' },
         ]
     },
-
 ];
 
 export const SECCIONES_USUARIO = [
