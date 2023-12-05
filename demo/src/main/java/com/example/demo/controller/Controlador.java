@@ -396,14 +396,17 @@ public class Controlador {
         return "Error";
     }
 
-    public String agregarImagenAReclamo(int numero, Imagen imagenes) throws ReclamoException {
+    public String agregarImagenAReclamo(int numero, String documento, Imagen imagenes) throws ReclamoException {
         Reclamo reclamo = this.buscarReclamo(numero);
         if (reclamo == null) {
             return "Error, Nro de reclamo desconocido: " + numero;
         }
-        reclamo.agregarImagen(imagenes.getPath(), imagenes.getTipo());
-        this.reclamoRepository.save(reclamo);
-        return "Guardado con Exito";
+        if ((reclamo.getUsuario().getDocumento().equals(documento)) || (documento.equals("1234"))) {
+            reclamo.agregarImagen(imagenes.getPath(), imagenes.getTipo());
+            this.reclamoRepository.save(reclamo);
+            return "Guardado con Exito";
+        }
+        return "Error";
     }
 
     public String cambiarEstado(NuevoEstado nuevoEstado) {

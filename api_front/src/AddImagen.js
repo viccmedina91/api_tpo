@@ -13,6 +13,7 @@ function AddImagen() {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Otro-Encabezado': localStorage.getItem('documento'),
             },
             body: JSON.stringify(datos.newItem),
         })

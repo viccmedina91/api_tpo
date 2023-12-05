@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -86,10 +87,14 @@ public class ReclamoController {
     }
 
     @PutMapping("/agregar/imagen/{reclamo}")
-    public ResponseEntity<?> agregarImagen(@PathVariable("reclamo") int idReclamo, @RequestBody Imagen imagenes)
+    public ResponseEntity<?> agregarImagen(@PathVariable("reclamo") int idReclamo,
+            @RequestHeader(value = "Otro-Encabezado", required = false) String documento,
+            @RequestBody Imagen imagenes)
             throws ReclamoException {
         // Dado un reclamo existente, almacenamos las imagenes
-        String operacion = this.controlador.agregarImagenAReclamo(idReclamo, imagenes);
+
+        System.out.println("DOCUMENTOO --> " + documento);
+        String operacion = this.controlador.agregarImagenAReclamo(idReclamo, documento, imagenes);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body("{\"mensaje\": \"" + operacion + "\"}");
