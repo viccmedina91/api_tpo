@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Error from './Error';
 import TablaReclamos from './Tablas/TablaReclamos';
-
+import BarraNavegacion from './BarraNavegacion';
 
 function MisReclamos() {
     const [responseData, setResponseData] = useState(null);
@@ -31,21 +31,29 @@ function MisReclamos() {
 
     return (
         <div>
-            <h2>Mis Reclamos</h2>
-            <div className="container mt-3">
-                <button type="button" class="btn btn-primary" onClick={handleSubmit}>
-                    Listar Mis Reclamos
-                </button>
-            </div>
-            {responseData && (
-                <div>
-                    {error ? (
-                        <Error message={error} />
-                    ) : <TablaReclamos result={JSON.stringify(responseData, null, 2)} />}
+            <div className="container mt-5">
+                <div className="row">
+                    <div className="col-4">
+                        <BarraNavegacion usuario={localStorage.getItem('documento')} />
+                    </div>
+                    <div className="col-8">
+                        <h2>Mis Reclamos</h2>
+                        <div className="container mt-3">
+                            <button type="button" class="btn btn-primary" onClick={handleSubmit}>
+                                Listar Mis Reclamos
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            )}
+                {responseData && (
+                    <div>
+                        {error ? (
+                            <Error message={error} />
+                        ) : <TablaReclamos result={JSON.stringify(responseData, null, 2)} />}
+                    </div>
+                )}
+            </div>
         </div>
-
     );
 }
 

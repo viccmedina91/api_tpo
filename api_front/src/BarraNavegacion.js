@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
-import { SECCIONES } from './setting/constantes';
+import { SECCIONES, SECCIONES_USUARIO } from './setting/constantes';
 
 const BarraNavegacion = ({ usuario }) => {
+    console.log("----------");
+    console.log(usuario);
     const [activeIndex, setActiveIndex] = useState(null);
     const handleToggle = (index) => {
         setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
     };
+    let secciones;
+    if (usuario === '1234') {
+        secciones = SECCIONES;
+    } else {
+        secciones = SECCIONES_USUARIO;
+
+    }
 
     return (
         <div className="accordion" id="accordionExample">
-            {SECCIONES.map((item, index) => (
+            {secciones.map((item, index) => (
                 <div key={index} className="accordion-item">
                     <h2 className="accordion-header" id={`heading${index}`}>
                         <button

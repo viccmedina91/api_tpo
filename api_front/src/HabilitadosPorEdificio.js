@@ -34,7 +34,7 @@ function HabilitadosPorEdificio() {
             <div className="container mt-5">
                 <div className="row">
                     <div className="col-4">
-                        <BarraNavegacion />
+                        <BarraNavegacion usuario={localStorage.getItem('documento')} />
                     </div>
                     <div className="col-8">
                         <h2>Buscar Habilitados según Edificio</h2>

@@ -81,3 +81,23 @@ export const SECCIONES = [
     },
 
 ];
+
+export const SECCIONES_USUARIO = [
+    {
+        title: 'Gestión de Unidades',
+        content: ' ',
+        subSections: [
+            { nombre: 'Listar mis Unidades', url: '/unidad/mis' },
+        ]
+    },
+    {
+        title: 'Gestión de Reclamos',
+        content: ' ',
+        subSections: [
+            { nombre: 'Crear Reclamo', url: '/reclamos/crear' },
+            { nombre: 'Ver Mis Reclamos', url: '/reclamos/mis' },
+            { nombre: 'Agregar Imagen a Reclamo', url: '/reclamos/agregar/imagen' },
+            { nombre: 'Cambiar de estado a Reclamo', url: '/reclamos/actualizar/estado' },
+        ]
+    },
+];
